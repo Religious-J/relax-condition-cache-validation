@@ -1,0 +1,539 @@
+{
+  "schema_version": 1,
+  "status": "ready",
+  "cluster": {
+    "ray_address": "PRIVATE_IP_1:6379",
+    "dashboard": "http://127.0.0.1:8265",
+    "expected_gpus": 8,
+    "pythonpath": [
+      "/REDACTED_HOME/Megatron-LM"
+    ],
+    "lock_file": "/REDACTED_WORKSPACE/relax17-v6/.node-experiments.lock",
+    "serve_deployments": {
+      "actor": "Actor",
+      "sft": "ImageSFT",
+      "metrics": "MetricsService",
+      "dcs_coordinator": "DCSCoordinator"
+    }
+  },
+  "runs_root": "/REDACTED_WORKSPACE/relax17-minimal/runs",
+  "implementation_commit": "a983b3cfb5880616d8dcdcde204989fd371b1995",
+  "workloads": {
+    "sensenova-verify": {
+      "model": {
+        "id": "sensenova/SenseNova-U1.5-8B-MoT",
+        "path": "/REDACTED_WORKSPACE/models/SenseNova-U1.5-8B-MoT",
+        "content_sha256": "8d01e346ac868fb0ef8219d517987eb72ea78d26fd994457f7ef475c8158b2dc",
+        "revision": "19bc874ef6ffc97fda9837b40fc1d1301806158a",
+        "revision_evidence": "reports/sensenova-model-revision-verification.json",
+        "revision_evidence_sha256": "4e3b1496b9399d31ecfeb05b344a441130238fc9ab9ecc9693116d81629102f5",
+        "revision_api_sha256": "8fa2e90f5dafc94d618dcb5f3b6eae2dd71d609e868227ed2b043b29b6e62d3a"
+      },
+      "data": {
+        "root": "/REDACTED_WORKSPACE/relax17/data/magicbrush-train-128",
+        "metadata": "/REDACTED_WORKSPACE/relax17/data/magicbrush-train-128/train.json",
+        "metadata_sha256": "37a54c42d0ee1b341c61fa0b39cde781c76e3ebb4edca4bde349c58dddd6ebb5",
+        "rows": 128,
+        "format": "json_array",
+        "selection_rule": "Existing frozen v5: first official train parquet first 128 rows, original order and image bytes",
+        "revision": "6c254560879df7851233ea0fd2ae2a62764d0ef2"
+      },
+      "source": {
+        "repo": "/REDACTED_HOME/Relax-no17-minimal-r01",
+        "implementation_sha256": "1fb6338810268b20ed01ea89b99378f56e3407efe2cab27a8cfcaefd6ab5cace"
+      },
+      "launcher": "scripts/training/diffusion/run-sensenova-condition-cache.sh",
+      "launcher_sha256": "01672a3619b9c45afbf5cf8c306bff4ec8fdc7e770cc80f34f8879b5a0880ff3",
+      "training": {
+        "world_size": 8,
+        "global_batch_size": 8,
+        "micro_batch_size": 1,
+        "seed": 42,
+        "semantic_config": {
+          "family": "sensenova",
+          "adapter_path": "relax.models.sensenova.adapter.SenseNovaSFTAdapter",
+          "world_size": 8,
+          "global_batch_size": 8,
+          "seed": 42,
+          "trainable_mode": "lora",
+          "lora": {
+            "rank": 32,
+            "alpha": 32,
+            "dropout": 0.0
+          },
+          "optimizer": {
+            "lr": 0.0001,
+            "betas": [
+              0.9,
+              0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 0.01
+          },
+          "warmup": 0,
+          "clip_grad": 1.0,
+          "param_dtype": "bf16",
+          "reduce_dtype": "fp32",
+          "master_dtype": "fp32",
+          "image_prefetch_depth": 4,
+          "image_prefetch_workers": 2,
+          "config": {
+            "max_pixels": 1048576,
+            "conditioning_images": 1,
+            "deterministic_attention": true,
+            "prefix_gradient_checkpointing": false,
+            "fsdp_branch_groups": true,
+            "dataset_size": 128
+          }
+        }
+      },
+      "cache": {
+        "root": "/dev/shm/relax17-minimal-conditioning",
+        "payload_bytes": 20401094656,
+        "prefetch_bytes": 536870912,
+        "prefetch_depth": 2
+      },
+      "env": {
+        "FSDP_BRANCH_GROUPS": "1",
+        "PREFIX_GRADIENT_CHECKPOINTING": "0",
+        "DETERMINISTIC_ATTENTION": "1",
+        "IMAGE_PREFETCH_DEPTH": "4",
+        "IMAGE_PREFETCH_WORKERS": "2",
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "4"
+      },
+      "extra_args": [
+        "--no-fsdp-reshard-after-forward",
+        "--lr-warmup-iters",
+        "0"
+      ]
+    },
+    "qwen-text-verify": {
+      "model": {
+        "id": "Qwen/Qwen-Image",
+        "path": "/REDACTED_WORKSPACE/relax17-v6/models/Qwen-Image",
+        "content_sha256": "665f10caed78e40a523ef7b02eed4c65fe8cce610f9dae257761ef1a99c94e22",
+        "revision": "75e0b4be04f60ec59a75f475837eced720f823b6"
+      },
+      "data": {
+        "root": "/REDACTED_WORKSPACE/relax17-v6/data/coco2017-train-128",
+        "metadata": "/REDACTED_WORKSPACE/relax17-v6/data/coco2017-train-128/train.json",
+        "metadata_sha256": "5199d2a2826a5fcbb8118e5c3b431a9daafc200635fa4dad5c0d94f4c6b759c3",
+        "rows": 128,
+        "format": "json_array",
+        "selection_rule": "first 128 physical rows in pinned train parquet; first original caption per image; no filtering for reuse/length/content",
+        "revision": "036f3f8291db64d17faad9b09e59dd30bb65c4d7"
+      },
+      "source": {
+        "repo": "/REDACTED_HOME/Relax-no17-minimal-r01",
+        "implementation_sha256": "1fb6338810268b20ed01ea89b99378f56e3407efe2cab27a8cfcaefd6ab5cace"
+      },
+      "launcher": "scripts/training/diffusion/run-qwen-image-sft-condition-cache.sh",
+      "launcher_sha256": "429fd8fcd1995761ab2eb67b87ae46b525689cd65626079388e8c6d0e504dd56",
+      "training": {
+        "world_size": 8,
+        "global_batch_size": 16,
+        "micro_batch_size": 1,
+        "seed": 42,
+        "semantic_config": {
+          "family": "qwen_image",
+          "adapter_path": "relax.models.qwen_image.sft_adapter.QwenImageSFTAdapter",
+          "world_size": 8,
+          "global_batch_size": 16,
+          "seed": 42,
+          "trainable_mode": "lora",
+          "lora": {
+            "rank": 32,
+            "alpha": 32,
+            "dropout": 0.0
+          },
+          "optimizer": {
+            "lr": 0.0001,
+            "betas": [
+              0.9,
+              0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 0.01
+          },
+          "warmup": 0,
+          "clip_grad": 1.0,
+          "param_dtype": "bf16",
+          "reduce_dtype": "fp32",
+          "master_dtype": "fp32",
+          "config": {
+            "height": 512,
+            "width": 512,
+            "max_sequence_length": 512,
+            "gradient_checkpointing": false,
+            "deterministic_attention": true,
+            "caption_dropout": 0.0,
+            "random_crop": false,
+            "dataset_size": 128,
+            "text_encoder_placement": "replicated"
+          },
+          "image_prefetch_depth": 0,
+          "image_prefetch_workers": 2
+        }
+      },
+      "cache": {
+        "root": "/dev/shm/relax17-minimal-conditioning",
+        "payload_bytes": 1073741824,
+        "prefetch_bytes": 536870912,
+        "prefetch_depth": 0
+      },
+      "env": {
+        "HEIGHT": "512",
+        "WIDTH": "512",
+        "MAX_SEQUENCE_LENGTH": "512",
+        "GRADIENT_CHECKPOINTING": "0",
+        "DETERMINISTIC_ATTENTION": "1",
+        "CAPTION_DROPOUT": "0",
+        "RANDOM_CROP": "0",
+        "IMAGE_PREFETCH_DEPTH": "0",
+        "IMAGE_PREFETCH_WORKERS": "2",
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "4",
+        "TEXT_ENCODER_PLACEMENT": "replicated",
+        "LR_WARMUP_ITERS": "0"
+      },
+      "extra_args": [
+        "--no-fsdp-reshard-after-forward",
+        "--sft-max-in-flight-steps",
+        "2"
+      ]
+    },
+    "sensenova-performance": {
+      "model": {
+        "id": "sensenova/SenseNova-U1.5-8B-MoT",
+        "path": "/REDACTED_WORKSPACE/models/SenseNova-U1.5-8B-MoT",
+        "content_sha256": "8d01e346ac868fb0ef8219d517987eb72ea78d26fd994457f7ef475c8158b2dc",
+        "revision": "19bc874ef6ffc97fda9837b40fc1d1301806158a",
+        "revision_evidence": "reports/sensenova-model-revision-verification.json",
+        "revision_evidence_sha256": "4e3b1496b9399d31ecfeb05b344a441130238fc9ab9ecc9693116d81629102f5",
+        "revision_api_sha256": "8fa2e90f5dafc94d618dcb5f3b6eae2dd71d609e868227ed2b043b29b6e62d3a"
+      },
+      "data": {
+        "root": "/REDACTED_WORKSPACE/relax17/data/magicbrush-train-128",
+        "metadata": "/REDACTED_WORKSPACE/relax17/data/magicbrush-train-128/train.json",
+        "metadata_sha256": "37a54c42d0ee1b341c61fa0b39cde781c76e3ebb4edca4bde349c58dddd6ebb5",
+        "rows": 128,
+        "format": "json_array",
+        "selection_rule": "Existing frozen v5: first official train parquet first 128 rows, original order and image bytes",
+        "revision": "6c254560879df7851233ea0fd2ae2a62764d0ef2"
+      },
+      "source": {
+        "repo": "/REDACTED_HOME/Relax-no17-minimal-r01",
+        "implementation_sha256": "1fb6338810268b20ed01ea89b99378f56e3407efe2cab27a8cfcaefd6ab5cace"
+      },
+      "launcher": "scripts/training/diffusion/run-sensenova-condition-cache.sh",
+      "launcher_sha256": "01672a3619b9c45afbf5cf8c306bff4ec8fdc7e770cc80f34f8879b5a0880ff3",
+      "training": {
+        "world_size": 8,
+        "global_batch_size": 8,
+        "micro_batch_size": 1,
+        "seed": 42,
+        "semantic_config": {
+          "family": "sensenova",
+          "adapter_path": "relax.models.sensenova.adapter.SenseNovaSFTAdapter",
+          "world_size": 8,
+          "global_batch_size": 8,
+          "seed": 42,
+          "trainable_mode": "lora",
+          "lora": {
+            "rank": 32,
+            "alpha": 32,
+            "dropout": 0.0
+          },
+          "optimizer": {
+            "lr": 0.0001,
+            "betas": [
+              0.9,
+              0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 0.01
+          },
+          "warmup": 200,
+          "clip_grad": 1.0,
+          "param_dtype": "bf16",
+          "reduce_dtype": "fp32",
+          "master_dtype": "fp32",
+          "image_prefetch_depth": 4,
+          "image_prefetch_workers": 2,
+          "config": {
+            "max_pixels": 1048576,
+            "conditioning_images": 1,
+            "deterministic_attention": true,
+            "prefix_gradient_checkpointing": false,
+            "fsdp_branch_groups": true,
+            "dataset_size": 128
+          }
+        }
+      },
+      "cache": {
+        "root": "/dev/shm/relax17-minimal-conditioning",
+        "payload_bytes": 20401094656,
+        "prefetch_bytes": 536870912,
+        "prefetch_depth": 2
+      },
+      "env": {
+        "FSDP_BRANCH_GROUPS": "1",
+        "PREFIX_GRADIENT_CHECKPOINTING": "0",
+        "DETERMINISTIC_ATTENTION": "1",
+        "IMAGE_PREFETCH_DEPTH": "4",
+        "IMAGE_PREFETCH_WORKERS": "2",
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "4"
+      },
+      "extra_args": [
+        "--no-fsdp-reshard-after-forward"
+      ]
+    },
+    "qwen-text-performance": {
+      "model": {
+        "id": "Qwen/Qwen-Image",
+        "path": "/REDACTED_WORKSPACE/relax17-v6/models/Qwen-Image",
+        "content_sha256": "665f10caed78e40a523ef7b02eed4c65fe8cce610f9dae257761ef1a99c94e22",
+        "revision": "75e0b4be04f60ec59a75f475837eced720f823b6"
+      },
+      "data": {
+        "root": "/REDACTED_WORKSPACE/relax17-v6/data/coco2017-train-128",
+        "metadata": "/REDACTED_WORKSPACE/relax17-v6/data/coco2017-train-128/train.json",
+        "metadata_sha256": "5199d2a2826a5fcbb8118e5c3b431a9daafc200635fa4dad5c0d94f4c6b759c3",
+        "rows": 128,
+        "format": "json_array",
+        "selection_rule": "first 128 physical rows in pinned train parquet; first original caption per image; no filtering for reuse/length/content",
+        "revision": "036f3f8291db64d17faad9b09e59dd30bb65c4d7"
+      },
+      "source": {
+        "repo": "/REDACTED_HOME/Relax-no17-minimal-r01",
+        "implementation_sha256": "1fb6338810268b20ed01ea89b99378f56e3407efe2cab27a8cfcaefd6ab5cace"
+      },
+      "launcher": "scripts/training/diffusion/run-qwen-image-sft-condition-cache.sh",
+      "launcher_sha256": "429fd8fcd1995761ab2eb67b87ae46b525689cd65626079388e8c6d0e504dd56",
+      "training": {
+        "world_size": 8,
+        "global_batch_size": 16,
+        "micro_batch_size": 1,
+        "seed": 42,
+        "semantic_config": {
+          "family": "qwen_image",
+          "adapter_path": "relax.models.qwen_image.sft_adapter.QwenImageSFTAdapter",
+          "world_size": 8,
+          "global_batch_size": 16,
+          "seed": 42,
+          "trainable_mode": "lora",
+          "lora": {
+            "rank": 32,
+            "alpha": 32,
+            "dropout": 0.0
+          },
+          "optimizer": {
+            "lr": 0.0001,
+            "betas": [
+              0.9,
+              0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 0.01
+          },
+          "warmup": 200,
+          "clip_grad": 1.0,
+          "param_dtype": "bf16",
+          "reduce_dtype": "fp32",
+          "master_dtype": "fp32",
+          "config": {
+            "height": 512,
+            "width": 512,
+            "max_sequence_length": 512,
+            "gradient_checkpointing": false,
+            "deterministic_attention": true,
+            "caption_dropout": 0.0,
+            "random_crop": false,
+            "dataset_size": 128,
+            "text_encoder_placement": "replicated"
+          },
+          "image_prefetch_depth": 0,
+          "image_prefetch_workers": 2
+        }
+      },
+      "cache": {
+        "root": "/dev/shm/relax17-minimal-conditioning",
+        "payload_bytes": 1073741824,
+        "prefetch_bytes": 536870912,
+        "prefetch_depth": 0
+      },
+      "env": {
+        "HEIGHT": "512",
+        "WIDTH": "512",
+        "MAX_SEQUENCE_LENGTH": "512",
+        "GRADIENT_CHECKPOINTING": "0",
+        "DETERMINISTIC_ATTENTION": "1",
+        "CAPTION_DROPOUT": "0",
+        "RANDOM_CROP": "0",
+        "IMAGE_PREFETCH_DEPTH": "0",
+        "IMAGE_PREFETCH_WORKERS": "2",
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "4",
+        "TEXT_ENCODER_PLACEMENT": "replicated"
+      },
+      "extra_args": [
+        "--no-fsdp-reshard-after-forward",
+        "--sft-max-in-flight-steps",
+        "2"
+      ]
+    }
+  },
+  "runs": [
+    {
+      "name": "sensenova-minimal-verify-r01",
+      "workload": "sensenova-verify",
+      "purpose": "verify",
+      "cache": true,
+      "steps": 1,
+      "cold_steps": 0,
+      "rtol": 0
+    },
+    {
+      "name": "qwen-text-minimal-verify-r01",
+      "workload": "qwen-text-verify",
+      "purpose": "verify",
+      "cache": true,
+      "steps": 1,
+      "cold_steps": 0,
+      "rtol": 0
+    },
+    {
+      "name": "sensenova-minimal-online-r01",
+      "workload": "sensenova-performance",
+      "purpose": "performance",
+      "group": "sensenova-minimal",
+      "repeat": 1,
+      "cache": false,
+      "steps": 64,
+      "cold_steps": 16
+    },
+    {
+      "name": "sensenova-minimal-cached-r01",
+      "workload": "sensenova-performance",
+      "purpose": "performance",
+      "group": "sensenova-minimal",
+      "repeat": 1,
+      "cache": true,
+      "steps": 64,
+      "cold_steps": 16
+    },
+    {
+      "name": "sensenova-minimal-cached-r02",
+      "workload": "sensenova-performance",
+      "purpose": "performance",
+      "group": "sensenova-minimal",
+      "repeat": 2,
+      "cache": true,
+      "steps": 64,
+      "cold_steps": 16
+    },
+    {
+      "name": "sensenova-minimal-online-r02",
+      "workload": "sensenova-performance",
+      "purpose": "performance",
+      "group": "sensenova-minimal",
+      "repeat": 2,
+      "cache": false,
+      "steps": 64,
+      "cold_steps": 16
+    },
+    {
+      "name": "sensenova-minimal-low-online-r01",
+      "workload": "sensenova-performance",
+      "purpose": "low_reuse",
+      "group": "sensenova-minimal-low",
+      "repeat": 1,
+      "cache": false,
+      "steps": 16,
+      "cold_steps": 0
+    },
+    {
+      "name": "sensenova-minimal-low-cached-r01",
+      "workload": "sensenova-performance",
+      "purpose": "low_reuse",
+      "group": "sensenova-minimal-low",
+      "repeat": 1,
+      "cache": true,
+      "steps": 16,
+      "cold_steps": 0
+    },
+    {
+      "name": "qwen-text-minimal-online-r01",
+      "workload": "qwen-text-performance",
+      "purpose": "performance",
+      "group": "qwen-text-minimal",
+      "repeat": 1,
+      "cache": false,
+      "steps": 64,
+      "cold_steps": 8
+    },
+    {
+      "name": "qwen-text-minimal-cached-r01",
+      "workload": "qwen-text-performance",
+      "purpose": "performance",
+      "group": "qwen-text-minimal",
+      "repeat": 1,
+      "cache": true,
+      "steps": 64,
+      "cold_steps": 8
+    },
+    {
+      "name": "qwen-text-minimal-cached-r02",
+      "workload": "qwen-text-performance",
+      "purpose": "performance",
+      "group": "qwen-text-minimal",
+      "repeat": 2,
+      "cache": true,
+      "steps": 64,
+      "cold_steps": 8
+    },
+    {
+      "name": "qwen-text-minimal-online-r02",
+      "workload": "qwen-text-performance",
+      "purpose": "performance",
+      "group": "qwen-text-minimal",
+      "repeat": 2,
+      "cache": false,
+      "steps": 64,
+      "cold_steps": 8
+    },
+    {
+      "name": "qwen-text-minimal-low-online-r01",
+      "workload": "qwen-text-performance",
+      "purpose": "low_reuse",
+      "group": "qwen-text-minimal-low",
+      "repeat": 1,
+      "cache": false,
+      "steps": 8,
+      "cold_steps": 0
+    },
+    {
+      "name": "qwen-text-minimal-low-cached-r01",
+      "workload": "qwen-text-performance",
+      "purpose": "low_reuse",
+      "group": "qwen-text-minimal-low",
+      "repeat": 1,
+      "cache": true,
+      "steps": 8,
+      "cold_steps": 0
+    }
+  ],
+  "selection_note": "Frozen before measurements: two exact numerical gates, then two complete 64-step pairs per model in AB/BA order and one first-pass pair per model (14 jobs). Reuse original pinned first-128 public rows and optimized online training configuration without reselecting data. Qwen text only, VAE remains online. No pooling with historical joint-cache measurements; report all tails and variance. Two pairs are a targeted post-simplification regression, not the former three-pair campaign.",
+  "generation": {
+    "performance_pairs_per_model": 2,
+    "low_reuse_pairs_per_model": 1,
+    "formal_measurements_seen_at_plan_freeze": 0,
+    "correctness_first_fail_closed": true
+  }
+}

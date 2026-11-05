@@ -1,0 +1,190 @@
+{
+  "run": {
+    "name": "qwen-recovery-cached-r02",
+    "workload": "qwen-recovery-performance",
+    "purpose": "performance",
+    "group": "qwen-recovery",
+    "repeat": 2,
+    "cache": true,
+    "steps": 64,
+    "cold_steps": 8
+  },
+  "directory": "/REDACTED_WORKSPACE/relax17-qwen-recovery/runs/qwen-recovery-cached-r02",
+  "job_id": "conditioning-cache-qwen-recovery-cached-r02",
+  "command": [
+    "bash",
+    "/REDACTED_HOME/Relax-no17-qwen-recovery-r01/scripts/entrypoint/ray-job.sh",
+    "/REDACTED_HOME/Relax-no17-qwen-recovery-r01/scripts/training/diffusion/run-qwen-image-sft-condition-cache.sh",
+    "--no-fsdp-reshard-after-forward",
+    "--sft-max-in-flight-steps",
+    "2"
+  ],
+  "env": {
+    "HEIGHT": "512",
+    "WIDTH": "512",
+    "MAX_SEQUENCE_LENGTH": "512",
+    "GRADIENT_CHECKPOINTING": "0",
+    "DETERMINISTIC_ATTENTION": "1",
+    "CAPTION_DROPOUT": "0",
+    "RANDOM_CROP": "0",
+    "IMAGE_PREFETCH_DEPTH": "0",
+    "IMAGE_PREFETCH_WORKERS": "2",
+    "OMP_NUM_THREADS": "4",
+    "MKL_NUM_THREADS": "4",
+    "OPENBLAS_NUM_THREADS": "4",
+    "TEXT_ENCODER_PLACEMENT": "replicated",
+    "RELAX": "/REDACTED_HOME/Relax-no17-qwen-recovery-r01",
+    "PYTHONPATH": "/REDACTED_HOME/Relax-no17-qwen-recovery-r01:/REDACTED_HOME/Megatron-LM",
+    "DRIVER_PYTHONPATH": "/REDACTED_HOME/Relax-no17-qwen-recovery-r01:/REDACTED_HOME/Megatron-LM",
+    "MODEL_PATH": "/REDACTED_WORKSPACE/relax17-v6/models/Qwen-Image",
+    "DATA_ROOT": "/REDACTED_WORKSPACE/relax17-v6/data/coco2017-train-128",
+    "METADATA_PATH": "/REDACTED_WORKSPACE/relax17-v6/data/coco2017-train-128/train.json",
+    "DATASET_SIZE": "128",
+    "GPUS": "8",
+    "GPUS_PER_NODE": "8",
+    "GLOBAL_BATCH_SIZE": "16",
+    "MICRO_BATCH_SIZE": "1",
+    "SEED": "42",
+    "STEPS": "64",
+    "EXP_NAME": "qwen-recovery-cached-r02",
+    "JOB_ID": "conditioning-cache-qwen-recovery-cached-r02",
+    "SAVE_DIR": "/REDACTED_WORKSPACE/relax17-qwen-recovery/runs/checkpoints",
+    "RUN_DIR": "/REDACTED_WORKSPACE/relax17-qwen-recovery/runs/qwen-recovery-cached-r02",
+    "SAVE_CHECKPOINTS": "0",
+    "USE_CLEARML": "0",
+    "RAY_ADDRESS": "PRIVATE_IP_1:6379",
+    "RAY_DASHBOARD_ADDRESS": "http://127.0.0.1:8265",
+    "RAY_NO_WAIT": "1",
+    "RELAX_SKIP_CLUSTER_CLEANUP": "1",
+    "RELAX_CONDITION_CACHE": "1",
+    "RELAX_CONDITION_PROFILE": "1",
+    "RELAX_CONDITION_VERIFY": "0",
+    "RELAX_CONDITION_VERIFY_RTOL": "0",
+    "RELAX_CONDITION_CACHE_DIR": "/dev/shm/relax17-qwen-recovery",
+    "RELAX_CONDITION_CACHE_MAX_BYTES": "1073741824",
+    "RELAX_CONDITION_CACHE_RUN_DIR": "/REDACTED_WORKSPACE/relax17-qwen-recovery/runs/qwen-recovery-cached-r02",
+    "RELAX_CONDITION_PREFETCH_DEPTH": "0",
+    "RELAX_CONDITION_PREFETCH_MAX_BYTES": "536870912"
+  },
+  "comparison_signature": {
+    "workload": "qwen-recovery-performance",
+    "model": {
+      "id": "Qwen/Qwen-Image",
+      "path": "/REDACTED_WORKSPACE/relax17-v6/models/Qwen-Image",
+      "content_sha256": "665f10caed78e40a523ef7b02eed4c65fe8cce610f9dae257761ef1a99c94e22",
+      "revision": "75e0b4be04f60ec59a75f475837eced720f823b6"
+    },
+    "data": {
+      "root": "/REDACTED_WORKSPACE/relax17-v6/data/coco2017-train-128",
+      "metadata": "/REDACTED_WORKSPACE/relax17-v6/data/coco2017-train-128/train.json",
+      "metadata_sha256": "5199d2a2826a5fcbb8118e5c3b431a9daafc200635fa4dad5c0d94f4c6b759c3",
+      "rows": 128,
+      "format": "json_array",
+      "selection_rule": "first 128 physical rows in pinned train parquet; first original caption per image; no filtering for reuse/length/content",
+      "revision": "036f3f8291db64d17faad9b09e59dd30bb65c4d7"
+    },
+    "source": {
+      "repo": "/REDACTED_HOME/Relax-no17-qwen-recovery-r01",
+      "implementation_sha256": "eb2d2d15ee78a7fed11ea1a5e5660931c9402e873985e6ff25faa246c832399c"
+    },
+    "launcher": "scripts/training/diffusion/run-qwen-image-sft-condition-cache.sh",
+    "launcher_sha256": "a2005bacf21bff9cbdf63f39c6a82ce0051cf61eb1fe871a6920ca599a6dad46",
+    "training": {
+      "world_size": 8,
+      "global_batch_size": 16,
+      "micro_batch_size": 1,
+      "seed": 42,
+      "semantic_config": {
+        "family": "qwen_image",
+        "adapter_path": "relax.models.qwen_image.sft_adapter.QwenImageSFTAdapter",
+        "world_size": 8,
+        "global_batch_size": 16,
+        "seed": 42,
+        "trainable_mode": "lora",
+        "lora": {
+          "rank": 32,
+          "alpha": 32,
+          "dropout": 0.0
+        },
+        "optimizer": {
+          "lr": 0.0001,
+          "betas": [
+            0.9,
+            0.999
+          ],
+          "eps": 1e-08,
+          "weight_decay": 0.01
+        },
+        "warmup": 200,
+        "clip_grad": 1.0,
+        "param_dtype": "bf16",
+        "reduce_dtype": "fp32",
+        "master_dtype": "fp32",
+        "config": {
+          "height": 512,
+          "width": 512,
+          "max_sequence_length": 512,
+          "gradient_checkpointing": false,
+          "deterministic_attention": true,
+          "caption_dropout": 0.0,
+          "random_crop": false,
+          "dataset_size": 128,
+          "text_encoder_placement": "replicated"
+        },
+        "image_prefetch_depth": 0,
+        "image_prefetch_workers": 2
+      }
+    },
+    "env": {
+      "HEIGHT": "512",
+      "WIDTH": "512",
+      "MAX_SEQUENCE_LENGTH": "512",
+      "GRADIENT_CHECKPOINTING": "0",
+      "DETERMINISTIC_ATTENTION": "1",
+      "CAPTION_DROPOUT": "0",
+      "RANDOM_CROP": "0",
+      "IMAGE_PREFETCH_DEPTH": "0",
+      "IMAGE_PREFETCH_WORKERS": "2",
+      "OMP_NUM_THREADS": "4",
+      "MKL_NUM_THREADS": "4",
+      "OPENBLAS_NUM_THREADS": "4",
+      "TEXT_ENCODER_PLACEMENT": "replicated"
+    },
+    "extra_args": [
+      "--no-fsdp-reshard-after-forward",
+      "--sft-max-in-flight-steps",
+      "2"
+    ],
+    "steps": 64,
+    "cold_steps": 8
+  },
+  "implementation_sha256": "eb2d2d15ee78a7fed11ea1a5e5660931c9402e873985e6ff25faa246c832399c",
+  "base_commit": "91795121a565079a1a5ad3024b6a44c6c497814e",
+  "started_unix": 1793717409.589153,
+  "plan_sha256": "051caa0ec0b1e9997d8f3dd4eb97b3495849769cca579bcbe54818a02d81ea24",
+  "runner_sha256": "cdb2d0435cc824083ced3b960026c8a05ab8e5f18226d89b084592c1841538f7",
+  "metadata_sha256": "5199d2a2826a5fcbb8118e5c3b431a9daafc200635fa4dad5c0d94f4c6b759c3",
+  "idle_resources": {
+    "ray": {
+      "total_gpus": 8.0,
+      "available_gpus": 8.0
+    },
+    "gpu_memory_csv_rows": [
+      "0, 0 MiB",
+      "1, 0 MiB",
+      "2, 0 MiB",
+      "3, 0 MiB",
+      "4, 0 MiB",
+      "5, 0 MiB",
+      "6, 0 MiB",
+      "7, 0 MiB"
+    ],
+    "compute_empty": true,
+    "shm_used_bytes": 1294336
+  },
+  "harness_sha256": {
+    "run_experiments.py": "cdb2d0435cc824083ced3b960026c8a05ab8e5f18226d89b084592c1841538f7",
+    "prepare_experiments.py": "fb05c59df6f93fe3f993ad1b63daccf7325dcb509d99d9059354b0dc3d17317c",
+    "owned_serve.py": "ab4cfe996296bf2bda98ef3dca0ac2245ab178b8badd64e6a733d813c8316d84"
+  }
+}

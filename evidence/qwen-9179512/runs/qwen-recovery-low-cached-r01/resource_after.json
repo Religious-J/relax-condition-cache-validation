@@ -1,0 +1,25 @@
+{
+  "ray": {
+    "total_gpus": 8.0,
+    "available_gpus": 8.0
+  },
+  "gpu_memory_csv_rows": [
+    "0, 0 MiB",
+    "1, 0 MiB",
+    "2, 0 MiB",
+    "3, 0 MiB",
+    "4, 0 MiB",
+    "5, 0 MiB",
+    "6, 0 MiB",
+    "7, 0 MiB"
+  ],
+  "compute_empty": true,
+  "shm_used_bytes": 1294336,
+  "unix": 1793718630.6436527,
+  "job_id": "conditioning-cache-qwen-recovery-low-cached-r01",
+  "namespace_count": 0,
+  "payload_file_count": 0,
+  "payload_logical_bytes": 0,
+  "scope": "post_job_idle; excluded from Ray job wall",
+  "observation": "read-only finalization after observer raced with normal Serve shutdown; no retry or deletion"
+}

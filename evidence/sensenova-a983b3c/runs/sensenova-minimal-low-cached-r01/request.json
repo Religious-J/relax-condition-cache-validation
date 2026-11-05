@@ -1,0 +1,176 @@
+{
+  "run": {
+    "name": "sensenova-minimal-low-cached-r01",
+    "workload": "sensenova-performance",
+    "purpose": "low_reuse",
+    "group": "sensenova-minimal-low",
+    "repeat": 1,
+    "cache": true,
+    "steps": 16,
+    "cold_steps": 0
+  },
+  "directory": "/REDACTED_WORKSPACE/relax17-minimal/runs/sensenova-minimal-low-cached-r01",
+  "job_id": "conditioning-cache-sensenova-minimal-low-cached-r01",
+  "command": [
+    "bash",
+    "/REDACTED_HOME/Relax-no17-minimal-r01/scripts/entrypoint/ray-job.sh",
+    "/REDACTED_HOME/Relax-no17-minimal-r01/scripts/training/diffusion/run-sensenova-condition-cache.sh",
+    "--no-fsdp-reshard-after-forward"
+  ],
+  "env": {
+    "FSDP_BRANCH_GROUPS": "1",
+    "PREFIX_GRADIENT_CHECKPOINTING": "0",
+    "DETERMINISTIC_ATTENTION": "1",
+    "IMAGE_PREFETCH_DEPTH": "4",
+    "IMAGE_PREFETCH_WORKERS": "2",
+    "OMP_NUM_THREADS": "4",
+    "MKL_NUM_THREADS": "4",
+    "OPENBLAS_NUM_THREADS": "4",
+    "RELAX": "/REDACTED_HOME/Relax-no17-minimal-r01",
+    "PYTHONPATH": "/REDACTED_HOME/Relax-no17-minimal-r01:/REDACTED_HOME/Megatron-LM",
+    "DRIVER_PYTHONPATH": "/REDACTED_HOME/Relax-no17-minimal-r01:/REDACTED_HOME/Megatron-LM",
+    "MODEL_PATH": "/REDACTED_WORKSPACE/models/SenseNova-U1.5-8B-MoT",
+    "DATA_ROOT": "/REDACTED_WORKSPACE/relax17/data/magicbrush-train-128",
+    "METADATA_PATH": "/REDACTED_WORKSPACE/relax17/data/magicbrush-train-128/train.json",
+    "DATASET_SIZE": "128",
+    "GPUS": "8",
+    "GPUS_PER_NODE": "8",
+    "GLOBAL_BATCH_SIZE": "8",
+    "MICRO_BATCH_SIZE": "1",
+    "SEED": "42",
+    "STEPS": "16",
+    "EXP_NAME": "sensenova-minimal-low-cached-r01",
+    "JOB_ID": "conditioning-cache-sensenova-minimal-low-cached-r01",
+    "SAVE_DIR": "/REDACTED_WORKSPACE/relax17-minimal/runs/checkpoints",
+    "RUN_DIR": "/REDACTED_WORKSPACE/relax17-minimal/runs/sensenova-minimal-low-cached-r01",
+    "SAVE_CHECKPOINTS": "0",
+    "USE_CLEARML": "0",
+    "RAY_ADDRESS": "PRIVATE_IP_1:6379",
+    "RAY_DASHBOARD_ADDRESS": "http://127.0.0.1:8265",
+    "RAY_NO_WAIT": "1",
+    "RELAX_SKIP_CLUSTER_CLEANUP": "1",
+    "RELAX_CONDITION_CACHE": "1",
+    "RELAX_CONDITION_PROFILE": "1",
+    "RELAX_CONDITION_VERIFY": "0",
+    "RELAX_CONDITION_VERIFY_RTOL": "0",
+    "RELAX_CONDITION_CACHE_DIR": "/dev/shm/relax17-minimal-conditioning",
+    "RELAX_CONDITION_CACHE_MAX_BYTES": "20401094656",
+    "RELAX_CONDITION_CACHE_RUN_DIR": "/REDACTED_WORKSPACE/relax17-minimal/runs/sensenova-minimal-low-cached-r01",
+    "RELAX_CONDITION_PREFETCH_DEPTH": "2",
+    "RELAX_CONDITION_PREFETCH_MAX_BYTES": "536870912"
+  },
+  "comparison_signature": {
+    "workload": "sensenova-performance",
+    "model": {
+      "id": "sensenova/SenseNova-U1.5-8B-MoT",
+      "path": "/REDACTED_WORKSPACE/models/SenseNova-U1.5-8B-MoT",
+      "content_sha256": "8d01e346ac868fb0ef8219d517987eb72ea78d26fd994457f7ef475c8158b2dc",
+      "revision": "19bc874ef6ffc97fda9837b40fc1d1301806158a",
+      "revision_evidence": "reports/sensenova-model-revision-verification.json",
+      "revision_evidence_sha256": "4e3b1496b9399d31ecfeb05b344a441130238fc9ab9ecc9693116d81629102f5",
+      "revision_api_sha256": "8fa2e90f5dafc94d618dcb5f3b6eae2dd71d609e868227ed2b043b29b6e62d3a"
+    },
+    "data": {
+      "root": "/REDACTED_WORKSPACE/relax17/data/magicbrush-train-128",
+      "metadata": "/REDACTED_WORKSPACE/relax17/data/magicbrush-train-128/train.json",
+      "metadata_sha256": "37a54c42d0ee1b341c61fa0b39cde781c76e3ebb4edca4bde349c58dddd6ebb5",
+      "rows": 128,
+      "format": "json_array",
+      "selection_rule": "Existing frozen v5: first official train parquet first 128 rows, original order and image bytes",
+      "revision": "6c254560879df7851233ea0fd2ae2a62764d0ef2"
+    },
+    "source": {
+      "repo": "/REDACTED_HOME/Relax-no17-minimal-r01",
+      "implementation_sha256": "1fb6338810268b20ed01ea89b99378f56e3407efe2cab27a8cfcaefd6ab5cace"
+    },
+    "launcher": "scripts/training/diffusion/run-sensenova-condition-cache.sh",
+    "launcher_sha256": "01672a3619b9c45afbf5cf8c306bff4ec8fdc7e770cc80f34f8879b5a0880ff3",
+    "training": {
+      "world_size": 8,
+      "global_batch_size": 8,
+      "micro_batch_size": 1,
+      "seed": 42,
+      "semantic_config": {
+        "family": "sensenova",
+        "adapter_path": "relax.models.sensenova.adapter.SenseNovaSFTAdapter",
+        "world_size": 8,
+        "global_batch_size": 8,
+        "seed": 42,
+        "trainable_mode": "lora",
+        "lora": {
+          "rank": 32,
+          "alpha": 32,
+          "dropout": 0.0
+        },
+        "optimizer": {
+          "lr": 0.0001,
+          "betas": [
+            0.9,
+            0.999
+          ],
+          "eps": 1e-08,
+          "weight_decay": 0.01
+        },
+        "warmup": 200,
+        "clip_grad": 1.0,
+        "param_dtype": "bf16",
+        "reduce_dtype": "fp32",
+        "master_dtype": "fp32",
+        "image_prefetch_depth": 4,
+        "image_prefetch_workers": 2,
+        "config": {
+          "max_pixels": 1048576,
+          "conditioning_images": 1,
+          "deterministic_attention": true,
+          "prefix_gradient_checkpointing": false,
+          "fsdp_branch_groups": true,
+          "dataset_size": 128
+        }
+      }
+    },
+    "env": {
+      "FSDP_BRANCH_GROUPS": "1",
+      "PREFIX_GRADIENT_CHECKPOINTING": "0",
+      "DETERMINISTIC_ATTENTION": "1",
+      "IMAGE_PREFETCH_DEPTH": "4",
+      "IMAGE_PREFETCH_WORKERS": "2",
+      "OMP_NUM_THREADS": "4",
+      "MKL_NUM_THREADS": "4",
+      "OPENBLAS_NUM_THREADS": "4"
+    },
+    "extra_args": [
+      "--no-fsdp-reshard-after-forward"
+    ],
+    "steps": 16,
+    "cold_steps": 0
+  },
+  "implementation_sha256": "1fb6338810268b20ed01ea89b99378f56e3407efe2cab27a8cfcaefd6ab5cace",
+  "base_commit": "a983b3cfb5880616d8dcdcde204989fd371b1995",
+  "started_unix": 1793711745.4308913,
+  "plan_sha256": "6e32a600d0f0b901ea1b567ce6b62c69727472c8f16dceac3c1032deda23d728",
+  "runner_sha256": "cdb2d0435cc824083ced3b960026c8a05ab8e5f18226d89b084592c1841538f7",
+  "metadata_sha256": "37a54c42d0ee1b341c61fa0b39cde781c76e3ebb4edca4bde349c58dddd6ebb5",
+  "idle_resources": {
+    "ray": {
+      "total_gpus": 8.0,
+      "available_gpus": 8.0
+    },
+    "gpu_memory_csv_rows": [
+      "0, 0 MiB",
+      "1, 0 MiB",
+      "2, 0 MiB",
+      "3, 0 MiB",
+      "4, 0 MiB",
+      "5, 0 MiB",
+      "6, 0 MiB",
+      "7, 0 MiB"
+    ],
+    "compute_empty": true,
+    "shm_used_bytes": 1294336
+  },
+  "harness_sha256": {
+    "run_experiments.py": "cdb2d0435cc824083ced3b960026c8a05ab8e5f18226d89b084592c1841538f7",
+    "prepare_experiments.py": "fb05c59df6f93fe3f993ad1b63daccf7325dcb509d99d9059354b0dc3d17317c",
+    "owned_serve.py": "ab4cfe996296bf2bda98ef3dca0ac2245ab178b8badd64e6a733d813c8316d84"
+  }
+}

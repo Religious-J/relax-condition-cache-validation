@@ -1,0 +1,4258 @@
+{
+  "schema_version": 1,
+  "purpose": "Historical measurements and current-source regression evidence; not newly executed measurements",
+  "redaction_rules": {
+    "private_ipv4": "Consistent PRIVATE_IP_n labels; loopback retained",
+    "paths": "Machine-specific /root, /workspace, /Users/<name>, /home/<name> and /tmp/ray prefixes replaced; remaining hierarchy retained",
+    "ray_node_identity": "driver_node_id replaced",
+    "credentials": "Selected files scanned for known credential prefixes, private keys, URL credentials and bearer tokens; any hit aborts export"
+  },
+  "original_hash_scope": "Original hashes refer to retained private files. Published files may be redacted and/or gzip encoded; verify.py validates public bytes, not possession of originals. Redacted plans/requests cannot reproduce original plan/source-envelope hashes.",
+  "campaigns": [
+    {
+      "id": "sensenova-a983b3c",
+      "source_commit": "a983b3cfb5880616d8dcdcde204989fd371b1995",
+      "plan": "plan.json",
+      "runs": [
+        {
+          "name": "sensenova-minimal-verify-r01",
+          "workload": "sensenova-verify",
+          "purpose": "verify",
+          "cache": true,
+          "steps": 1,
+          "cold_steps": 0,
+          "rtol": 0
+        },
+        {
+          "name": "sensenova-minimal-online-r01",
+          "workload": "sensenova-performance",
+          "purpose": "performance",
+          "group": "sensenova-minimal",
+          "repeat": 1,
+          "cache": false,
+          "steps": 64,
+          "cold_steps": 16
+        },
+        {
+          "name": "sensenova-minimal-cached-r01",
+          "workload": "sensenova-performance",
+          "purpose": "performance",
+          "group": "sensenova-minimal",
+          "repeat": 1,
+          "cache": true,
+          "steps": 64,
+          "cold_steps": 16
+        },
+        {
+          "name": "sensenova-minimal-cached-r02",
+          "workload": "sensenova-performance",
+          "purpose": "performance",
+          "group": "sensenova-minimal",
+          "repeat": 2,
+          "cache": true,
+          "steps": 64,
+          "cold_steps": 16
+        },
+        {
+          "name": "sensenova-minimal-online-r02",
+          "workload": "sensenova-performance",
+          "purpose": "performance",
+          "group": "sensenova-minimal",
+          "repeat": 2,
+          "cache": false,
+          "steps": 64,
+          "cold_steps": 16
+        },
+        {
+          "name": "sensenova-minimal-low-online-r01",
+          "workload": "sensenova-performance",
+          "purpose": "low_reuse",
+          "group": "sensenova-minimal-low",
+          "repeat": 1,
+          "cache": false,
+          "steps": 16,
+          "cold_steps": 0
+        },
+        {
+          "name": "sensenova-minimal-low-cached-r01",
+          "workload": "sensenova-performance",
+          "purpose": "low_reuse",
+          "group": "sensenova-minimal-low",
+          "repeat": 1,
+          "cache": true,
+          "steps": 16,
+          "cold_steps": 0
+        }
+      ],
+      "source_run_count": 14,
+      "included_run_count": 7,
+      "scope": "historical acceptance; two pairs and one low-reuse pair",
+      "selection": "SenseNova runs only; superseded Qwen results at this commit are excluded and replaced by the separately recorded Qwen recovery campaign",
+      "historical_harness_sha256": {
+        "prepare_experiments.py": "fb05c59df6f93fe3f993ad1b63daccf7325dcb509d99d9059354b0dc3d17317c",
+        "owned_serve.py": "ab4cfe996296bf2bda98ef3dca0ac2245ab178b8badd64e6a733d813c8316d84",
+        "run_experiments.py": "cdb2d0435cc824083ced3b960026c8a05ab8e5f18226d89b084592c1841538f7"
+      },
+      "source_patch": "empty in every included run; original request retains base_commit and implementation_sha256",
+      "excluded_large_artifacts": [
+        "model weights",
+        "dataset images",
+        "source.bundle",
+        "initial tensors/checkpoints"
+      ],
+      "original_derived_summary": {
+        "source_path": "no17-minimal/summary.json",
+        "sha256": "082908a9551dc3173c3a53e5fa863d862db032d44c86b5308929359971940c3f",
+        "bytes": 192246,
+        "published": false,
+        "reason": "Recomputed from the selected per-rank events, job metadata and numerical report instead"
+      }
+    },
+    {
+      "id": "qwen-9179512",
+      "source_commit": "91795121a565079a1a5ad3024b6a44c6c497814e",
+      "plan": "plan.json",
+      "runs": [
+        {
+          "name": "qwen-recovery-verify-r01",
+          "workload": "qwen-recovery-verify",
+          "purpose": "verify",
+          "cache": true,
+          "steps": 1,
+          "cold_steps": 0,
+          "rtol": 0
+        },
+        {
+          "name": "qwen-recovery-online-r01",
+          "workload": "qwen-recovery-performance",
+          "purpose": "performance",
+          "group": "qwen-recovery",
+          "repeat": 1,
+          "cache": false,
+          "steps": 64,
+          "cold_steps": 8
+        },
+        {
+          "name": "qwen-recovery-cached-r01",
+          "workload": "qwen-recovery-performance",
+          "purpose": "performance",
+          "group": "qwen-recovery",
+          "repeat": 1,
+          "cache": true,
+          "steps": 64,
+          "cold_steps": 8
+        },
+        {
+          "name": "qwen-recovery-cached-r02",
+          "workload": "qwen-recovery-performance",
+          "purpose": "performance",
+          "group": "qwen-recovery",
+          "repeat": 2,
+          "cache": true,
+          "steps": 64,
+          "cold_steps": 8
+        },
+        {
+          "name": "qwen-recovery-online-r02",
+          "workload": "qwen-recovery-performance",
+          "purpose": "performance",
+          "group": "qwen-recovery",
+          "repeat": 2,
+          "cache": false,
+          "steps": 64,
+          "cold_steps": 8
+        },
+        {
+          "name": "qwen-recovery-low-online-r01",
+          "workload": "qwen-recovery-performance",
+          "purpose": "low_reuse",
+          "group": "qwen-recovery-low",
+          "repeat": 1,
+          "cache": false,
+          "steps": 8,
+          "cold_steps": 0
+        },
+        {
+          "name": "qwen-recovery-low-cached-r01",
+          "workload": "qwen-recovery-performance",
+          "purpose": "low_reuse",
+          "group": "qwen-recovery-low",
+          "repeat": 1,
+          "cache": true,
+          "steps": 8,
+          "cold_steps": 0
+        }
+      ],
+      "source_run_count": 7,
+      "included_run_count": 7,
+      "scope": "historical acceptance; two pairs and one low-reuse pair",
+      "selection": "All seven final runs; low-cached observation was recovered after observer interruption, without retraining",
+      "historical_harness_sha256": {
+        "prepare_experiments.py": "fb05c59df6f93fe3f993ad1b63daccf7325dcb509d99d9059354b0dc3d17317c",
+        "owned_serve.py": "ab4cfe996296bf2bda98ef3dca0ac2245ab178b8badd64e6a733d813c8316d84",
+        "run_experiments.py": "cdb2d0435cc824083ced3b960026c8a05ab8e5f18226d89b084592c1841538f7"
+      },
+      "source_patch": "empty in every included run; original request retains base_commit and implementation_sha256",
+      "excluded_large_artifacts": [
+        "model weights",
+        "dataset images",
+        "source.bundle",
+        "initial tensors/checkpoints"
+      ],
+      "original_derived_summary": {
+        "source_path": "no17-qwen-recovery/summary.json",
+        "sha256": "829c67512baac3d857bff0ffc0dd9dfcbc705fcb1dde158a002ceb6c8d98c466",
+        "bytes": 96412,
+        "published": false,
+        "reason": "Recomputed from the selected per-rank events, job metadata and numerical report instead"
+      }
+    },
+    {
+      "id": "review-bd07ff5",
+      "source_commit": "bd07ff5e8146207b9319c6b42be426c058be0a82",
+      "plan": "plan.json",
+      "runs": [
+        {
+          "name": "sensenova-review-verify-r02",
+          "workload": "sensenova-review-verify",
+          "purpose": "verify",
+          "cache": true,
+          "steps": 1,
+          "cold_steps": 0,
+          "rtol": 0
+        },
+        {
+          "name": "qwen-review-verify-r02",
+          "workload": "qwen-review-verify",
+          "purpose": "verify",
+          "cache": true,
+          "steps": 1,
+          "cold_steps": 0,
+          "rtol": 0
+        },
+        {
+          "name": "sensenova-review-online-r02",
+          "workload": "sensenova-review-screen",
+          "purpose": "screen",
+          "group": "sensenova-review-screen",
+          "repeat": 1,
+          "cache": false,
+          "steps": 64,
+          "cold_steps": 16
+        },
+        {
+          "name": "sensenova-review-cached-r02",
+          "workload": "sensenova-review-screen",
+          "purpose": "screen",
+          "group": "sensenova-review-screen",
+          "repeat": 1,
+          "cache": true,
+          "steps": 64,
+          "cold_steps": 16
+        },
+        {
+          "name": "qwen-review-online-r02",
+          "workload": "qwen-review-screen",
+          "purpose": "screen",
+          "group": "qwen-review-screen",
+          "repeat": 1,
+          "cache": false,
+          "steps": 64,
+          "cold_steps": 8
+        },
+        {
+          "name": "qwen-review-cached-r02",
+          "workload": "qwen-review-screen",
+          "purpose": "screen",
+          "group": "qwen-review-screen",
+          "repeat": 1,
+          "cache": true,
+          "steps": 64,
+          "cold_steps": 8
+        }
+      ],
+      "source_run_count": 6,
+      "included_run_count": 6,
+      "scope": "Review-fix regression at bd07ff5, before validation extraction; one pair per model",
+      "selection": "All six successful r02 runs; r01 failed before any training event because shallow Git metadata was missing",
+      "historical_harness_sha256": {
+        "prepare_experiments.py": "fb05c59df6f93fe3f993ad1b63daccf7325dcb509d99d9059354b0dc3d17317c",
+        "owned_serve.py": "ab4cfe996296bf2bda98ef3dca0ac2245ab178b8badd64e6a733d813c8316d84",
+        "run_experiments.py": "cdb2d0435cc824083ced3b960026c8a05ab8e5f18226d89b084592c1841538f7"
+      },
+      "source_patch": "empty in every included run; original request retains base_commit and implementation_sha256",
+      "excluded_large_artifacts": [
+        "model weights",
+        "dataset images",
+        "source.bundle",
+        "initial tensors/checkpoints"
+      ],
+      "original_derived_summary": {
+        "source_path": "no17-review-fixes/regression-summary.local.json",
+        "sha256": "d83eefb38aa97a7ab2dd592cc70d4a22ae0e3a5d7d59c08a012a7519b4f1930c",
+        "bytes": 75890,
+        "published": false,
+        "reason": "Recomputed from the selected per-rank events, job metadata and numerical report instead"
+      }
+    }
+  ],
+  "files": [
+    {
+      "path": "evidence/sensenova-a983b3c/plan.json",
+      "source_path": "no17-minimal/plan.json",
+      "source_sha256": "6e32a600d0f0b901ea1b567ce6b62c69727472c8f16dceac3c1032deda23d728",
+      "source_bytes": 17963,
+      "public_sha256": "ea854861ae9b8857d6a3b723b2c41d7e0edf9c382269b3df70070d633e4cd680",
+      "public_bytes": 18133,
+      "public_content_sha256": "ea854861ae9b8857d6a3b723b2c41d7e0edf9c382269b3df70070d633e4cd680",
+      "public_content_bytes": 18133,
+      "encoding": "utf-8",
+      "redactions": {
+        "private_ipv4": 1,
+        "root_home_prefix": 5,
+        "workspace_prefix": 14
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/resources.jsonl.gz",
+      "source_path": "no17-minimal/resources.jsonl",
+      "source_sha256": "65e5e2d531b6c3c8e15966f130e6abb57a8685e70199dd7331bb7c9dffa74bcb",
+      "source_bytes": 562086,
+      "public_sha256": "59d7b800050db1066612e9aabaefcefc50ecf4a2c452a0ff586337b94fbf585a",
+      "public_bytes": 39899,
+      "public_content_sha256": "65e5e2d531b6c3c8e15966f130e6abb57a8685e70199dd7331bb7c9dffa74bcb",
+      "public_content_bytes": 562086,
+      "encoding": "gzip",
+      "redactions": {},
+      "byte_exact_before_compression": true
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-verify-r01/conditioning-verification.json.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-verify-r01/conditioning-verification.json",
+      "source_sha256": "d7c73515ffc7def42ad0d7ecbb954f3b3a19db59d21f155abbe4d1d8a16fa9da",
+      "source_bytes": 365548,
+      "public_sha256": "1fd1e3da42e9e8e1c5f6b63056d7f0940d6aa15de6271d2a4c3e3cbd5300e763",
+      "public_bytes": 17868,
+      "public_content_sha256": "d7c73515ffc7def42ad0d7ecbb954f3b3a19db59d21f155abbe4d1d8a16fa9da",
+      "public_content_bytes": 365548,
+      "encoding": "gzip",
+      "redactions": {},
+      "byte_exact_before_compression": true
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-verify-r01/driver.log.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-verify-r01/driver.log",
+      "source_sha256": "1417d2e3eaab68c57ae4857f9a096beb2f7b0098fbd5f274c3c0946464472593",
+      "source_bytes": 42976,
+      "public_sha256": "bf330ea252a90f857bc224182c942af44b441974d359b732cbcb500076481b78",
+      "public_bytes": 7341,
+      "public_content_sha256": "afe235f2db2b351685b457d01f7550bd9c2a9aabc51b383040b45dc995beab13",
+      "public_content_bytes": 43050,
+      "encoding": "gzip",
+      "redactions": {
+        "private_ipv4": 25,
+        "root_home_prefix": 8,
+        "workspace_prefix": 3
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-verify-r01/events-rank0.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-verify-r01/events-rank0.jsonl",
+      "source_sha256": "5aff0a06b47ae992801ca8bbaca8c88ef92a635982eab5a2fced565466681d8d",
+      "source_bytes": 6805,
+      "public_sha256": "28e93908e5031819f4ee6ee6409a1588da7b7abbbe2beff30d3c5e63b626c558",
+      "public_bytes": 2255,
+      "public_content_sha256": "fe16da1cfd829f667f47bbdfcc9b719365c7664fb89b083de47fc4fcf1c14438",
+      "public_content_bytes": 6823,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-verify-r01/events-rank1.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-verify-r01/events-rank1.jsonl",
+      "source_sha256": "ba3f1c46b906bef15bf5701fc345397e2828cc338c2bb3ad75564a31a79d7185",
+      "source_bytes": 6816,
+      "public_sha256": "9281a1677822385b427cd4093f6fb20099ca746689050f1f144d01709a592a31",
+      "public_bytes": 2251,
+      "public_content_sha256": "f8af6c711dc005662b6001c20ba6b3e5d696b87c99145bb08d3aae5d68be9be2",
+      "public_content_bytes": 6834,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-verify-r01/events-rank2.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-verify-r01/events-rank2.jsonl",
+      "source_sha256": "7cc1398fb7c92237fd707df2467990f6b3f88360a32964dc02102272a9e7b593",
+      "source_bytes": 6822,
+      "public_sha256": "eed3d04db6527fb460f2cc82c46f6e6c2e43bfe44ade96739cdab0428e9e8397",
+      "public_bytes": 2251,
+      "public_content_sha256": "a61b926039cf594f1c4f7c7dd5ceabb26a636c11cbfddc89c7ef721cce493c1f",
+      "public_content_bytes": 6840,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-verify-r01/events-rank3.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-verify-r01/events-rank3.jsonl",
+      "source_sha256": "7131a24fcb45bfc5556f0ccd501cfff80cf0b003e26e986922c34d5b75ce101a",
+      "source_bytes": 6823,
+      "public_sha256": "3e7f928bfb453cf985fb2f25a5269673de0ee0746b452f0abba5f2ecc366d754",
+      "public_bytes": 2246,
+      "public_content_sha256": "050d79f64088e218d2579566cd453a338dabb760324c8f4b0ded28b588710f51",
+      "public_content_bytes": 6841,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-verify-r01/events-rank4.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-verify-r01/events-rank4.jsonl",
+      "source_sha256": "0f20033856940f661046f5a662c54c34931fa9cb7097cd837180652e4d0de3c6",
+      "source_bytes": 6824,
+      "public_sha256": "977dd24d9e32b9636187ac7771e7c7d5dcea9a194b42820ee601cfa1915b3960",
+      "public_bytes": 2241,
+      "public_content_sha256": "1bd4a23b9b29e10eb5ef1c7f85d8151e0a99e3452df514d56f59883176275c9d",
+      "public_content_bytes": 6842,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-verify-r01/events-rank5.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-verify-r01/events-rank5.jsonl",
+      "source_sha256": "f0ede312a166fbb2bed3b985f9fd89abaea8837f33b51f6c552b6ee8402b7aa6",
+      "source_bytes": 6807,
+      "public_sha256": "e0c01c01ac212619d981d3085306285de0fe4cd4e722a0e993dbe4a37a8fff5f",
+      "public_bytes": 2242,
+      "public_content_sha256": "ff74ff26b3d6b9e057a432f12ead5508e82e33fabdde272624170ba26b7c8fb3",
+      "public_content_bytes": 6825,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-verify-r01/events-rank6.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-verify-r01/events-rank6.jsonl",
+      "source_sha256": "56960b617cb69f616371e22181a46f3fb9c6943bff3c2a074055ff7ecd78babf",
+      "source_bytes": 6813,
+      "public_sha256": "9a9faf40be446cafd4b829ec49dc47fb2fcc7323180d14bb4e145b3ffadc7b95",
+      "public_bytes": 2250,
+      "public_content_sha256": "9bac80552dcc4ad3b003f74a3b7ec11d7888d225d0f4d59f08afa3ad7aac52ba",
+      "public_content_bytes": 6831,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-verify-r01/events-rank7.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-verify-r01/events-rank7.jsonl",
+      "source_sha256": "99beb24f7645b7f4043192f61016696eecef7af8bddf42e73c0690b40d0acd5b",
+      "source_bytes": 6810,
+      "public_sha256": "78e2f4d1aadaa216bd801ae11d2f5b63e5290a446c8634b6b1ab6dbf720b84c3",
+      "public_bytes": 2242,
+      "public_content_sha256": "09cb5ecd19e3752b28ccaddc8709703cc8719fd6e7885c25128b4b7823d931b1",
+      "public_content_bytes": 6828,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-verify-r01/job.json",
+      "source_path": "no17-minimal/runs/sensenova-minimal-verify-r01/job.json",
+      "source_sha256": "cf2eee7b4571e3fd67251f8ee866f44d8f6b13e4542108ab4df76ede194ba19d",
+      "source_bytes": 3478,
+      "public_sha256": "97f5d98eeacdaab42f4e70dbbf2a900b545748a280737276c755444fad772063",
+      "public_bytes": 3534,
+      "public_content_sha256": "97f5d98eeacdaab42f4e70dbbf2a900b545748a280737276c755444fad772063",
+      "public_content_bytes": 3534,
+      "encoding": "utf-8",
+      "redactions": {
+        "private_ipv4": 3,
+        "root_home_prefix": 7,
+        "workspace_prefix": 4,
+        "ray_node_identity": 1
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-verify-r01/request.json",
+      "source_path": "no17-minimal/runs/sensenova-minimal-verify-r01/request.json",
+      "source_sha256": "b66936f209247f582b677b110d013d7b517794a869b944ce2712792ca0a76f5a",
+      "source_bytes": 6507,
+      "public_sha256": "9f554af0473efdb204ad7af0045d37a5a0ac3a45a469dd0d53666a2a96377a51",
+      "public_bytes": 6668,
+      "public_content_sha256": "9f554af0473efdb204ad7af0045d37a5a0ac3a45a469dd0d53666a2a96377a51",
+      "public_content_bytes": 6668,
+      "encoding": "utf-8",
+      "redactions": {
+        "private_ipv4": 1,
+        "root_home_prefix": 8,
+        "workspace_prefix": 10
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-verify-r01/resource_after.json",
+      "source_path": "no17-minimal/runs/sensenova-minimal-verify-r01/resource_after.json",
+      "source_sha256": "fe976c41bac578d2de8dfab8c429b4176462fb48946c6cb9cbd4ca7e1df3adc4",
+      "source_bytes": 511,
+      "public_sha256": "fe976c41bac578d2de8dfab8c429b4176462fb48946c6cb9cbd4ca7e1df3adc4",
+      "public_bytes": 511,
+      "public_content_sha256": "fe976c41bac578d2de8dfab8c429b4176462fb48946c6cb9cbd4ca7e1df3adc4",
+      "public_content_bytes": 511,
+      "encoding": "utf-8",
+      "redactions": {},
+      "byte_exact_before_compression": true
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-online-r01/driver.log.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-online-r01/driver.log",
+      "source_sha256": "a6cdb3193ea4f835683675dc30b70f74f7a5895ec3829b70abc72c7d9c2b33cc",
+      "source_bytes": 127277,
+      "public_sha256": "217c4aab92c1812b0e8499fd649c86ab7d27263e708001fc302a6d02cac423fe",
+      "public_bytes": 15152,
+      "public_content_sha256": "d6f98f20b3e05f59a03293f94ba6476edc92795835a274b0031a6a51e7df413e",
+      "public_content_bytes": 127351,
+      "encoding": "gzip",
+      "redactions": {
+        "private_ipv4": 25,
+        "root_home_prefix": 8,
+        "workspace_prefix": 3
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-online-r01/events-rank0.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-online-r01/events-rank0.jsonl",
+      "source_sha256": "448494808347d90fe4f81034831a7dcaa2124dfe2591630ff9019cba7c6e3213",
+      "source_bytes": 86858,
+      "public_sha256": "a10fc00351f448c3c7f85a5203539db303e2297ecbc1012bb375faeb8ad56249",
+      "public_bytes": 8551,
+      "public_content_sha256": "da459d4d88957be05971cba2f1fcb85ece5ca9b1710e4d4fdfbcedc02377f883",
+      "public_content_bytes": 86876,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-online-r01/events-rank1.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-online-r01/events-rank1.jsonl",
+      "source_sha256": "5c70c225ded29db5a1954f7ea0484307ed96f1bcb7eba6e63712b9b6f14f1b50",
+      "source_bytes": 86877,
+      "public_sha256": "29b646d2e1bb9a0ba44c312e0e8d3e162951d481793b2e91010ab4a58a2dc4c8",
+      "public_bytes": 8487,
+      "public_content_sha256": "08484e7a729cf68043b27f7295e1843ab2fd0e4dc0cf07697b6bdd989dfc1444",
+      "public_content_bytes": 86895,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-online-r01/events-rank2.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-online-r01/events-rank2.jsonl",
+      "source_sha256": "231a031d0c4070196fbe69db33bb827b93690f7ec541ecfbfc6d4c9246bb0a5e",
+      "source_bytes": 86881,
+      "public_sha256": "50e7db017dcc8e0972de5aad5256a6e39fb9e422a94ec21deb3681941f8f663c",
+      "public_bytes": 8491,
+      "public_content_sha256": "65333a492e73c3e25c38d37923a7e0436c9d44d19215f5c6dac8ae5eedbabc09",
+      "public_content_bytes": 86899,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-online-r01/events-rank3.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-online-r01/events-rank3.jsonl",
+      "source_sha256": "672e27f7ff5d02eb14955332fa7bad91699da66af35c1c0bfd2997b22fe58d4c",
+      "source_bytes": 86865,
+      "public_sha256": "2bfe401929ea60aa28b145b200874fae18939fa1e371f8bf796aa8cfe1434f5a",
+      "public_bytes": 8565,
+      "public_content_sha256": "d97c7dc4549a5623e65c342995954cbe52c7182525fbd6c6ac234bcefd3c9e72",
+      "public_content_bytes": 86883,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-online-r01/events-rank4.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-online-r01/events-rank4.jsonl",
+      "source_sha256": "1cc213a8846bfab77bbad8748288dadce7e3b13592cf0b563ae4d43d377b909a",
+      "source_bytes": 86854,
+      "public_sha256": "0473da5e4f27504d9c5b1ebe91a5d8a034add1e36d797012b808593b6496082a",
+      "public_bytes": 8424,
+      "public_content_sha256": "d47d49d9cd886a22cac474a8c8b4c4032e7fb2f3d7c10b806e13462e2a008d4f",
+      "public_content_bytes": 86872,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-online-r01/events-rank5.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-online-r01/events-rank5.jsonl",
+      "source_sha256": "737753e22801f262f9d0540f52bb55a00d80f12627ef7f6488deb1bdffbc675a",
+      "source_bytes": 86844,
+      "public_sha256": "96d8d754e52ae7fc81c24e7d3908d6ab1e597e6140de9c7a768af2137022a8de",
+      "public_bytes": 8501,
+      "public_content_sha256": "299c6deea94baed9875db43fe1f88a5ece59cddbe8f32a602625375daed488e3",
+      "public_content_bytes": 86862,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-online-r01/events-rank6.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-online-r01/events-rank6.jsonl",
+      "source_sha256": "e3a6ffe5f14f590a7d9a34a12ccdb253a489dedd4ecb3af2971dc0e8eaff9449",
+      "source_bytes": 86871,
+      "public_sha256": "11c028ade99a34cc593db1afebf10b3c342fe1d983ad2be1ebe80a2d0c7799d3",
+      "public_bytes": 8576,
+      "public_content_sha256": "4bfaa9e2a60d134b4e96fde95ef1562a15c4d3b269ec27a95572a94f79ef54ba",
+      "public_content_bytes": 86889,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-online-r01/events-rank7.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-online-r01/events-rank7.jsonl",
+      "source_sha256": "ee16d845a3ef40a41d67034a2825083aa97051a6b8aab1e5e6d8835a06964b87",
+      "source_bytes": 86878,
+      "public_sha256": "c6f700faa38f64af8a4b0a6b5e4b88c81a842a39910a050e7bc510603dc3ec61",
+      "public_bytes": 8525,
+      "public_content_sha256": "b54fdad84660fabb229670341fc04d5f2ddcabe3d217c118abc436723b6bdc81",
+      "public_content_bytes": 86896,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-online-r01/job.json",
+      "source_path": "no17-minimal/runs/sensenova-minimal-online-r01/job.json",
+      "source_sha256": "1aba33d4f382504c7a1bbd46a1263802b69f9db8f5741c3efc329fdc2c08a0b1",
+      "source_bytes": 3459,
+      "public_sha256": "0cc126e08fae784eb37814aedf46457427adeee293af07a1e9c09d5368b50060",
+      "public_bytes": 3515,
+      "public_content_sha256": "0cc126e08fae784eb37814aedf46457427adeee293af07a1e9c09d5368b50060",
+      "public_content_bytes": 3515,
+      "encoding": "utf-8",
+      "redactions": {
+        "private_ipv4": 3,
+        "root_home_prefix": 7,
+        "workspace_prefix": 4,
+        "ray_node_identity": 1
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-online-r01/request.json",
+      "source_path": "no17-minimal/runs/sensenova-minimal-online-r01/request.json",
+      "source_sha256": "50c2938716d1b71497fd390f95d81dcec2742d86248707cafa528b1c47c39eb6",
+      "source_bytes": 6493,
+      "public_sha256": "d6dfdb77129da414c3daf78e80688ab93904657bbc6d1573726b57ca784c8ea0",
+      "public_bytes": 6654,
+      "public_content_sha256": "d6dfdb77129da414c3daf78e80688ab93904657bbc6d1573726b57ca784c8ea0",
+      "public_content_bytes": 6654,
+      "encoding": "utf-8",
+      "redactions": {
+        "private_ipv4": 1,
+        "root_home_prefix": 8,
+        "workspace_prefix": 10
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-online-r01/resource_after.json",
+      "source_path": "no17-minimal/runs/sensenova-minimal-online-r01/resource_after.json",
+      "source_sha256": "52893b217220a076d44555d570b071bc2714b423b44be1da09d654f5f47e9ab7",
+      "source_bytes": 510,
+      "public_sha256": "52893b217220a076d44555d570b071bc2714b423b44be1da09d654f5f47e9ab7",
+      "public_bytes": 510,
+      "public_content_sha256": "52893b217220a076d44555d570b071bc2714b423b44be1da09d654f5f47e9ab7",
+      "public_content_bytes": 510,
+      "encoding": "utf-8",
+      "redactions": {},
+      "byte_exact_before_compression": true
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-cached-r01/driver.log.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-cached-r01/driver.log",
+      "source_sha256": "1847430127176dd9f98db893d1beda85005280a21171daa6fae6b9fcde74a9d4",
+      "source_bytes": 127277,
+      "public_sha256": "c93a6929bd50f8010dde34d1121c26dd4eb048a18bb62b02d5cc88bf65935c65",
+      "public_bytes": 15125,
+      "public_content_sha256": "89a0323849cffa203a3403901225feb3cf30acaa5e93a6a34ee6570ceb1a46e3",
+      "public_content_bytes": 127351,
+      "encoding": "gzip",
+      "redactions": {
+        "private_ipv4": 25,
+        "root_home_prefix": 8,
+        "workspace_prefix": 3
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-cached-r01/events-rank0.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-cached-r01/events-rank0.jsonl",
+      "source_sha256": "491b0ba27d51dd7887acd87820944cf992ff3f4ca3925c7fe19e8e38a44a5225",
+      "source_bytes": 180595,
+      "public_sha256": "a9f636ed9644b22a7dcbfc7c51e3a784bc56e9ba5198daf2ba3d2cec7bcffb0a",
+      "public_bytes": 20741,
+      "public_content_sha256": "6b03bbbc298bc0936505863d4f783591fff7c27ca6b1d14db7a4e9ad7abf7944",
+      "public_content_bytes": 180613,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-cached-r01/events-rank1.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-cached-r01/events-rank1.jsonl",
+      "source_sha256": "c86770e7a9ebd1cfa8d251e7a359635d80f8de81d2a0e70e1fb14a145627f7c6",
+      "source_bytes": 180614,
+      "public_sha256": "092146354eebaaf00cea8c6ce96026afc76ecbb5aa1d1c709060ebf4154ce9ba",
+      "public_bytes": 20646,
+      "public_content_sha256": "6b6e282d9fd412674f3a03928a30943e6b174d20db4216a1799a43a19f18f0bf",
+      "public_content_bytes": 180632,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-cached-r01/events-rank2.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-cached-r01/events-rank2.jsonl",
+      "source_sha256": "3d6bfe8cd07365473e5a51d8da464240e94757dc26d9eec24d78bbca7beea199",
+      "source_bytes": 180709,
+      "public_sha256": "8dcd3261f2ad765a3c803b06d7008c10b9bfbbb12446dc168dffc181c4232eb6",
+      "public_bytes": 20621,
+      "public_content_sha256": "814f80e8fd6a31d64d7143da328fc79b772d8d0740e33a3ca96cbc7d80b9e5d5",
+      "public_content_bytes": 180727,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-cached-r01/events-rank3.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-cached-r01/events-rank3.jsonl",
+      "source_sha256": "f1e823d79c9bdc1b19dcc7941c6177a747b5971574d1cfb95ceea5a52ad0a6d2",
+      "source_bytes": 180543,
+      "public_sha256": "ec430560ff0da188acec61cc08921ac3a8e225410289fa9dd0257aa710786440",
+      "public_bytes": 20571,
+      "public_content_sha256": "41699c41d33d1f85fe8fa9c0ec2c3376df861e66d4339e6a40d951cbcc24cdbc",
+      "public_content_bytes": 180561,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-cached-r01/events-rank4.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-cached-r01/events-rank4.jsonl",
+      "source_sha256": "704e65bf1ad55d7543b2607a9675d8a5196e80d97cbf38275d24de0f0da6daf1",
+      "source_bytes": 180585,
+      "public_sha256": "e33f6151b53563b1fda104e2f8af8c3d735e43db12937cb3eb42db8d61b7481a",
+      "public_bytes": 20601,
+      "public_content_sha256": "1ee2bf9967236863705c44a70a98ecbf7c496a61aa1a2a27d37809485206e1a9",
+      "public_content_bytes": 180603,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-cached-r01/events-rank5.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-cached-r01/events-rank5.jsonl",
+      "source_sha256": "6122432c3e6a8e7b1f94c39d05c886987fc22d522f01dae363b8e5cd13e1b7f6",
+      "source_bytes": 180584,
+      "public_sha256": "63f2279d2a5f07b25d53ca846c7d22aa5e23cc20f25775605745009b21194ad7",
+      "public_bytes": 20698,
+      "public_content_sha256": "01dcd2df369175ad766b79b60d6de336f239f6ad26ede1f585d2005be833761e",
+      "public_content_bytes": 180602,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-cached-r01/events-rank6.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-cached-r01/events-rank6.jsonl",
+      "source_sha256": "cf874c89cd2407a0339372d23a0d4aaaf467c827f7e9198edfd8ce6ecb723dc1",
+      "source_bytes": 180637,
+      "public_sha256": "27c41c89d869a27df96df4b503ad56699e528cacf4bc97de588186f79c9cede0",
+      "public_bytes": 20613,
+      "public_content_sha256": "93762ed32367d1e52829cac75461aaba8d59fb87de8f702e107895fc3936f953",
+      "public_content_bytes": 180655,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-cached-r01/events-rank7.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-cached-r01/events-rank7.jsonl",
+      "source_sha256": "72da8fa39fc5f94c2eb6dc79599d14835d8442577efec145fce1a7c5cd022561",
+      "source_bytes": 180610,
+      "public_sha256": "8b1dbfb5134a16309ad72f6b1ff49684a26087714322782bdb82766ee15a5f0a",
+      "public_bytes": 20634,
+      "public_content_sha256": "284b84fe9b1b6c05e88c18ff0aa8782fc2acf8e48eb78e50ad227b4af04d306e",
+      "public_content_bytes": 180628,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-cached-r01/job.json",
+      "source_path": "no17-minimal/runs/sensenova-minimal-cached-r01/job.json",
+      "source_sha256": "55646b22f51f525ee6c38bb82651c83b8ed276708999bff732ec3afc69c4dcd1",
+      "source_bytes": 3459,
+      "public_sha256": "a4c58cae6ee8f2ef9126d118736135692ef2c036ee9056325d0407c0a2f24984",
+      "public_bytes": 3515,
+      "public_content_sha256": "a4c58cae6ee8f2ef9126d118736135692ef2c036ee9056325d0407c0a2f24984",
+      "public_content_bytes": 3515,
+      "encoding": "utf-8",
+      "redactions": {
+        "private_ipv4": 3,
+        "root_home_prefix": 7,
+        "workspace_prefix": 4,
+        "ray_node_identity": 1
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-cached-r01/request.json",
+      "source_path": "no17-minimal/runs/sensenova-minimal-cached-r01/request.json",
+      "source_sha256": "5a586e0fec63822d65d7b964ace45e28c3b2661184b8b3c99ed305f91c58096b",
+      "source_bytes": 6493,
+      "public_sha256": "63171a4c919010edd28e06433e147e504ef315eab546a54ee58fe7ae388a3b69",
+      "public_bytes": 6654,
+      "public_content_sha256": "63171a4c919010edd28e06433e147e504ef315eab546a54ee58fe7ae388a3b69",
+      "public_content_bytes": 6654,
+      "encoding": "utf-8",
+      "redactions": {
+        "private_ipv4": 1,
+        "root_home_prefix": 8,
+        "workspace_prefix": 10
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-cached-r01/resource_after.json",
+      "source_path": "no17-minimal/runs/sensenova-minimal-cached-r01/resource_after.json",
+      "source_sha256": "0dc83d2f7a8e7493e51c25d3023562a3ac57476ef3874bb9048d1699c92d7093",
+      "source_bytes": 511,
+      "public_sha256": "0dc83d2f7a8e7493e51c25d3023562a3ac57476ef3874bb9048d1699c92d7093",
+      "public_bytes": 511,
+      "public_content_sha256": "0dc83d2f7a8e7493e51c25d3023562a3ac57476ef3874bb9048d1699c92d7093",
+      "public_content_bytes": 511,
+      "encoding": "utf-8",
+      "redactions": {},
+      "byte_exact_before_compression": true
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-cached-r02/driver.log.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-cached-r02/driver.log",
+      "source_sha256": "0992c69462df90aa335232ee8807fa14018a6698abe6c933194dd643b67c3f03",
+      "source_bytes": 127028,
+      "public_sha256": "e1162c9a9d9ab15efc07f0916797e7576990f3da0ad980ab28cb7a317b9560e9",
+      "public_bytes": 14990,
+      "public_content_sha256": "a2cff8c7683b2670f97b211f136b98143baca17a5bd487442cb90ee4464d3d93",
+      "public_content_bytes": 127102,
+      "encoding": "gzip",
+      "redactions": {
+        "private_ipv4": 25,
+        "root_home_prefix": 8,
+        "workspace_prefix": 3
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-cached-r02/events-rank0.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-cached-r02/events-rank0.jsonl",
+      "source_sha256": "e2518c5ffbdc043e88354d3223ec66bb4c0fed353e80908a3615952e0e0275b6",
+      "source_bytes": 180626,
+      "public_sha256": "3d00510e378f0ddad8df8e43a361b8f1978b680bbdf3f912f3b520fdc530c675",
+      "public_bytes": 20631,
+      "public_content_sha256": "78a9513e8116497cdd4f98522c1a5067efac0a569f5e8e1691d959865ef07e79",
+      "public_content_bytes": 180644,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-cached-r02/events-rank1.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-cached-r02/events-rank1.jsonl",
+      "source_sha256": "4a0ca4d9cbac685a20c3e908d21432fe7edac469412ed89cd10f33455280042c",
+      "source_bytes": 180592,
+      "public_sha256": "41babaefc3402339ae2be2fa43b012a8d42e3c5973cb3ff647ea9abcd28cefd5",
+      "public_bytes": 20626,
+      "public_content_sha256": "77ddd3423a110a315a53845269eadbb1b28a4edda35f0477cb332b59a27c43f9",
+      "public_content_bytes": 180610,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-cached-r02/events-rank2.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-cached-r02/events-rank2.jsonl",
+      "source_sha256": "5569f489a2082f42324b209e3ece4ad5db483df53b6f4cc8a2fe2944449d8f6c",
+      "source_bytes": 180638,
+      "public_sha256": "8fb9d799afd7ec553bd4da11117e96461d8d11ab76460e49f310ff6ec3e67fc6",
+      "public_bytes": 20466,
+      "public_content_sha256": "df1f54ea76a38cc64863e42125a28acbf0c3666b29fc24b841bcf2d67b2f59df",
+      "public_content_bytes": 180656,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-cached-r02/events-rank3.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-cached-r02/events-rank3.jsonl",
+      "source_sha256": "e512cde24aa73781e47ea6b079d6c70cd82a48d105f733c9b53fafcf1b5998af",
+      "source_bytes": 180562,
+      "public_sha256": "7ba8b09d1d4ab851eb2291006ca1eab782a8c300e66b6ae6d772f9e195ac551d",
+      "public_bytes": 20515,
+      "public_content_sha256": "03924ff00cbbec6d308d1d0158facdd61385922e186ce4fd1661a60c61b44eed",
+      "public_content_bytes": 180580,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-cached-r02/events-rank4.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-cached-r02/events-rank4.jsonl",
+      "source_sha256": "7bf26721ba8c514461d26bd8ff584f93c86f604718163b13e10d6d52acdfa651",
+      "source_bytes": 180498,
+      "public_sha256": "595e2eb1940f41aaac890f1ea1f23cadb38b448ad259b06086a1ac4465a3288e",
+      "public_bytes": 20522,
+      "public_content_sha256": "a3d8579a97002828d00acadd71e192f2db9e8845de3f06f616b79ca48fcb2652",
+      "public_content_bytes": 180516,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-cached-r02/events-rank5.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-cached-r02/events-rank5.jsonl",
+      "source_sha256": "0736af9eb79bd784b26a80c899f8f1dc5d2c3eea82c28b5d8bc83a18f59b8eb5",
+      "source_bytes": 180516,
+      "public_sha256": "b2e8fedf6f863000032197b89ab6ecb5836362c504d0a8cd41862644dc478c0e",
+      "public_bytes": 20680,
+      "public_content_sha256": "921fff1c2b7609f78a2cde39815f53ba4d4435b064facce4045e084958d30c10",
+      "public_content_bytes": 180534,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-cached-r02/events-rank6.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-cached-r02/events-rank6.jsonl",
+      "source_sha256": "f20b99e8b1aa954a35db41432fb2d5605c430e0c7ce3d30c5fd9b023dfe1794c",
+      "source_bytes": 180672,
+      "public_sha256": "2afd16f7cfb03d834c9a748a055c8375e311c5c1cccdd62b1a73077d7f1c9d50",
+      "public_bytes": 20680,
+      "public_content_sha256": "91684fd744b6d4c53342ae914e96a70893311fc5d97c7890ebf5ffe7a330dc41",
+      "public_content_bytes": 180690,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-cached-r02/events-rank7.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-cached-r02/events-rank7.jsonl",
+      "source_sha256": "2aff9e7805878fc4913e0ae3873138adeebf3804882a053a1e129e66268c98a4",
+      "source_bytes": 180640,
+      "public_sha256": "bcafbe3b97780bc3b9a20172e0c7ac62964010856bad72073c27585888f2ec97",
+      "public_bytes": 20720,
+      "public_content_sha256": "10f649b77177b2d4eff27fb77ac46014242ac9d71180b0251c934e693cf18ef6",
+      "public_content_bytes": 180658,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-cached-r02/job.json",
+      "source_path": "no17-minimal/runs/sensenova-minimal-cached-r02/job.json",
+      "source_sha256": "2e8b8b11ee6cd225c2a1973557bb95ce83c2f388da560023b3af3293d0504455",
+      "source_bytes": 3459,
+      "public_sha256": "7acd145df770bc7bde8c90a06d0cec25a0cc96c80b0901aba6b89f57a8c4545b",
+      "public_bytes": 3515,
+      "public_content_sha256": "7acd145df770bc7bde8c90a06d0cec25a0cc96c80b0901aba6b89f57a8c4545b",
+      "public_content_bytes": 3515,
+      "encoding": "utf-8",
+      "redactions": {
+        "private_ipv4": 3,
+        "root_home_prefix": 7,
+        "workspace_prefix": 4,
+        "ray_node_identity": 1
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-cached-r02/request.json",
+      "source_path": "no17-minimal/runs/sensenova-minimal-cached-r02/request.json",
+      "source_sha256": "ee59be4e83d01c10f62959b838b5de760dfa4112bde1483a222571b3e0b01df2",
+      "source_bytes": 6493,
+      "public_sha256": "b18a82ab2c4bd973e5b0ba5b330f7fc9394cba23ddb628ce6fab297d1179fdc4",
+      "public_bytes": 6654,
+      "public_content_sha256": "b18a82ab2c4bd973e5b0ba5b330f7fc9394cba23ddb628ce6fab297d1179fdc4",
+      "public_content_bytes": 6654,
+      "encoding": "utf-8",
+      "redactions": {
+        "private_ipv4": 1,
+        "root_home_prefix": 8,
+        "workspace_prefix": 10
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-cached-r02/resource_after.json",
+      "source_path": "no17-minimal/runs/sensenova-minimal-cached-r02/resource_after.json",
+      "source_sha256": "0a641c6ff59cf8fc51bc960649e9a193753b51affffa189fd5518ba6c43f0c5a",
+      "source_bytes": 511,
+      "public_sha256": "0a641c6ff59cf8fc51bc960649e9a193753b51affffa189fd5518ba6c43f0c5a",
+      "public_bytes": 511,
+      "public_content_sha256": "0a641c6ff59cf8fc51bc960649e9a193753b51affffa189fd5518ba6c43f0c5a",
+      "public_content_bytes": 511,
+      "encoding": "utf-8",
+      "redactions": {},
+      "byte_exact_before_compression": true
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-online-r02/driver.log.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-online-r02/driver.log",
+      "source_sha256": "c5da43fad34a479535c26ed7031e2b76dd0aa67438a0977e7c05123945cdbfcf",
+      "source_bytes": 127660,
+      "public_sha256": "7c2901b319b40f4cad7b96afb8df13f09d4cf65fc82cba4a7d0f1fac5580dbc2",
+      "public_bytes": 15339,
+      "public_content_sha256": "3f27410582d9ed548a6dfa349faf7db96df7c97d2b162692cd4960491cd726d5",
+      "public_content_bytes": 127733,
+      "encoding": "gzip",
+      "redactions": {
+        "private_ipv4": 26,
+        "root_home_prefix": 8,
+        "workspace_prefix": 3
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-online-r02/events-rank0.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-online-r02/events-rank0.jsonl",
+      "source_sha256": "e5efcbbfb9312871e740453e6ebc4d02ab1587c7a306a4706742c6e7334485a9",
+      "source_bytes": 86877,
+      "public_sha256": "7e41470a19efbdc94dd29ec0408ca873f31fde811ed14a05c55cddf3b3664551",
+      "public_bytes": 8586,
+      "public_content_sha256": "e320fc4c4b7476795d99a1e06e91d5721c026e2ea598f43a0fb1230c4e8bd07b",
+      "public_content_bytes": 86895,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-online-r02/events-rank1.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-online-r02/events-rank1.jsonl",
+      "source_sha256": "4c42d01aae2c435572091bdfc7fcb1a3f6c65d08e4050f2c0df033f390c1e7aa",
+      "source_bytes": 86876,
+      "public_sha256": "d3fa260a1922cfd33eae31de5f50f86acb19b8a3508f5562ca5962a192fdb0d6",
+      "public_bytes": 8567,
+      "public_content_sha256": "534e1f38c746952a833f7195469825d8e09ddb8c4a116cab14c17fd2ee81a2b7",
+      "public_content_bytes": 86894,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-online-r02/events-rank2.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-online-r02/events-rank2.jsonl",
+      "source_sha256": "4172e4dd5fe70d11c9d2c0a31138792609d405bafcdc48df484a2c1bd09aa5f4",
+      "source_bytes": 86864,
+      "public_sha256": "0022b288a9d06839c4a26aeed5127b6c9c3e9b6a18350d77cee3d1e4dfe7a6b0",
+      "public_bytes": 8482,
+      "public_content_sha256": "eecd1342be978791d25eaa839ecf96dbe19cccf0ba09eed66f584d24f11f0551",
+      "public_content_bytes": 86882,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-online-r02/events-rank3.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-online-r02/events-rank3.jsonl",
+      "source_sha256": "53df1d2b06a3f06d079537cbd9143d3cd0825cf9eef6a8aeb39b84ed781bf757",
+      "source_bytes": 86837,
+      "public_sha256": "d1251eba976776bdcab1d6572d8dee79c36bd49bbd6a7210480fa4cc25d6d892",
+      "public_bytes": 8575,
+      "public_content_sha256": "546b2922133ffd9b20e5fe9366a1e3b513dfca63b9aaa0976f7c3e486099ce08",
+      "public_content_bytes": 86855,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-online-r02/events-rank4.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-online-r02/events-rank4.jsonl",
+      "source_sha256": "bb6f553c7db53606142c73a6b309aae6fc22dec67720eb243b65d6826994a463",
+      "source_bytes": 86870,
+      "public_sha256": "92e71731dc8acb2e63d229b5dd92ce8c2b49cbf7ced5672b30c448f99d897844",
+      "public_bytes": 8444,
+      "public_content_sha256": "463b96e3d7e2b2fc574d86c53554c05c39c6c70475940154fd8ff58aa2c9c234",
+      "public_content_bytes": 86888,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-online-r02/events-rank5.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-online-r02/events-rank5.jsonl",
+      "source_sha256": "472b0e1e38680fffee9eafd063805c374860cb4d7205bd3e31e6495ccebc3482",
+      "source_bytes": 86861,
+      "public_sha256": "f10edcb318442aea7db20ff93aee19b31c60d658d2db2a0b13e69a9f789d80c4",
+      "public_bytes": 8528,
+      "public_content_sha256": "3a9f3e3981f6e7728319eeee82e8dcbd2714e52bdbfd80d36eccb7b17c1a8621",
+      "public_content_bytes": 86879,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-online-r02/events-rank6.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-online-r02/events-rank6.jsonl",
+      "source_sha256": "15ca28de007000a6e79ee4380cbc5b32d0488a7a440d3af0f1d3ea6216625ae0",
+      "source_bytes": 86863,
+      "public_sha256": "110bdd02dfc08e1073febe980931aa636aadac9db45ca0a8a78a402ddc83b150",
+      "public_bytes": 8715,
+      "public_content_sha256": "7fd6b7038f699b0cb8b8127d92c35b73a10ce5a9f8d9710a16d887f90321c58c",
+      "public_content_bytes": 86881,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-online-r02/events-rank7.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-online-r02/events-rank7.jsonl",
+      "source_sha256": "7d0854fcefdaefadf3c2defe9b9ee3e1dff20ac59cfadf70958caf4324f3ffdd",
+      "source_bytes": 86851,
+      "public_sha256": "f4fc9978626960e5d1fda3488483070ceb6b351416cd92a222954d6b5a095764",
+      "public_bytes": 8593,
+      "public_content_sha256": "daa38438989c0c97d9bb324d945061d66c7b1e4444c2ab30b2f4d999f14bf95d",
+      "public_content_bytes": 86869,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-online-r02/job.json",
+      "source_path": "no17-minimal/runs/sensenova-minimal-online-r02/job.json",
+      "source_sha256": "a31c3bd089373849cb751bdc387537fed79d1e0e76de985a38bc7a6a68422b12",
+      "source_bytes": 3459,
+      "public_sha256": "0433cfa74a1713dc196cb88846e57ac303b2786fc927e299c77ddd4be2dc671c",
+      "public_bytes": 3515,
+      "public_content_sha256": "0433cfa74a1713dc196cb88846e57ac303b2786fc927e299c77ddd4be2dc671c",
+      "public_content_bytes": 3515,
+      "encoding": "utf-8",
+      "redactions": {
+        "private_ipv4": 3,
+        "root_home_prefix": 7,
+        "workspace_prefix": 4,
+        "ray_node_identity": 1
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-online-r02/request.json",
+      "source_path": "no17-minimal/runs/sensenova-minimal-online-r02/request.json",
+      "source_sha256": "60eb61cfda626d377f40802389e4bf2ea642e5fad31a0cf3cd70c44af31755e9",
+      "source_bytes": 6493,
+      "public_sha256": "0cfa743e674035cc74d306a9dbb35af3a5d39b103b0bd878ae1a41a91c66c75b",
+      "public_bytes": 6654,
+      "public_content_sha256": "0cfa743e674035cc74d306a9dbb35af3a5d39b103b0bd878ae1a41a91c66c75b",
+      "public_content_bytes": 6654,
+      "encoding": "utf-8",
+      "redactions": {
+        "private_ipv4": 1,
+        "root_home_prefix": 8,
+        "workspace_prefix": 10
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-online-r02/resource_after.json",
+      "source_path": "no17-minimal/runs/sensenova-minimal-online-r02/resource_after.json",
+      "source_sha256": "261ded245298051f95db4b3494c5ec56c35e0ce39dcd0ca76491cc7fd6857a9d",
+      "source_bytes": 511,
+      "public_sha256": "261ded245298051f95db4b3494c5ec56c35e0ce39dcd0ca76491cc7fd6857a9d",
+      "public_bytes": 511,
+      "public_content_sha256": "261ded245298051f95db4b3494c5ec56c35e0ce39dcd0ca76491cc7fd6857a9d",
+      "public_content_bytes": 511,
+      "encoding": "utf-8",
+      "redactions": {},
+      "byte_exact_before_compression": true
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-low-online-r01/driver.log.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-low-online-r01/driver.log",
+      "source_sha256": "8683a34356d822c9fc48022eb51e1c59582bf19cf37a23af3b7cf0356ab08d89",
+      "source_bytes": 62938,
+      "public_sha256": "702d32dd323fb47882e755874d42e57c672fc058728ca253d0d51a9945a88ae9",
+      "public_bytes": 9264,
+      "public_content_sha256": "3a9bc6ceb2eddc517a8ca9a89a1a4533232c634c44683bc3b33cc7bd004362c1",
+      "public_content_bytes": 63012,
+      "encoding": "gzip",
+      "redactions": {
+        "private_ipv4": 25,
+        "root_home_prefix": 8,
+        "workspace_prefix": 3
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-low-online-r01/events-rank0.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-low-online-r01/events-rank0.jsonl",
+      "source_sha256": "f11b3de20af2bc18dcb414d43565e9adc4ca4a2da4e439dbba0edb940090c280",
+      "source_bytes": 23638,
+      "public_sha256": "8d8eb1fa5ae737884bf06cf0172c678aadab335c4cc60983b6a5b8592eeb745d",
+      "public_bytes": 3577,
+      "public_content_sha256": "07d47fbee4ba3af49353bedadbe908c7e891ddb7f7e94ae9c1658a6dbb779348",
+      "public_content_bytes": 23656,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-low-online-r01/events-rank1.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-low-online-r01/events-rank1.jsonl",
+      "source_sha256": "f1f064ac9e5b22d1f0c824baded7dc7741894b0f109b67872ebb17b5fd6d6969",
+      "source_bytes": 23644,
+      "public_sha256": "3ab7b3debe38dcef09ecf6b8ac86b78d4585ae743d890803b5c47609c0a890a6",
+      "public_bytes": 3536,
+      "public_content_sha256": "0f82e5c1cd8fe2b135e4655e320116637860ca5d2f5eae1798f6e4391d8c90b8",
+      "public_content_bytes": 23662,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-low-online-r01/events-rank2.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-low-online-r01/events-rank2.jsonl",
+      "source_sha256": "a3f8fc1651b98ee7f372145dcc11c0cd9a1700164016037c090035ae5f3a7d0d",
+      "source_bytes": 23634,
+      "public_sha256": "e2591d3f765d00b51d62b4c2ca2b69e84349ef759a2a8a97e8a6f1d83e87aa0a",
+      "public_bytes": 3524,
+      "public_content_sha256": "6825cfa193867c91a6c169acdadddf28aa19f37974fd950c5dc13341d4bb834e",
+      "public_content_bytes": 23652,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-low-online-r01/events-rank3.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-low-online-r01/events-rank3.jsonl",
+      "source_sha256": "8582ebe43e6b7b41f4d0ebe57159205c57aa1ac8a51863111e8cc03332350210",
+      "source_bytes": 23648,
+      "public_sha256": "0693888e916f678de96c132a16a3401fd9b94f6be1ae11b1772fd93718149630",
+      "public_bytes": 3565,
+      "public_content_sha256": "623a7b5b80aa096b1bf29ef17fa17d811d417f1e6c2b537366c08f5d3a86f765",
+      "public_content_bytes": 23666,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-low-online-r01/events-rank4.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-low-online-r01/events-rank4.jsonl",
+      "source_sha256": "7b0333a4822d2da0c6cb08740b1070c3cfcd3e8ed4455cffd6e9889d7a984f86",
+      "source_bytes": 23642,
+      "public_sha256": "52028d72d6877605d904d197f0f2445017bd170e7d4d720f664bcd4124c56bbf",
+      "public_bytes": 3504,
+      "public_content_sha256": "a2d719f1ef4c510372ca782298280ad25e9e4d09bf0eec7daf35457a03938c95",
+      "public_content_bytes": 23660,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-low-online-r01/events-rank5.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-low-online-r01/events-rank5.jsonl",
+      "source_sha256": "b55f7c9bcf234be70503667a4bb5b4310c354f9de90c34ab60570a92810a03fd",
+      "source_bytes": 23634,
+      "public_sha256": "9ae690376e82f323dc2e6cbcc4c72fd85f5fdc047a45e6cc148aea0c9ad59723",
+      "public_bytes": 3524,
+      "public_content_sha256": "0c34282c0504a7f3ba4e3cc567643745a9ebff42ddc2c36f308191262b27cbdf",
+      "public_content_bytes": 23652,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-low-online-r01/events-rank6.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-low-online-r01/events-rank6.jsonl",
+      "source_sha256": "727ff45009c27e15f47b55cf05d747b228a33eea275d5a1d250fa2849eaf77cd",
+      "source_bytes": 23640,
+      "public_sha256": "d9085db86845967c29068f5f486b0a94cbf8024276fc8c9156d23c3e38405cd8",
+      "public_bytes": 3530,
+      "public_content_sha256": "f7709257d25e2675ec0bab70fae0c8997ab700d5b0e74d97763cbcdbc53777e6",
+      "public_content_bytes": 23658,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-low-online-r01/events-rank7.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-low-online-r01/events-rank7.jsonl",
+      "source_sha256": "80fbd9fb4fe36acb86a42ef5bd3adf1dc8e2a2bda6f13bed0da59146d3f72f82",
+      "source_bytes": 23641,
+      "public_sha256": "68d0f1b5a6d270d0491e5afac2562558dfedad99dbaad425cd390a3916932feb",
+      "public_bytes": 3499,
+      "public_content_sha256": "14fc6e1389a7d373cd4eb809be371dbec471434148f19f51c509b0948a25d764",
+      "public_content_bytes": 23659,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-low-online-r01/job.json",
+      "source_path": "no17-minimal/runs/sensenova-minimal-low-online-r01/job.json",
+      "source_sha256": "66b942aa6aca20c9e00dd41046dc90f990f4fd8411c8695ed6ec85d02d0cb45c",
+      "source_bytes": 3467,
+      "public_sha256": "b0b42bf97352b3d9dc9a9080dbf6a8a82f535ca41abf22c38ede0135f3fcba50",
+      "public_bytes": 3523,
+      "public_content_sha256": "b0b42bf97352b3d9dc9a9080dbf6a8a82f535ca41abf22c38ede0135f3fcba50",
+      "public_content_bytes": 3523,
+      "encoding": "utf-8",
+      "redactions": {
+        "private_ipv4": 3,
+        "root_home_prefix": 7,
+        "workspace_prefix": 4,
+        "ray_node_identity": 1
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-low-online-r01/request.json",
+      "source_path": "no17-minimal/runs/sensenova-minimal-low-online-r01/request.json",
+      "source_sha256": "41a043ff03dfb53aebfe7be0bd5eef0092ed6a6a6da671d70bf0b8c4c8a176ab",
+      "source_bytes": 6522,
+      "public_sha256": "daeac520fbd56575a45af69e45327a7a288308c2956e46c7987279073c0e471f",
+      "public_bytes": 6683,
+      "public_content_sha256": "daeac520fbd56575a45af69e45327a7a288308c2956e46c7987279073c0e471f",
+      "public_content_bytes": 6683,
+      "encoding": "utf-8",
+      "redactions": {
+        "private_ipv4": 1,
+        "root_home_prefix": 8,
+        "workspace_prefix": 10
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-low-online-r01/resource_after.json",
+      "source_path": "no17-minimal/runs/sensenova-minimal-low-online-r01/resource_after.json",
+      "source_sha256": "b3d3cd56204180031085d5c3be169d33b24fcc40ba6d8a0106271634f5fc9a96",
+      "source_bytes": 514,
+      "public_sha256": "b3d3cd56204180031085d5c3be169d33b24fcc40ba6d8a0106271634f5fc9a96",
+      "public_bytes": 514,
+      "public_content_sha256": "b3d3cd56204180031085d5c3be169d33b24fcc40ba6d8a0106271634f5fc9a96",
+      "public_content_bytes": 514,
+      "encoding": "utf-8",
+      "redactions": {},
+      "byte_exact_before_compression": true
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-low-cached-r01/driver.log.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-low-cached-r01/driver.log",
+      "source_sha256": "157c1f5e9b5c5d01737fdcd5706e0fece57c8654d78fd79c0bf35abce16b934b",
+      "source_bytes": 63187,
+      "public_sha256": "a0820e1f670435d4c90baebc154d3c0be59651b126db9f7aa89039ddc9e96f90",
+      "public_bytes": 9391,
+      "public_content_sha256": "e1757ea5b3d91bb5dce58fe0c9435b9bf2c786755c086fb7cbf02aeb3787260d",
+      "public_content_bytes": 63261,
+      "encoding": "gzip",
+      "redactions": {
+        "private_ipv4": 25,
+        "root_home_prefix": 8,
+        "workspace_prefix": 3
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-low-cached-r01/events-rank0.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-low-cached-r01/events-rank0.jsonl",
+      "source_sha256": "4557d579d5be59bc541aa6aec302e5817da0b6f98545323f5ddeaa465015da80",
+      "source_bytes": 46757,
+      "public_sha256": "eeb4f7782f6b6e74ec2f6ef29d2b9f6fa9efc18a9f8e541b44d2508f8487c009",
+      "public_bytes": 7144,
+      "public_content_sha256": "0db5d2c89c80d83b4ef22e7e31cc42a37899a904c604991132f5fa54452ac629",
+      "public_content_bytes": 46775,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-low-cached-r01/events-rank1.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-low-cached-r01/events-rank1.jsonl",
+      "source_sha256": "4d9a8cd2bb3668c25061614a01042a287bfdfec03405eed2769b528ebde49729",
+      "source_bytes": 46767,
+      "public_sha256": "c7686801ec96514cf4707998d3789b2bf0b0b1686d5997cb71a4914c17461b3c",
+      "public_bytes": 7049,
+      "public_content_sha256": "e76bb5b22bc8bdcb2e8aa7d964082fc51aa7418ed731a8f574616bdae86f1883",
+      "public_content_bytes": 46785,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-low-cached-r01/events-rank2.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-low-cached-r01/events-rank2.jsonl",
+      "source_sha256": "bab181c7e6311b13c17248d97afa2b670b3a4b55547f677ced263afbb94815cd",
+      "source_bytes": 46754,
+      "public_sha256": "48ec0ab8e649d810dbf325148aac5d12421da67b68c8bd9037f400c38ea1906b",
+      "public_bytes": 6999,
+      "public_content_sha256": "cae3015168cb5214b07a6bef7793f1c9378ff81a13bca2e33ba2656cd981654e",
+      "public_content_bytes": 46772,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-low-cached-r01/events-rank3.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-low-cached-r01/events-rank3.jsonl",
+      "source_sha256": "755706d3bcf735eb343f0109a5ef06fc233ed131ab62b53cf0eef24a748418c5",
+      "source_bytes": 46741,
+      "public_sha256": "72c749072e54954c00c948fca10b4c3d26482c8361d91344b893617f3df1fe31",
+      "public_bytes": 7036,
+      "public_content_sha256": "935cf73ec91fb3275049e9dd0ade1db25cba20e7f2a096b2569708aaceba8e63",
+      "public_content_bytes": 46759,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-low-cached-r01/events-rank4.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-low-cached-r01/events-rank4.jsonl",
+      "source_sha256": "30c87033eb7d34d80698184445882977756df1a8e88052e384db139703d82d6b",
+      "source_bytes": 46760,
+      "public_sha256": "fbb327221ecb1cfef3a6b18c79f2984e338b048eb33cc477be5ad41962ad715c",
+      "public_bytes": 7049,
+      "public_content_sha256": "fe6fc0f352c2c67132d8a581d79bea2ac4616822b47ba360b5851b77aec78c33",
+      "public_content_bytes": 46778,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-low-cached-r01/events-rank5.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-low-cached-r01/events-rank5.jsonl",
+      "source_sha256": "d33e0b7d7a9b5fc6a9752222e822b68e31045747ba1e93ab62a70a9a65b36929",
+      "source_bytes": 46755,
+      "public_sha256": "1f5c04c97779fc1693ca3ed82c531f49cbb4c8309a81c97749cefb32cd0270da",
+      "public_bytes": 7071,
+      "public_content_sha256": "5e3e68351dbdb3c5f686f11fa839aa31c4a4d3fca2de0f609b966f202ea8d842",
+      "public_content_bytes": 46773,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-low-cached-r01/events-rank6.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-low-cached-r01/events-rank6.jsonl",
+      "source_sha256": "a1ac52e69bdfffeabb3ae6f4a37f548b7814ee4bf4930c2fb97c0c89c95f1e94",
+      "source_bytes": 46740,
+      "public_sha256": "9f285cc0520fb156c9387838033b4fe05cd1755aad504691ebc2c1e4439672ae",
+      "public_bytes": 7045,
+      "public_content_sha256": "f237068eb073fdfef44ea9db165d6fcb1c171eeaca45a9e65e8c974679db1483",
+      "public_content_bytes": 46758,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-low-cached-r01/events-rank7.jsonl.gz",
+      "source_path": "no17-minimal/runs/sensenova-minimal-low-cached-r01/events-rank7.jsonl",
+      "source_sha256": "2f28ae627d373e949198f2309042a11a8381d785749225c202ccaf8e2abaccf3",
+      "source_bytes": 46780,
+      "public_sha256": "eb260ceb7e5751fbe5a1fc9165b533a0f09e8b00fe3c5e870635a68e9b6d59d3",
+      "public_bytes": 7074,
+      "public_content_sha256": "aa40017d385d05881680f9eb96c0867a55fe014a57602a41a20d23d61a3df95a",
+      "public_content_bytes": 46798,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-low-cached-r01/job.json",
+      "source_path": "no17-minimal/runs/sensenova-minimal-low-cached-r01/job.json",
+      "source_sha256": "3b7ac44b607a676c61184052e1df9fe5b3eb0c7125385f1586184a2b53db961d",
+      "source_bytes": 3467,
+      "public_sha256": "0a97127806046681a36364e48240b2d8eeead8da82f7c7cb1f52f00ac4756f71",
+      "public_bytes": 3523,
+      "public_content_sha256": "0a97127806046681a36364e48240b2d8eeead8da82f7c7cb1f52f00ac4756f71",
+      "public_content_bytes": 3523,
+      "encoding": "utf-8",
+      "redactions": {
+        "private_ipv4": 3,
+        "root_home_prefix": 7,
+        "workspace_prefix": 4,
+        "ray_node_identity": 1
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-low-cached-r01/request.json",
+      "source_path": "no17-minimal/runs/sensenova-minimal-low-cached-r01/request.json",
+      "source_sha256": "ba196c80cdf51aa13bf7341895898436102cf5a18a01456b89db36dedc36d869",
+      "source_bytes": 6521,
+      "public_sha256": "a0d39ce16a8c7122600cafd9dcbeb7f6856feb2726acf73b5288f15ae77202ec",
+      "public_bytes": 6682,
+      "public_content_sha256": "a0d39ce16a8c7122600cafd9dcbeb7f6856feb2726acf73b5288f15ae77202ec",
+      "public_content_bytes": 6682,
+      "encoding": "utf-8",
+      "redactions": {
+        "private_ipv4": 1,
+        "root_home_prefix": 8,
+        "workspace_prefix": 10
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/runs/sensenova-minimal-low-cached-r01/resource_after.json",
+      "source_path": "no17-minimal/runs/sensenova-minimal-low-cached-r01/resource_after.json",
+      "source_sha256": "745cb169672991b7985fc502d1bb2c0c78794855f7b8f0ad47ce0f3ee9e2eaf4",
+      "source_bytes": 515,
+      "public_sha256": "745cb169672991b7985fc502d1bb2c0c78794855f7b8f0ad47ce0f3ee9e2eaf4",
+      "public_bytes": 515,
+      "public_content_sha256": "745cb169672991b7985fc502d1bb2c0c78794855f7b8f0ad47ce0f3ee9e2eaf4",
+      "public_content_bytes": 515,
+      "encoding": "utf-8",
+      "redactions": {},
+      "byte_exact_before_compression": true
+    },
+    {
+      "path": "evidence/qwen-9179512/plan.json",
+      "source_path": "no17-qwen-recovery/plan.json",
+      "source_sha256": "051caa0ec0b1e9997d8f3dd4eb97b3495849769cca579bcbe54818a02d81ea24",
+      "source_bytes": 9728,
+      "public_sha256": "da73d2f490d8c58695e94d1f2b5a941840789e9ba48bd855999277bb82c61d23",
+      "public_bytes": 9826,
+      "public_content_sha256": "da73d2f490d8c58695e94d1f2b5a941840789e9ba48bd855999277bb82c61d23",
+      "public_content_bytes": 9826,
+      "encoding": "utf-8",
+      "redactions": {
+        "private_ipv4": 1,
+        "root_home_prefix": 3,
+        "workspace_prefix": 8
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/resources.jsonl.gz",
+      "source_path": "no17-qwen-recovery/resources.jsonl",
+      "source_sha256": "e67332c9f5e8e3955ff2ef2005ed244de531d4e5b56649eda7e9a9ec12d060eb",
+      "source_bytes": 305973,
+      "public_sha256": "de804dea451ccd774ea0c3afb3fef27358dd8c72322609d33dababfba1ddb087",
+      "public_bytes": 21224,
+      "public_content_sha256": "e67332c9f5e8e3955ff2ef2005ed244de531d4e5b56649eda7e9a9ec12d060eb",
+      "public_content_bytes": 305973,
+      "encoding": "gzip",
+      "redactions": {},
+      "byte_exact_before_compression": true
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-verify-r01/conditioning-verification.json.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-verify-r01/conditioning-verification.json",
+      "source_sha256": "85ca9de40835517f2304fe5617478d6df30c8948791c18cc2ec537572ec80bfd",
+      "source_bytes": 565683,
+      "public_sha256": "170d321ed1eb7d5877b115954f1495611b8a8e4c7414dad0c4adf44e37ae27b9",
+      "public_bytes": 27855,
+      "public_content_sha256": "85ca9de40835517f2304fe5617478d6df30c8948791c18cc2ec537572ec80bfd",
+      "public_content_bytes": 565683,
+      "encoding": "gzip",
+      "redactions": {},
+      "byte_exact_before_compression": true
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-verify-r01/driver.log.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-verify-r01/driver.log",
+      "source_sha256": "aeeb5449fd9fd00d80d0934100a99dafaa1381b36c20d598f219a1a96e722856",
+      "source_bytes": 46960,
+      "public_sha256": "c8d23e0b63e8348b401da730e4bafe137fa914df8f8f50f98df37d8726c66544",
+      "public_bytes": 7989,
+      "public_content_sha256": "ee8eafa657306599be70edfaf1e3ade766b0633d9774c7eb6737d993b97c6655",
+      "public_content_bytes": 47034,
+      "encoding": "gzip",
+      "redactions": {
+        "private_ipv4": 25,
+        "root_home_prefix": 8,
+        "workspace_prefix": 3
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-verify-r01/events-rank0.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-verify-r01/events-rank0.jsonl",
+      "source_sha256": "b4eee2d07ce5d5833eb8a373973d416b21cabe49bf7ed25dfc8fb7ccea641131",
+      "source_bytes": 5982,
+      "public_sha256": "e13cad35a23b319c46d6349030d7720f44c37e959389cf7c2dd65eaac018b345",
+      "public_bytes": 2104,
+      "public_content_sha256": "716f806575f2b37da06c42263735ca4952b4ae06dd1080254d71a63391410fec",
+      "public_content_bytes": 6000,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-verify-r01/events-rank1.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-verify-r01/events-rank1.jsonl",
+      "source_sha256": "d05897eb5c75c4bc597c1e434a77b070de801534fa97208f758bc38408613887",
+      "source_bytes": 5982,
+      "public_sha256": "b974d2377eab01f0ae71050418fa0c23c01d0eebbe27be36dbcf10249ea618d5",
+      "public_bytes": 2093,
+      "public_content_sha256": "bd4c95870d1e3588eb12226dcdce1f812dc062f1364a0bdf1f1e586ee14a05e3",
+      "public_content_bytes": 6000,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-verify-r01/events-rank2.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-verify-r01/events-rank2.jsonl",
+      "source_sha256": "57ab7406510defc1aa6aa0b83cf10e7216d4373e1eb481aeaf7b950229a9e920",
+      "source_bytes": 5978,
+      "public_sha256": "a824f69c2fc52e81e5d53c50326747057ee49deaad0fce8525c0c11692e29a1d",
+      "public_bytes": 2092,
+      "public_content_sha256": "3fa1c8c37b832da0b651da0ef3fcc1e63c9b6e890f53120654b6d48bc07d677d",
+      "public_content_bytes": 5996,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-verify-r01/events-rank3.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-verify-r01/events-rank3.jsonl",
+      "source_sha256": "96b1596a98e493292c23eab040d97be3eb666914603d6d59a2ffdf4c7e10b060",
+      "source_bytes": 5974,
+      "public_sha256": "89515f6c21dfd81271d79267e72648cfb81da67fcecf460ee61660b4bfdea9f5",
+      "public_bytes": 2088,
+      "public_content_sha256": "a635748a1cf131ed66b7ce8a4fad7b663fc1dac1113463b30a360908cc970edf",
+      "public_content_bytes": 5992,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-verify-r01/events-rank4.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-verify-r01/events-rank4.jsonl",
+      "source_sha256": "bd6404ae1043e74bf14a22f72a2bd8054aaeaa1b2d595008945a071cd9e9ffc1",
+      "source_bytes": 5982,
+      "public_sha256": "ac6186a23972d79fa072e1ff25939740a27b20a8a8568ef17b677ded09d0f192",
+      "public_bytes": 2093,
+      "public_content_sha256": "8d7b03b6f46d30c02f815b0f7373cc43df75bb56bc8dc8b7638128b7909335c9",
+      "public_content_bytes": 6000,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-verify-r01/events-rank5.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-verify-r01/events-rank5.jsonl",
+      "source_sha256": "cc405d6a250a6b3eb8e079289bdc897fc13d6194fee392584ff96a7c7a251241",
+      "source_bytes": 5971,
+      "public_sha256": "5d84e2dcd17a6743f9b410d53d35ae46bf7e3e0c1655fdb2234314d4dc03d08e",
+      "public_bytes": 2093,
+      "public_content_sha256": "357a733445732c6ade7239d514ed64304e43acc02baa14fbe7dd0366eb555fa0",
+      "public_content_bytes": 5989,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-verify-r01/events-rank6.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-verify-r01/events-rank6.jsonl",
+      "source_sha256": "3ba378532a5193591315e8fe3516491f65d58c3edbd4b071d97cd8087595a609",
+      "source_bytes": 5982,
+      "public_sha256": "63905262a8e1a705a8e7001a9cefe720827262ad13463601ed6b4c89ed2a2a8b",
+      "public_bytes": 2094,
+      "public_content_sha256": "66ac26a4f41ffb47debc0c58013b13e4a828d0350352e0336a908e6d85d00c5e",
+      "public_content_bytes": 6000,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-verify-r01/events-rank7.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-verify-r01/events-rank7.jsonl",
+      "source_sha256": "cb9a729a52a059e19b397ff7f41dd4018918c7fcf6adf0978931a2ced7bf8c81",
+      "source_bytes": 5978,
+      "public_sha256": "00db2ee10e409ac134452a4aa5506f220503b39afe1649c0af94620642f8795a",
+      "public_bytes": 2096,
+      "public_content_sha256": "6bac2030bd7f03b926aafc16e128610e5f1c394f18f789ff4f652624d678b2fa",
+      "public_content_bytes": 5996,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-verify-r01/job.json",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-verify-r01/job.json",
+      "source_sha256": "7d399380592e43f0c4425a01a57aeb0cd3cc3c5f325d15d61d811ae1eb7a0370",
+      "source_bytes": 3643,
+      "public_sha256": "866783b5369bd80695e8d93dcf976df54d635128a49d677683b15fa03c7a5b42",
+      "public_bytes": 3699,
+      "public_content_sha256": "866783b5369bd80695e8d93dcf976df54d635128a49d677683b15fa03c7a5b42",
+      "public_content_bytes": 3699,
+      "encoding": "utf-8",
+      "redactions": {
+        "private_ipv4": 3,
+        "root_home_prefix": 7,
+        "workspace_prefix": 4,
+        "ray_node_identity": 1
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-verify-r01/request.json",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-verify-r01/request.json",
+      "source_sha256": "e4fddfc8ec921168ee1a2b700e3d8d60638ad7d5b092ade09b79335819cd72ed",
+      "source_bytes": 6729,
+      "public_sha256": "3df8d328ec502c789ee48a4655e35cb5618fa5d2f9e50a2451d288fd2bdae814",
+      "public_bytes": 6890,
+      "public_content_sha256": "3df8d328ec502c789ee48a4655e35cb5618fa5d2f9e50a2451d288fd2bdae814",
+      "public_content_bytes": 6890,
+      "encoding": "utf-8",
+      "redactions": {
+        "private_ipv4": 1,
+        "root_home_prefix": 8,
+        "workspace_prefix": 10
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-verify-r01/resource_after.json",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-verify-r01/resource_after.json",
+      "source_sha256": "1de92d1ab2fade76f190df9cf27795db0eebdb7affbbb255c260091b6ad14774",
+      "source_bytes": 507,
+      "public_sha256": "1de92d1ab2fade76f190df9cf27795db0eebdb7affbbb255c260091b6ad14774",
+      "public_bytes": 507,
+      "public_content_sha256": "1de92d1ab2fade76f190df9cf27795db0eebdb7affbbb255c260091b6ad14774",
+      "public_content_bytes": 507,
+      "encoding": "utf-8",
+      "redactions": {},
+      "byte_exact_before_compression": true
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-online-r01/driver.log.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-online-r01/driver.log",
+      "source_sha256": "248a507099dea5fe618ec5cd825de1ee16d46abb323fca9d92a8beb2956184a7",
+      "source_bytes": 131185,
+      "public_sha256": "305ab01eff43cfa932c60a819258d0fd968fbedfb9e93af5656eebba30de5a18",
+      "public_bytes": 15643,
+      "public_content_sha256": "b5d9e9c2545b680ca344b04fbadfb41936223160defb7104e51501e5b0539280",
+      "public_content_bytes": 131259,
+      "encoding": "gzip",
+      "redactions": {
+        "private_ipv4": 25,
+        "root_home_prefix": 8,
+        "workspace_prefix": 3
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-online-r01/events-rank0.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-online-r01/events-rank0.jsonl",
+      "source_sha256": "3dd137752cfc2cb8cb2b1fccdb4444337b1b7161981c68143847815dce2adbe5",
+      "source_bytes": 87307,
+      "public_sha256": "1cbeacb4ab39ba7a5d051b885722ccbab26efd578e1870a785590fdb8689ba18",
+      "public_bytes": 8816,
+      "public_content_sha256": "e34210b2838f9c850d90ec65127de90a3a44fcee55ff322a7ba7e7641f570f22",
+      "public_content_bytes": 87325,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-online-r01/events-rank1.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-online-r01/events-rank1.jsonl",
+      "source_sha256": "6eb9516b8246620eac4629c38c2e9e51e7ee1d187bb74d826496ab4c87fb3a20",
+      "source_bytes": 87324,
+      "public_sha256": "1023896fcfd4c56ef5cf9bef420372ce4b3216e650f844aa2873147957d45d63",
+      "public_bytes": 8793,
+      "public_content_sha256": "73b970618ff021f25ec4a86a0bd09ed4c0cc97037295a235fe30e4099b716548",
+      "public_content_bytes": 87342,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-online-r01/events-rank2.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-online-r01/events-rank2.jsonl",
+      "source_sha256": "bff82930dd65db728ae243c7f48d22eadbd7d6fa2ba10919cce45b357377ae8d",
+      "source_bytes": 87349,
+      "public_sha256": "0cde5c31427568878e9b8ed042161cd7a79363d47e71df449a85891272229099",
+      "public_bytes": 8788,
+      "public_content_sha256": "a546fe3c416300631a89154d08ba2dbf4ed46a0127da39599106ed983f731b6a",
+      "public_content_bytes": 87367,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-online-r01/events-rank3.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-online-r01/events-rank3.jsonl",
+      "source_sha256": "65412556f424b8a6043be7fa1940b78312ec950908b0c54d2dd5e1af4853178c",
+      "source_bytes": 87305,
+      "public_sha256": "4f2d958f9ad54e2a0e17dbb3451a8c7a03a4b5ac50fe7c6c2b195eeaa52aac89",
+      "public_bytes": 8760,
+      "public_content_sha256": "b75fbfd23280f9ac03fad43fb1e1595e912b25c7e75a3ed3204634ae0b636b45",
+      "public_content_bytes": 87323,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-online-r01/events-rank4.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-online-r01/events-rank4.jsonl",
+      "source_sha256": "58a8415c93bebe807e044825f7a122bf7560c48893c94f63c2810e5b9f495948",
+      "source_bytes": 87316,
+      "public_sha256": "b20ff4587adaaf45ffc3fc7968f78085da91714747a878a401f1636a5f47431c",
+      "public_bytes": 8689,
+      "public_content_sha256": "a377b802fe70c579098b71afee4734027f21b57a8421c36cd491d5f7f15c651d",
+      "public_content_bytes": 87334,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-online-r01/events-rank5.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-online-r01/events-rank5.jsonl",
+      "source_sha256": "54d321a7bb8f57116f9394b8f3c1b192c81a1fb46e33ec4b9fe31daadf211c2a",
+      "source_bytes": 87286,
+      "public_sha256": "c8cc71dc6e4a1811e18fb989b4962e232a627b2549f611adaeaac08ccd7221ba",
+      "public_bytes": 8725,
+      "public_content_sha256": "4945fcfd6211945bb3576f9b83d59c1f894f1fd95d68c5723ad04fc58b4f1a87",
+      "public_content_bytes": 87304,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-online-r01/events-rank6.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-online-r01/events-rank6.jsonl",
+      "source_sha256": "f8c386995a08390298e9c92b02509f9c9ea03375e14e402f9186c1cfe047292d",
+      "source_bytes": 87290,
+      "public_sha256": "0c4a658b7eecc506248d5f6ec13cf18942a04ffa1fd811efc829f6c6a8045cb4",
+      "public_bytes": 8797,
+      "public_content_sha256": "7f02a8b069a4433845a79da05d2a5c2510e9eaf40c8964e5b1a7f2567c6a331a",
+      "public_content_bytes": 87308,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-online-r01/events-rank7.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-online-r01/events-rank7.jsonl",
+      "source_sha256": "dfa3d71af92ce29ffef56f2f7c9763c74526af1c7ae05777c88b8f33abbaf7c0",
+      "source_bytes": 87327,
+      "public_sha256": "fcb339758bb05f89b3aa0c89e914005853196b1eedd8888536af141b9bc901ff",
+      "public_bytes": 8818,
+      "public_content_sha256": "1272dd1c396978f1c54dd772022651b70bba36ccf960fde51949451629e8f020",
+      "public_content_bytes": 87345,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-online-r01/job.json",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-online-r01/job.json",
+      "source_sha256": "9dda8497e3d8bc339c3aa71b57c2aa508c2bd7b610bcf2b8e74de6e69f5355f0",
+      "source_bytes": 3646,
+      "public_sha256": "a7fb49e9613b6e47376ffce8c4b65fc991415dbacd1037835bca22e7ec196af0",
+      "public_bytes": 3702,
+      "public_content_sha256": "a7fb49e9613b6e47376ffce8c4b65fc991415dbacd1037835bca22e7ec196af0",
+      "public_content_bytes": 3702,
+      "encoding": "utf-8",
+      "redactions": {
+        "private_ipv4": 3,
+        "root_home_prefix": 7,
+        "workspace_prefix": 4,
+        "ray_node_identity": 1
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-online-r01/request.json",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-online-r01/request.json",
+      "source_sha256": "72544ce5b3193035e802132eaabd29f22135e4264c860ea761bf7721e60ef6a2",
+      "source_bytes": 6725,
+      "public_sha256": "edc9a8eb3d9aee631ade86b14f92c35409e28c43261cbc739cf16cb9787797a0",
+      "public_bytes": 6886,
+      "public_content_sha256": "edc9a8eb3d9aee631ade86b14f92c35409e28c43261cbc739cf16cb9787797a0",
+      "public_content_bytes": 6886,
+      "encoding": "utf-8",
+      "redactions": {
+        "private_ipv4": 1,
+        "root_home_prefix": 8,
+        "workspace_prefix": 10
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-online-r01/resource_after.json",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-online-r01/resource_after.json",
+      "source_sha256": "fd3f6e4f433c187157ddbf1ea0e0f81982d4e9e3959c85137b84152a9ba5c0b7",
+      "source_bytes": 507,
+      "public_sha256": "fd3f6e4f433c187157ddbf1ea0e0f81982d4e9e3959c85137b84152a9ba5c0b7",
+      "public_bytes": 507,
+      "public_content_sha256": "fd3f6e4f433c187157ddbf1ea0e0f81982d4e9e3959c85137b84152a9ba5c0b7",
+      "public_content_bytes": 507,
+      "encoding": "utf-8",
+      "redactions": {},
+      "byte_exact_before_compression": true
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-cached-r01/driver.log.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-cached-r01/driver.log",
+      "source_sha256": "31637e29c6c5dfec2da4f1709a8ae42cf5a397b199a5bd16f4f13a3b98acaba2",
+      "source_bytes": 132301,
+      "public_sha256": "facc806247ea4f69a32a8637314b03f8abc03317f2e9207253aef14358eb5839",
+      "public_bytes": 15653,
+      "public_content_sha256": "9df2a2d8826fc878fd58f80daad82fd71e0aa58788d9fe88446d14fb6327a02e",
+      "public_content_bytes": 132375,
+      "encoding": "gzip",
+      "redactions": {
+        "private_ipv4": 25,
+        "root_home_prefix": 8,
+        "workspace_prefix": 3
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-cached-r01/events-rank0.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-cached-r01/events-rank0.jsonl",
+      "source_sha256": "6afb8d35257b35a8085730255b88e05ccad48872cc8ff10d011618845e57abc5",
+      "source_bytes": 153403,
+      "public_sha256": "c38f529c64d49439c2a704895e18d980f2832c3065b62e3ec84af6004b4e6c3e",
+      "public_bytes": 17071,
+      "public_content_sha256": "0bbf946b922fa4ab6eab6f83544292cb69bca1139a677cf7f6165aacef48d839",
+      "public_content_bytes": 153421,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-cached-r01/events-rank1.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-cached-r01/events-rank1.jsonl",
+      "source_sha256": "b462e98e54fa663ef05c128a96fcc5ed20040cd3410d945a6eb98073867ab940",
+      "source_bytes": 153408,
+      "public_sha256": "12283a9dc300d3a8ade035e39e289db7b5de5eb0159ff2eb8e08f0416ce626b7",
+      "public_bytes": 17055,
+      "public_content_sha256": "7b1f93b2540c36e1b6c3f390119b1a24234db30be3055bda1fffc6b302c5c60f",
+      "public_content_bytes": 153426,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-cached-r01/events-rank2.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-cached-r01/events-rank2.jsonl",
+      "source_sha256": "05a308459266f7853376e09800ab7812d5c3795bc9dbee47b110a362c026134e",
+      "source_bytes": 153346,
+      "public_sha256": "ad124bdf10ef480243bd92a24e7d7715c163b56c66274a9b5b04870812f53871",
+      "public_bytes": 17071,
+      "public_content_sha256": "09724b9cd53cf8cf3b418b5be44c0e2b54d1375bb75294b4ee7b9a006fab56a4",
+      "public_content_bytes": 153364,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-cached-r01/events-rank3.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-cached-r01/events-rank3.jsonl",
+      "source_sha256": "8350c514ca50816ef12775092fb95e66c46363d0bf3e7331110f4628139897c0",
+      "source_bytes": 153443,
+      "public_sha256": "98c2233dc9a3da056456c6101b2f3a5b184bcb41bcc6f60d9966841d3b697282",
+      "public_bytes": 17148,
+      "public_content_sha256": "aa7db03d122d14514a323b38f5d889d85344c83f0672ea11496d05a581104703",
+      "public_content_bytes": 153461,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-cached-r01/events-rank4.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-cached-r01/events-rank4.jsonl",
+      "source_sha256": "adc13cf6f7b93b5d662694665332f6a275c00d7c7a8a6e8698e437f5e1ab8238",
+      "source_bytes": 153309,
+      "public_sha256": "76101634d7441e59b300a8025f7575cc11568a1b73d0cf9a8aa2fa02b64bb73c",
+      "public_bytes": 16930,
+      "public_content_sha256": "908669546a118b1a4a2b7bccc3ac6e1334ea46f4acca3a0580528d327665d6f3",
+      "public_content_bytes": 153327,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-cached-r01/events-rank5.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-cached-r01/events-rank5.jsonl",
+      "source_sha256": "f3f8a680e00dccaef669dd9c845024c091c7bc719cfc7df468aab1015e8c6883",
+      "source_bytes": 153341,
+      "public_sha256": "485b1934e8e85aaebe09ab351c8a3fd44ff183204efcc3ae182ce9df938b38e9",
+      "public_bytes": 16995,
+      "public_content_sha256": "9de7252758d9ece2726ff2a813273bcbe4f1bb155cee98c3c6007d518015fb63",
+      "public_content_bytes": 153359,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-cached-r01/events-rank6.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-cached-r01/events-rank6.jsonl",
+      "source_sha256": "3145116cb4508e9db44e9d0fc024def0f9e88c8361776d27647b9e4337847e7e",
+      "source_bytes": 153286,
+      "public_sha256": "7a1f4cf62da713b885dd8aa1cbeb8481d8342cd0e6b4192b34f77bf3cd7602e6",
+      "public_bytes": 17043,
+      "public_content_sha256": "520e097380038b38ac83deac8625972857e2b99262be436c78482b1300bca74c",
+      "public_content_bytes": 153304,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-cached-r01/events-rank7.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-cached-r01/events-rank7.jsonl",
+      "source_sha256": "97aeb291731c5f3c8266d746124d2a9ce454ba93c8be2f99dc1b299cf9af09df",
+      "source_bytes": 153378,
+      "public_sha256": "dd5980d3870f9c42bb4d8d7b41d021dc54cf04efcdc85e95ca9173bd1890f887",
+      "public_bytes": 17116,
+      "public_content_sha256": "42721faa707ca3a2b76217583d9cdda2ca83a965f1a698cb3e6a378cecb97ad9",
+      "public_content_bytes": 153396,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-cached-r01/job.json",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-cached-r01/job.json",
+      "source_sha256": "9631e1eb9ac6104219f662800efd82dfc73a7450d371ff09cf8e89d704bb3db2",
+      "source_bytes": 3646,
+      "public_sha256": "fe969f67e48c04e1c96c2ef0f1e41707da595a3dae37b5eb6b3bc026e36e302c",
+      "public_bytes": 3702,
+      "public_content_sha256": "fe969f67e48c04e1c96c2ef0f1e41707da595a3dae37b5eb6b3bc026e36e302c",
+      "public_content_bytes": 3702,
+      "encoding": "utf-8",
+      "redactions": {
+        "private_ipv4": 3,
+        "root_home_prefix": 7,
+        "workspace_prefix": 4,
+        "ray_node_identity": 1
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-cached-r01/request.json",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-cached-r01/request.json",
+      "source_sha256": "ab2a6279deb5f53488b3a07a5e1b819d5d9d63335182a6f5ac10d862ca50c86e",
+      "source_bytes": 6724,
+      "public_sha256": "e897477b1fb11c89650b7c3b0e017d299ae71375bd6363f9864814939988eeb4",
+      "public_bytes": 6885,
+      "public_content_sha256": "e897477b1fb11c89650b7c3b0e017d299ae71375bd6363f9864814939988eeb4",
+      "public_content_bytes": 6885,
+      "encoding": "utf-8",
+      "redactions": {
+        "private_ipv4": 1,
+        "root_home_prefix": 8,
+        "workspace_prefix": 10
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-cached-r01/resource_after.json",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-cached-r01/resource_after.json",
+      "source_sha256": "9a12a201c3f15e69f8ab756b8e9222e306b33e0fcbc4154891fa2f1674d1e58a",
+      "source_bytes": 507,
+      "public_sha256": "9a12a201c3f15e69f8ab756b8e9222e306b33e0fcbc4154891fa2f1674d1e58a",
+      "public_bytes": 507,
+      "public_content_sha256": "9a12a201c3f15e69f8ab756b8e9222e306b33e0fcbc4154891fa2f1674d1e58a",
+      "public_content_bytes": 507,
+      "encoding": "utf-8",
+      "redactions": {},
+      "byte_exact_before_compression": true
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-cached-r02/driver.log.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-cached-r02/driver.log",
+      "source_sha256": "294d0ecc1441a3eaa007adf4890137d428ad7eceaf86332e208ac0f1639f6b40",
+      "source_bytes": 132299,
+      "public_sha256": "6fe23a426b5459c77032b87857ac4eaf7c11ccc6ed9ea9e25f92311e29640b51",
+      "public_bytes": 15686,
+      "public_content_sha256": "4cb9394df7a4d6460da3371d37f6d111ef57950755f6a248a347a5b6e40b2c7f",
+      "public_content_bytes": 132373,
+      "encoding": "gzip",
+      "redactions": {
+        "private_ipv4": 25,
+        "root_home_prefix": 8,
+        "workspace_prefix": 3
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-cached-r02/events-rank0.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-cached-r02/events-rank0.jsonl",
+      "source_sha256": "1eef35559af5e753217cb357800ca7621ef392d552308a76f07382e67f74f022",
+      "source_bytes": 153503,
+      "public_sha256": "c6a3912cfa94658738cc17d0f05d3e3304488bc746e7f9fbccd43fe47d9f132e",
+      "public_bytes": 17080,
+      "public_content_sha256": "a400219fc4f950bcae09b0dc89beb6cd9e2f2a45c293312fcea0d35b12017449",
+      "public_content_bytes": 153521,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-cached-r02/events-rank1.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-cached-r02/events-rank1.jsonl",
+      "source_sha256": "0f243429d7ce7f3936f1f5f93c9db3b84cb478771789b1cf660161e14848e7f0",
+      "source_bytes": 153332,
+      "public_sha256": "bd3970a9b23af0e01da4c6fb78cf589e30dd3a8ff31c83fc51a865f982b833c6",
+      "public_bytes": 17050,
+      "public_content_sha256": "9352c3ba14190cc38dd14162edbae9167e993d939f962c6697c686231ca8d379",
+      "public_content_bytes": 153350,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-cached-r02/events-rank2.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-cached-r02/events-rank2.jsonl",
+      "source_sha256": "71cd111b46ac873e84bf95b7154e4dd9b08a33d676aa6af67df04bd323e3e03d",
+      "source_bytes": 153455,
+      "public_sha256": "83f93131152947d7919e0b86e49b523ce68451e04cbd4f88d13a617470f8fc1e",
+      "public_bytes": 17037,
+      "public_content_sha256": "052c280136bfa69796f09dfefb3c72cb9727d2855be1f187f9b5912d6ef16cb3",
+      "public_content_bytes": 153473,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-cached-r02/events-rank3.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-cached-r02/events-rank3.jsonl",
+      "source_sha256": "78cf227a486cccdfba0f81a16d921ca5c6714e141e069cc55de5d86832485253",
+      "source_bytes": 153414,
+      "public_sha256": "d4f8127d69da93911d5ea01d8f7f4ed32ad9c92306ddf9311e0d34a915f6026c",
+      "public_bytes": 17103,
+      "public_content_sha256": "eff4b5d93f25d5989fa808985dec04c76f8fbda0b2f0c023df90d9c17225dc98",
+      "public_content_bytes": 153432,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-cached-r02/events-rank4.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-cached-r02/events-rank4.jsonl",
+      "source_sha256": "7d6610a71f121a88479892506c99eeed38b6a8981ad6b189dd4db27cd653f8a0",
+      "source_bytes": 153462,
+      "public_sha256": "8d39e0f826663c7ee279d23924e01f902f3e71153d4a71507afd6edb8e2d57f1",
+      "public_bytes": 16977,
+      "public_content_sha256": "67a92eb454f2959d2662b70f0bd80e798e3df6fb12d99c00a817f6b86df1ba77",
+      "public_content_bytes": 153480,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-cached-r02/events-rank5.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-cached-r02/events-rank5.jsonl",
+      "source_sha256": "529f2b14eb16419ed078741484d05a8a94d9f541afe977e499f0e96d2560a0a0",
+      "source_bytes": 153452,
+      "public_sha256": "b6eaded6c40f50e0cd02d236660ce1df3d9c5a8cdb3f8c0d21b0f04ae032b0b2",
+      "public_bytes": 16970,
+      "public_content_sha256": "ae2fb320bcc5ca2dbeea1e13e273671ef8755f6c73cc12e89b66e3485c91c97b",
+      "public_content_bytes": 153470,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-cached-r02/events-rank6.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-cached-r02/events-rank6.jsonl",
+      "source_sha256": "c7046dd873e797a55e970e642ed72e68112dd11dd9bd2c099634c01fc6f26661",
+      "source_bytes": 153330,
+      "public_sha256": "f135f3e5df6ec2fc994a28662cc22f8f91ee8f96a30ed4680d66a2a28396d005",
+      "public_bytes": 17046,
+      "public_content_sha256": "f87e2f67009b840578df90fc8895afb11c8b91e1a0b33beab3dc993bf2ec138e",
+      "public_content_bytes": 153348,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-cached-r02/events-rank7.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-cached-r02/events-rank7.jsonl",
+      "source_sha256": "43cc01516455d7ac9bae30fa5f4e94b96ba0df4a71510af8459b4aa5a5d9de4e",
+      "source_bytes": 153432,
+      "public_sha256": "9390df1f27c0395cd44de352cb4c9aeb679796834f1b7cb8e8dbd67448148c5a",
+      "public_bytes": 17109,
+      "public_content_sha256": "6446b85a255c316c932384716e54ac3babcaa1a114203237e6b407a5afdc444a",
+      "public_content_bytes": 153450,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-cached-r02/job.json",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-cached-r02/job.json",
+      "source_sha256": "244d7597931f80b9258337bfa4c4c1c6a5985b5c4806d9134a59482b4bd5409e",
+      "source_bytes": 3646,
+      "public_sha256": "f7a61ae6124a23cba22863dfc7403c7814631fd4da3d9332e2f37444e9b98847",
+      "public_bytes": 3702,
+      "public_content_sha256": "f7a61ae6124a23cba22863dfc7403c7814631fd4da3d9332e2f37444e9b98847",
+      "public_content_bytes": 3702,
+      "encoding": "utf-8",
+      "redactions": {
+        "private_ipv4": 3,
+        "root_home_prefix": 7,
+        "workspace_prefix": 4,
+        "ray_node_identity": 1
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-cached-r02/request.json",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-cached-r02/request.json",
+      "source_sha256": "0191dade5c02c009eea31b61fda4486945b0e2847f9cbc3fc141f315f359becc",
+      "source_bytes": 6723,
+      "public_sha256": "a2ea3498551f7c71df66b4a7758345471cc2c5c055cc06b2cbd244903d44272f",
+      "public_bytes": 6884,
+      "public_content_sha256": "a2ea3498551f7c71df66b4a7758345471cc2c5c055cc06b2cbd244903d44272f",
+      "public_content_bytes": 6884,
+      "encoding": "utf-8",
+      "redactions": {
+        "private_ipv4": 1,
+        "root_home_prefix": 8,
+        "workspace_prefix": 10
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-cached-r02/resource_after.json",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-cached-r02/resource_after.json",
+      "source_sha256": "afb6b4f381f35eb63e5bd24596889b190a2a245fea491470b1de4d24ef64b15b",
+      "source_bytes": 507,
+      "public_sha256": "afb6b4f381f35eb63e5bd24596889b190a2a245fea491470b1de4d24ef64b15b",
+      "public_bytes": 507,
+      "public_content_sha256": "afb6b4f381f35eb63e5bd24596889b190a2a245fea491470b1de4d24ef64b15b",
+      "public_content_bytes": 507,
+      "encoding": "utf-8",
+      "redactions": {},
+      "byte_exact_before_compression": true
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-online-r02/driver.log.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-online-r02/driver.log",
+      "source_sha256": "83c5f19a5841b2c57fc1be157b274eeb7d58f5132324b6ba43324e073ccc5276",
+      "source_bytes": 131247,
+      "public_sha256": "68954fc64210f976e987c0be1f63aba9819f810627d23b6247892ed1857dea30",
+      "public_bytes": 15632,
+      "public_content_sha256": "c0e16414ea146a0fd3e719341e4c7073de04dd82e56b13e9d7bd13d7796f660e",
+      "public_content_bytes": 131321,
+      "encoding": "gzip",
+      "redactions": {
+        "private_ipv4": 25,
+        "root_home_prefix": 8,
+        "workspace_prefix": 3
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-online-r02/events-rank0.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-online-r02/events-rank0.jsonl",
+      "source_sha256": "a37f7f83f4749d9b4e98b2e0a582994c607735dc6dcb90b0baf337f944bb6c55",
+      "source_bytes": 87322,
+      "public_sha256": "f104644fbb78b0140dc6f35dc37662eaf0f421386977646f5b14a02a25053be8",
+      "public_bytes": 8819,
+      "public_content_sha256": "de180e6c2375c35f5dae2a252f76da7968090b520fdaf9b66092b2fe681da1ae",
+      "public_content_bytes": 87340,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-online-r02/events-rank1.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-online-r02/events-rank1.jsonl",
+      "source_sha256": "89a8bd0e1faf2197f3f7fbe31435b5256e743d0025a8ac3ed7586d7c6e5ae545",
+      "source_bytes": 87277,
+      "public_sha256": "ac71d0b7c328f549d167d188960eabf582279b8c37af7b268d1d2c408d10d6aa",
+      "public_bytes": 8718,
+      "public_content_sha256": "5a5c637a7201b77382ec24bcca0c02091288cc7082ef82a1cf060278bcf36768",
+      "public_content_bytes": 87295,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-online-r02/events-rank2.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-online-r02/events-rank2.jsonl",
+      "source_sha256": "d40f5d95f1d627413b8df657bb3692df51f4b8c5d5118ba1bf2718be3b60ecbe",
+      "source_bytes": 87377,
+      "public_sha256": "af05e3cc9fa8ba97d55d139f747118bb7f1e1e4c7e316ce2bec1908db51f2f5b",
+      "public_bytes": 8843,
+      "public_content_sha256": "92a2b1c29b8eb368afabc751a3376c54713adbb47931565cf25304f2ec2cdcc8",
+      "public_content_bytes": 87395,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-online-r02/events-rank3.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-online-r02/events-rank3.jsonl",
+      "source_sha256": "060b59c5b2e1ba14f4860376c7779ebbbc49b40428af8685032a85c4e5e13f57",
+      "source_bytes": 87324,
+      "public_sha256": "8432e9fda8f54f76775bafc54209efccc203a6c2bca09e0cc7e3e6faaff68bfb",
+      "public_bytes": 8872,
+      "public_content_sha256": "1dc460678f93134f9717c8e5507c5dc5003a0915e98a3ef6459c80e7378c23ea",
+      "public_content_bytes": 87342,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-online-r02/events-rank4.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-online-r02/events-rank4.jsonl",
+      "source_sha256": "78977b6fc778d48a91ab907896579daf65529bf6f585b961ea7eaa8e1da457bb",
+      "source_bytes": 87364,
+      "public_sha256": "eb5503fd23f26f2e71568260c3542faeb1386a0d609a63b6b9449580c414dffa",
+      "public_bytes": 8705,
+      "public_content_sha256": "1f7359c9f5ca6371154d381a00e301533522fa775a45479ce989a866a41f3c64",
+      "public_content_bytes": 87382,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-online-r02/events-rank5.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-online-r02/events-rank5.jsonl",
+      "source_sha256": "d7be01680fbdd686f09c5ad8a0fac23524b0e393296b46b966fddd8fc7740aeb",
+      "source_bytes": 87320,
+      "public_sha256": "6d3bc1fec60b30a035dc41db025b237c25305d3ce40929f769641a041d6c1f00",
+      "public_bytes": 8801,
+      "public_content_sha256": "9e32de3d3b63aa07563984d8e7a9ae93785b6a1bca7251162c9963404f867555",
+      "public_content_bytes": 87338,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-online-r02/events-rank6.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-online-r02/events-rank6.jsonl",
+      "source_sha256": "6dcadc363fa4a4235d3b347e9e9d241ac03182ec4feebb5eb0546b12a3ee102d",
+      "source_bytes": 87302,
+      "public_sha256": "810cf30b327d45eb250c453768d9dc6cb5e4adbc1c1ddea85751994432842dfa",
+      "public_bytes": 8790,
+      "public_content_sha256": "852ac096517e782c53c809b37eba3e5f4412721d65ebf84e5324b7f69352edac",
+      "public_content_bytes": 87320,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-online-r02/events-rank7.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-online-r02/events-rank7.jsonl",
+      "source_sha256": "4575b378559cfb29ea03c033b47c4125c9af99d3f698bdec648976f42a0b98d2",
+      "source_bytes": 87334,
+      "public_sha256": "d47b7038190f1cbcb517c7c498dc632ea087e86af2a2ca1f66d8df9202a97482",
+      "public_bytes": 8949,
+      "public_content_sha256": "c5a7a8e8e4d9cbb40776ea9a0e8b479ba7c7f1b8f6b4b48e1f9f79ae1a837802",
+      "public_content_bytes": 87352,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-online-r02/job.json",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-online-r02/job.json",
+      "source_sha256": "40f44cec2c2e469401611d7827ab74f2e1f7a2e5cef042c840fe65260a4f9946",
+      "source_bytes": 3646,
+      "public_sha256": "6b1a77aeb9318485dce6b72650f22f88e0372551fe7ab2f30957f73a320a271d",
+      "public_bytes": 3702,
+      "public_content_sha256": "6b1a77aeb9318485dce6b72650f22f88e0372551fe7ab2f30957f73a320a271d",
+      "public_content_bytes": 3702,
+      "encoding": "utf-8",
+      "redactions": {
+        "private_ipv4": 3,
+        "root_home_prefix": 7,
+        "workspace_prefix": 4,
+        "ray_node_identity": 1
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-online-r02/request.json",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-online-r02/request.json",
+      "source_sha256": "28209d53143fcd3531dd18fba23044febd31144ce9b26343e4a85d40cb6a2325",
+      "source_bytes": 6724,
+      "public_sha256": "bad9d4121115d3c5803464dc6a64b468a68023b34a4c04d3a4e2c8903f7118d0",
+      "public_bytes": 6885,
+      "public_content_sha256": "bad9d4121115d3c5803464dc6a64b468a68023b34a4c04d3a4e2c8903f7118d0",
+      "public_content_bytes": 6885,
+      "encoding": "utf-8",
+      "redactions": {
+        "private_ipv4": 1,
+        "root_home_prefix": 8,
+        "workspace_prefix": 10
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-online-r02/resource_after.json",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-online-r02/resource_after.json",
+      "source_sha256": "8bab2643bd503843ac9f1ef3b2302edc1d7f20813dfb2df2f616aebb3373bf81",
+      "source_bytes": 507,
+      "public_sha256": "8bab2643bd503843ac9f1ef3b2302edc1d7f20813dfb2df2f616aebb3373bf81",
+      "public_bytes": 507,
+      "public_content_sha256": "8bab2643bd503843ac9f1ef3b2302edc1d7f20813dfb2df2f616aebb3373bf81",
+      "public_content_bytes": 507,
+      "encoding": "utf-8",
+      "redactions": {},
+      "byte_exact_before_compression": true
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-low-online-r01/driver.log.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-low-online-r01/driver.log",
+      "source_sha256": "a942a315c0b73890ed8b7484d52392c21ae07408c6ba3f7832a884c03c509cd1",
+      "source_bytes": 55742,
+      "public_sha256": "b0500ac3835761f755329fd04ac5673f51a42093697d39ba85ff618f87f2f424",
+      "public_bytes": 8903,
+      "public_content_sha256": "92bcd1dbe12a2d98ba9b1ec582badf1d0ec067bd05283cd7ab0bac3565b8e658",
+      "public_content_bytes": 55816,
+      "encoding": "gzip",
+      "redactions": {
+        "private_ipv4": 25,
+        "root_home_prefix": 8,
+        "workspace_prefix": 3
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-low-online-r01/events-rank0.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-low-online-r01/events-rank0.jsonl",
+      "source_sha256": "24c93f8935733eac6743c05454bfc51a349e3fc3cc260cb986332dffe7648740",
+      "source_bytes": 13136,
+      "public_sha256": "8a2ea4a0d654df5f6eeb82e9fb9bd4bda421852c10b67b80e50855806f6fd874",
+      "public_bytes": 2608,
+      "public_content_sha256": "e25fad2fe5e024285a54e10658719fbe7f6c035f23073408bfd135a128d327a9",
+      "public_content_bytes": 13154,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-low-online-r01/events-rank1.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-low-online-r01/events-rank1.jsonl",
+      "source_sha256": "79266a8b975a8f3b00888f6b156625d924c8215266f6cca0e002cdea8170830c",
+      "source_bytes": 13133,
+      "public_sha256": "d53d229facd7962276b293e7b8eefa9b9315aaa1324798733da5a09db2c22203",
+      "public_bytes": 2596,
+      "public_content_sha256": "c1f14fe0d23b64052308062d0f254d1285218711e2d98f5276a6dcc929d84d17",
+      "public_content_bytes": 13151,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-low-online-r01/events-rank2.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-low-online-r01/events-rank2.jsonl",
+      "source_sha256": "27927a57fcdb312b28f864c910d5a8d8a890cb130c1a4342a16df23462d90376",
+      "source_bytes": 13142,
+      "public_sha256": "14b4debc240c9e07aafcef1dbe68ad01765c57cbb675e422aef4909cbb8256c3",
+      "public_bytes": 2587,
+      "public_content_sha256": "c6ec20e0b022acba915173e94f507ad73332919c25592bccc61068d430912c2d",
+      "public_content_bytes": 13160,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-low-online-r01/events-rank3.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-low-online-r01/events-rank3.jsonl",
+      "source_sha256": "09bd256c1db19d75225153cf234a4595fe72d9ecde9d927279fc4722640a34ba",
+      "source_bytes": 13138,
+      "public_sha256": "3e103f930470795e699b74a39acb376bf4e5b4c36c5af1a21650e55a932aeb2c",
+      "public_bytes": 2573,
+      "public_content_sha256": "96350b29ef57170dbe78919372500994aa60616e834c2cc8e26cba95b4063840",
+      "public_content_bytes": 13156,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-low-online-r01/events-rank4.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-low-online-r01/events-rank4.jsonl",
+      "source_sha256": "bbdba6a4adb2dc7ad845a8815a132fb58279838a9c1ccfa005bc568dbf743905",
+      "source_bytes": 13134,
+      "public_sha256": "318350c65fdb568ae8e439fcd30b39dec3c87c0aac0b4667855863358ff22975",
+      "public_bytes": 2546,
+      "public_content_sha256": "f3622319bc866744b93833c43f515d2cbb76b71fb1a1f50af883346a1f3e1078",
+      "public_content_bytes": 13152,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-low-online-r01/events-rank5.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-low-online-r01/events-rank5.jsonl",
+      "source_sha256": "bbb07ec7294bd61acb25e884a6549bbc6143cbba9c4d7d2100b88829c3f32153",
+      "source_bytes": 13137,
+      "public_sha256": "b8236d8ddf498210650bcb127c10723ba897bed7b5f580e00995ab03af85f817",
+      "public_bytes": 2569,
+      "public_content_sha256": "855f7dba0c346ec5d672d3786dda2244162df23cc1052694db6e002262190a77",
+      "public_content_bytes": 13155,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-low-online-r01/events-rank6.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-low-online-r01/events-rank6.jsonl",
+      "source_sha256": "bd8db7e04280c83c03c1607eafcd1be6587633746390c8bc016e996c12e8186a",
+      "source_bytes": 13140,
+      "public_sha256": "b02cf2e35470e3fcbc159befe32312d7fac3295abfc69931287504b5ddb6b1ea",
+      "public_bytes": 2604,
+      "public_content_sha256": "56418fa9752d02ddbd1ffe3348d3c8d8147ee086e66b291c4ea1a106525166dd",
+      "public_content_bytes": 13158,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-low-online-r01/events-rank7.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-low-online-r01/events-rank7.jsonl",
+      "source_sha256": "d3050f0e7949e4c526168d0432b310c62046afdb692c8d257dbd00f2a237c95a",
+      "source_bytes": 13140,
+      "public_sha256": "05a6cb1c4a979a79a40423af837ffeced5d2837be2be777f4203161d2e5dd55b",
+      "public_bytes": 2585,
+      "public_content_sha256": "b760a3ad7fddd632c1748f5ff20ac789a030140d95f32796d4d3fc09bb16a76e",
+      "public_content_bytes": 13158,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-low-online-r01/job.json",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-low-online-r01/job.json",
+      "source_sha256": "4a4d6d7ff06d80ab1e970880bcf52b67fc8bdb900b4d1d374a4f2c70f5aa6491",
+      "source_bytes": 3653,
+      "public_sha256": "314cea405dfd76851e40fc878cc2c2cdc4e4185b3c6a935cb0d797e85e602d48",
+      "public_bytes": 3709,
+      "public_content_sha256": "314cea405dfd76851e40fc878cc2c2cdc4e4185b3c6a935cb0d797e85e602d48",
+      "public_content_bytes": 3709,
+      "encoding": "utf-8",
+      "redactions": {
+        "private_ipv4": 3,
+        "root_home_prefix": 7,
+        "workspace_prefix": 4,
+        "ray_node_identity": 1
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-low-online-r01/request.json",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-low-online-r01/request.json",
+      "source_sha256": "455834b3dcb847a1498eaa2544392a8789b6e25b5e685016df453955c2ea480d",
+      "source_bytes": 6752,
+      "public_sha256": "f8ae32d62a5a72c99275f3310e915823a705473baf6078c807a9adddc0b3ece5",
+      "public_bytes": 6913,
+      "public_content_sha256": "f8ae32d62a5a72c99275f3310e915823a705473baf6078c807a9adddc0b3ece5",
+      "public_content_bytes": 6913,
+      "encoding": "utf-8",
+      "redactions": {
+        "private_ipv4": 1,
+        "root_home_prefix": 8,
+        "workspace_prefix": 10
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-low-online-r01/resource_after.json",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-low-online-r01/resource_after.json",
+      "source_sha256": "0c22d29188fd3d7443ae58770b88e52a59b4490c090af2fe7e398a43621076ce",
+      "source_bytes": 511,
+      "public_sha256": "0c22d29188fd3d7443ae58770b88e52a59b4490c090af2fe7e398a43621076ce",
+      "public_bytes": 511,
+      "public_content_sha256": "0c22d29188fd3d7443ae58770b88e52a59b4490c090af2fe7e398a43621076ce",
+      "public_content_bytes": 511,
+      "encoding": "utf-8",
+      "redactions": {},
+      "byte_exact_before_compression": true
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-low-cached-r01/driver.log.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-low-cached-r01/driver.log",
+      "source_sha256": "2300ba75bb83093d0dc8f87f0199dbc14d9e6684ae82395b1e52004c41a6a25c",
+      "source_bytes": 56892,
+      "public_sha256": "51613c57f0d34c8a87aa711ba029e67b5b1997e943c5e7aa3c4f00c7fd52ded4",
+      "public_bytes": 8973,
+      "public_content_sha256": "ebf217c8ce67cef08ce4b727b633a635a414ef9c89d12f8997bf5a1b66af30be",
+      "public_content_bytes": 56966,
+      "encoding": "gzip",
+      "redactions": {
+        "private_ipv4": 25,
+        "root_home_prefix": 8,
+        "workspace_prefix": 3
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-low-cached-r01/events-rank0.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-low-cached-r01/events-rank0.jsonl",
+      "source_sha256": "ad7a752471596b9ebcc55e4cbc02370d83344c52580f647f014b2f62b4038dad",
+      "source_bytes": 21887,
+      "public_sha256": "daf8bde05d18e9e799fa4220a957c8d166ab4cc05cd65dd524b7231d61b43dee",
+      "public_bytes": 4341,
+      "public_content_sha256": "ce046c2e2740cb06caba10ee6e7e022d202dc19334bb049b447b63b3599baae7",
+      "public_content_bytes": 21905,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-low-cached-r01/events-rank1.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-low-cached-r01/events-rank1.jsonl",
+      "source_sha256": "e3b80d261f1d7b509db3444671f6dc0bd56b15c818db342e6e8fc6e93e76804d",
+      "source_bytes": 21873,
+      "public_sha256": "d019dfd270b43facb5546b0172cb3a2cc0c5a284c58efae2aff76a3b0e7a75cb",
+      "public_bytes": 4259,
+      "public_content_sha256": "1ba68cabaa4ec791ea0736a2cb76574f38f20c92df308fa637ecab1465dd0a50",
+      "public_content_bytes": 21891,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-low-cached-r01/events-rank2.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-low-cached-r01/events-rank2.jsonl",
+      "source_sha256": "a74b41bd8c0a6b1ac54c49c9c3f697063e5a1a0d37dac1acb7cb8a6a97dddc22",
+      "source_bytes": 21887,
+      "public_sha256": "0da00a0aea00f91b2136b63733d3382cdd64dc00a998aac05ef044f6f7ce7c56",
+      "public_bytes": 4259,
+      "public_content_sha256": "65aa39f5b80c4f5303e6f3f9769e4a8ac1a5778e13b47cec8c5f686cbbd12021",
+      "public_content_bytes": 21905,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-low-cached-r01/events-rank3.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-low-cached-r01/events-rank3.jsonl",
+      "source_sha256": "b2818065f9d596b834ac8b1e30174a5b3f29c9f44bd80accbdad2c80b6230b0e",
+      "source_bytes": 21890,
+      "public_sha256": "8f43e68ef4dc03f53cafacacddeed24d3dd05f17662cd3ab9c5e98a65c3aed55",
+      "public_bytes": 4287,
+      "public_content_sha256": "2ae8c27b48be0c5c4dae650a6f7f0e644019b7016d02859aa3a92d86295b7ace",
+      "public_content_bytes": 21908,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-low-cached-r01/events-rank4.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-low-cached-r01/events-rank4.jsonl",
+      "source_sha256": "47a6952452fa17e018151699708c6744222dc2b9f361f73cc32cf9cd6794c2a0",
+      "source_bytes": 21888,
+      "public_sha256": "c3434bcf1e65f685b25a3729a2d8812b66513a5c3981ee764b7d3e100385ad30",
+      "public_bytes": 4241,
+      "public_content_sha256": "fcf196fbbb5d3dbb257741aacb3a2ad5d825a47e889e5ddf55f123b9d1976dde",
+      "public_content_bytes": 21906,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-low-cached-r01/events-rank5.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-low-cached-r01/events-rank5.jsonl",
+      "source_sha256": "e00e0a07276ffab67dfbefaa24da616d5961b95ab1e82a2d03ceed375f71a4fd",
+      "source_bytes": 21875,
+      "public_sha256": "470c8fe6aceb6e4d2e2129a3bfb65a588005e73a5f4629927c0e158ec898a8fa",
+      "public_bytes": 4248,
+      "public_content_sha256": "d5d87e03dde78a798cf0819191c51a55c1b11663971d8baa23f01e93e0c2d2c3",
+      "public_content_bytes": 21893,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-low-cached-r01/events-rank6.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-low-cached-r01/events-rank6.jsonl",
+      "source_sha256": "2a446034f104437c052fb4a89e28e002a76c985ae5b6769c8d1a501460a15b7d",
+      "source_bytes": 21882,
+      "public_sha256": "e08e3d065d89ac5bb297a783c3d2a8be1a3ed3997c9ee27d3fdcec14a7308f49",
+      "public_bytes": 4266,
+      "public_content_sha256": "96ce0e23c7942a25c1918f78d67f7fdd0e2e5af511c599418b281c0b226e92d9",
+      "public_content_bytes": 21900,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-low-cached-r01/events-rank7.jsonl.gz",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-low-cached-r01/events-rank7.jsonl",
+      "source_sha256": "38e66d09af3cc9909bbed3500fa6915afa8e42f4f5c00f23271d1596c8b19273",
+      "source_bytes": 21892,
+      "public_sha256": "6a4e8541df2230afd27e6151e487732e07df279f853a9907201b847fb8c8bc25",
+      "public_bytes": 4263,
+      "public_content_sha256": "61f23ca49b4ac95f10f6039cc64f26a357a69b6cd048ef08bf1264f997debb8a",
+      "public_content_bytes": 21910,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-low-cached-r01/job-at-observer-interruption.json",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-low-cached-r01/job-at-observer-interruption.json",
+      "source_sha256": "56118b57ab7a85c73e2a26b3541318e26f889e36406c1209ee4b1dd53a247a25",
+      "source_bytes": 3644,
+      "public_sha256": "3041fe4b1fd6710798f2db585ccc68715db0348d78e95d64ba890a533903ef98",
+      "public_bytes": 3700,
+      "public_content_sha256": "3041fe4b1fd6710798f2db585ccc68715db0348d78e95d64ba890a533903ef98",
+      "public_content_bytes": 3700,
+      "encoding": "utf-8",
+      "redactions": {
+        "private_ipv4": 3,
+        "root_home_prefix": 7,
+        "workspace_prefix": 4,
+        "ray_node_identity": 1
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-low-cached-r01/job.json",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-low-cached-r01/job.json",
+      "source_sha256": "02bff95e4496b729d893b22216f4fb4f88f9f677472b36813e5f3bc05624f8f5",
+      "source_bytes": 3653,
+      "public_sha256": "8e7357f4bc526bcd6939307e697100a8500a41d28953ab254009d0c27201d8f5",
+      "public_bytes": 3709,
+      "public_content_sha256": "8e7357f4bc526bcd6939307e697100a8500a41d28953ab254009d0c27201d8f5",
+      "public_content_bytes": 3709,
+      "encoding": "utf-8",
+      "redactions": {
+        "private_ipv4": 3,
+        "root_home_prefix": 7,
+        "workspace_prefix": 4,
+        "ray_node_identity": 1
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-low-cached-r01/request.json",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-low-cached-r01/request.json",
+      "source_sha256": "51a77094bb6f4f4d2b229983ebd0d8e60bafe4eb42a38f0bdcdd65b2386a1aa9",
+      "source_bytes": 6751,
+      "public_sha256": "f75ec9cae441ee6f525c329c4980517d05ba24ba3f23f363bdfdb168886251ac",
+      "public_bytes": 6912,
+      "public_content_sha256": "f75ec9cae441ee6f525c329c4980517d05ba24ba3f23f363bdfdb168886251ac",
+      "public_content_bytes": 6912,
+      "encoding": "utf-8",
+      "redactions": {
+        "private_ipv4": 1,
+        "root_home_prefix": 8,
+        "workspace_prefix": 10
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/runs/qwen-recovery-low-cached-r01/resource_after.json",
+      "source_path": "no17-qwen-recovery/runs/qwen-recovery-low-cached-r01/resource_after.json",
+      "source_sha256": "20c7aae1076541d0a680f42b2dd742588d6b23534eed56ed71bdd5a9aa023cfe",
+      "source_bytes": 624,
+      "public_sha256": "20c7aae1076541d0a680f42b2dd742588d6b23534eed56ed71bdd5a9aa023cfe",
+      "public_bytes": 624,
+      "public_content_sha256": "20c7aae1076541d0a680f42b2dd742588d6b23534eed56ed71bdd5a9aa023cfe",
+      "public_content_bytes": 624,
+      "encoding": "utf-8",
+      "redactions": {},
+      "byte_exact_before_compression": true
+    },
+    {
+      "path": "evidence/qwen-9179512/observation-recovery.json",
+      "source_path": "no17-qwen-recovery/observation-recovery.json",
+      "source_sha256": "67fdcb72b6f9ae5653d6cd6d926877852240ebb925f1af48ec401e78a5e9471f",
+      "source_bytes": 1014,
+      "public_sha256": "67fdcb72b6f9ae5653d6cd6d926877852240ebb925f1af48ec401e78a5e9471f",
+      "public_bytes": 1014,
+      "public_content_sha256": "67fdcb72b6f9ae5653d6cd6d926877852240ebb925f1af48ec401e78a5e9471f",
+      "public_content_bytes": 1014,
+      "encoding": "utf-8",
+      "redactions": {},
+      "byte_exact_before_compression": true
+    },
+    {
+      "path": "evidence/review-bd07ff5/plan.json",
+      "source_path": "no17-review-fixes/plan-r02.json",
+      "source_sha256": "f3af5abf632b1941dfeb0301ba669d017633ff4ab5fcbd93e35259ba63a36cad",
+      "source_bytes": 17231,
+      "public_sha256": "cc420dd3f3d7c39c39bf7ed173ab20522f32b6441a4dca667addb8cea9bcb25b",
+      "public_bytes": 17401,
+      "public_content_sha256": "cc420dd3f3d7c39c39bf7ed173ab20522f32b6441a4dca667addb8cea9bcb25b",
+      "public_content_bytes": 17401,
+      "encoding": "utf-8",
+      "redactions": {
+        "private_ipv4": 1,
+        "root_home_prefix": 5,
+        "workspace_prefix": 14
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/resources.jsonl.gz",
+      "source_path": "no17-review-fixes/resource-samples.jsonl",
+      "source_sha256": "ce956357cac9f97e8ec04a3f1bf798ce7f9882f194ccc3d72afd0fc213d774e8",
+      "source_bytes": 253356,
+      "public_sha256": "994442f177901493f7d05a1316c7cd8886c5c099a99a18bdb11be6cd5a44a086",
+      "public_bytes": 18122,
+      "public_content_sha256": "ce956357cac9f97e8ec04a3f1bf798ce7f9882f194ccc3d72afd0fc213d774e8",
+      "public_content_bytes": 253356,
+      "encoding": "gzip",
+      "redactions": {},
+      "byte_exact_before_compression": true
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/sensenova-review-verify-r02/conditioning-verification.json.gz",
+      "source_path": "no17-review-fixes/runs-r02/sensenova-review-verify-r02/conditioning-verification.json",
+      "source_sha256": "d7c73515ffc7def42ad0d7ecbb954f3b3a19db59d21f155abbe4d1d8a16fa9da",
+      "source_bytes": 365548,
+      "public_sha256": "1fd1e3da42e9e8e1c5f6b63056d7f0940d6aa15de6271d2a4c3e3cbd5300e763",
+      "public_bytes": 17868,
+      "public_content_sha256": "d7c73515ffc7def42ad0d7ecbb954f3b3a19db59d21f155abbe4d1d8a16fa9da",
+      "public_content_bytes": 365548,
+      "encoding": "gzip",
+      "redactions": {},
+      "byte_exact_before_compression": true
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/sensenova-review-verify-r02/driver.log.gz",
+      "source_path": "no17-review-fixes/runs-r02/sensenova-review-verify-r02/driver.log",
+      "source_sha256": "6d7326aec79e00c59abf0dacde283137a1fdb84dabed2e905ef40072597b8c01",
+      "source_bytes": 43419,
+      "public_sha256": "c6a141a6b3e3b84a12a302fdf14cae08ae569d29a936a9931c2ff4d0f1db8304",
+      "public_bytes": 7492,
+      "public_content_sha256": "20c97d9afdd0dc020dd71a6e9c9c25573704f3ed664b31b5f2207ac9fc4041ad",
+      "public_content_bytes": 43493,
+      "encoding": "gzip",
+      "redactions": {
+        "private_ipv4": 25,
+        "root_home_prefix": 8,
+        "workspace_prefix": 3
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/sensenova-review-verify-r02/events-rank0.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/sensenova-review-verify-r02/events-rank0.jsonl",
+      "source_sha256": "f250d76c30342c9f31907d5d74b2d5c421c385a0a51d2bc73f3e8ad398422592",
+      "source_bytes": 6949,
+      "public_sha256": "2cdbe4b2ffb6024e33bdf8381584db66df6d36257d54d3d48c384ae1b859e6ac",
+      "public_bytes": 2276,
+      "public_content_sha256": "358a828d26437c880ee356e89716afd10b05d8d246846abc010e0225a48a2b6b",
+      "public_content_bytes": 6967,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/sensenova-review-verify-r02/events-rank1.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/sensenova-review-verify-r02/events-rank1.jsonl",
+      "source_sha256": "c3c5572f00cda241cb0cda7df70a1efdfd802c4769e9dd6d852811960ccb62fa",
+      "source_bytes": 6961,
+      "public_sha256": "b10b33101db150b7823d19d4aed9a0473df5d8d0729c86ba8f9b415ab34586a7",
+      "public_bytes": 2269,
+      "public_content_sha256": "07bb529a920f94311b8b5f0ef2e0e2819e36669e662148ff0997554a83038107",
+      "public_content_bytes": 6979,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/sensenova-review-verify-r02/events-rank2.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/sensenova-review-verify-r02/events-rank2.jsonl",
+      "source_sha256": "9f84de17100300b73f3c5b4b782f028c5992100fa0295e4387628176ec77705e",
+      "source_bytes": 6964,
+      "public_sha256": "e0352af5ebf5c8f15fa076a985c52acdbc2a6c785176c2027280d893f4b070e8",
+      "public_bytes": 2272,
+      "public_content_sha256": "e46131fb8e10e1ead74141d1a0a405ed77b01d748898ea95a2c6e9b60b61609f",
+      "public_content_bytes": 6982,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/sensenova-review-verify-r02/events-rank3.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/sensenova-review-verify-r02/events-rank3.jsonl",
+      "source_sha256": "095b62a3055821b2c43c66314a90f630d646b4ddcf2794cccedbfbfe4ebaa242",
+      "source_bytes": 6966,
+      "public_sha256": "bec6e64f7fb3d637305566695faba18ab74e723ee78bf94bc9e923c5f28e5388",
+      "public_bytes": 2261,
+      "public_content_sha256": "495aa22bf17fd66018aaf60ba1d2404714be577a387befacac04372598a46cd3",
+      "public_content_bytes": 6984,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/sensenova-review-verify-r02/events-rank4.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/sensenova-review-verify-r02/events-rank4.jsonl",
+      "source_sha256": "93d4532bda33fbffcd2ffa9300cee7fec550de2e700e5d07baa1e05182b6f595",
+      "source_bytes": 6966,
+      "public_sha256": "e031f4a16c618c79c177d0c48c19123f35314e633e6da39eeb80d08a8000e037",
+      "public_bytes": 2257,
+      "public_content_sha256": "f55578b949c1bd6b87b630d1ddd5bb40d66372a928ee9de6d909e1225222425d",
+      "public_content_bytes": 6984,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/sensenova-review-verify-r02/events-rank5.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/sensenova-review-verify-r02/events-rank5.jsonl",
+      "source_sha256": "3c24abc9e2e2952807c8ff956b898cf2e9998a6adea7a9b716655653c5a62301",
+      "source_bytes": 6952,
+      "public_sha256": "d177a887a052a0463094d1f39dea19cffc9e277ca1530e7c8ab27ec312a29724",
+      "public_bytes": 2258,
+      "public_content_sha256": "eb3ac2c9736b9f6585d475477194e2e56fc2b448cb6959bd49ddff794a95171d",
+      "public_content_bytes": 6970,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/sensenova-review-verify-r02/events-rank6.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/sensenova-review-verify-r02/events-rank6.jsonl",
+      "source_sha256": "5a50b99af992c3658f08d2b692a9971ab1a18d49789c642105d9250a87c1223c",
+      "source_bytes": 6952,
+      "public_sha256": "f324e266e033fa5f3ccd4c2f09a65b543c4dcaa928f2ff91cba702f8bcad2003",
+      "public_bytes": 2263,
+      "public_content_sha256": "87a08fe403f3910428632926cba82fac916d1e4053880e7c77b638f8dea42d73",
+      "public_content_bytes": 6970,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/sensenova-review-verify-r02/events-rank7.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/sensenova-review-verify-r02/events-rank7.jsonl",
+      "source_sha256": "bca7bdeb7726a2de513e4ebdc297f1fee27e68d159ea8b5aa46f108a991658ae",
+      "source_bytes": 6950,
+      "public_sha256": "0ed52f2e8d12e6fee6945312997577b111a5484b15512128c74c962289501703",
+      "public_bytes": 2254,
+      "public_content_sha256": "5a24383f12e2a1c920409fc3c3a5d0a9c6c043047fd7325fdf6ad8ea8d81b38e",
+      "public_content_bytes": 6968,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/sensenova-review-verify-r02/job.json",
+      "source_path": "no17-review-fixes/runs-r02/sensenova-review-verify-r02/job.json",
+      "source_sha256": "d3cdbcde514e6f72c2d8b867a6426cd830a8f043b810a11348ba73791088b816",
+      "source_bytes": 3482,
+      "public_sha256": "57101324fd118fde0c9c355728ff4bb1a2b8533ed245bd1a69c85405444eff73",
+      "public_bytes": 3538,
+      "public_content_sha256": "57101324fd118fde0c9c355728ff4bb1a2b8533ed245bd1a69c85405444eff73",
+      "public_content_bytes": 3538,
+      "encoding": "utf-8",
+      "redactions": {
+        "private_ipv4": 3,
+        "root_home_prefix": 7,
+        "workspace_prefix": 4,
+        "ray_node_identity": 1
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/sensenova-review-verify-r02/request.json",
+      "source_path": "no17-review-fixes/runs-r02/sensenova-review-verify-r02/request.json",
+      "source_sha256": "9bcdf936c4a1716ed6680350f920ab8e4009257fbd27af5ffb657447962ac1ab",
+      "source_bytes": 6572,
+      "public_sha256": "74f58c141a4820ed1c4a75293401c684e727e29170e219c181182554f86adb98",
+      "public_bytes": 6733,
+      "public_content_sha256": "74f58c141a4820ed1c4a75293401c684e727e29170e219c181182554f86adb98",
+      "public_content_bytes": 6733,
+      "encoding": "utf-8",
+      "redactions": {
+        "private_ipv4": 1,
+        "root_home_prefix": 8,
+        "workspace_prefix": 10
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/sensenova-review-verify-r02/resource_after.json",
+      "source_path": "no17-review-fixes/runs-r02/sensenova-review-verify-r02/resource_after.json",
+      "source_sha256": "f7069c70a55156837332c80fb67012a3f7b8573a7b6ff91352275c32e292cd50",
+      "source_bytes": 510,
+      "public_sha256": "f7069c70a55156837332c80fb67012a3f7b8573a7b6ff91352275c32e292cd50",
+      "public_bytes": 510,
+      "public_content_sha256": "f7069c70a55156837332c80fb67012a3f7b8573a7b6ff91352275c32e292cd50",
+      "public_content_bytes": 510,
+      "encoding": "utf-8",
+      "redactions": {},
+      "byte_exact_before_compression": true
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/qwen-review-verify-r02/conditioning-verification.json.gz",
+      "source_path": "no17-review-fixes/runs-r02/qwen-review-verify-r02/conditioning-verification.json",
+      "source_sha256": "85ca9de40835517f2304fe5617478d6df30c8948791c18cc2ec537572ec80bfd",
+      "source_bytes": 565683,
+      "public_sha256": "170d321ed1eb7d5877b115954f1495611b8a8e4c7414dad0c4adf44e37ae27b9",
+      "public_bytes": 27855,
+      "public_content_sha256": "85ca9de40835517f2304fe5617478d6df30c8948791c18cc2ec537572ec80bfd",
+      "public_content_bytes": 565683,
+      "encoding": "gzip",
+      "redactions": {},
+      "byte_exact_before_compression": true
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/qwen-review-verify-r02/driver.log.gz",
+      "source_path": "no17-review-fixes/runs-r02/qwen-review-verify-r02/driver.log",
+      "source_sha256": "ec4effee7a2aca06dfb55bdcaac8e8b08f08caff3f48039c6634c4544c209cee",
+      "source_bytes": 46728,
+      "public_sha256": "3acb6cbc05e4c8255fd147d10493b238c21472f5e1605811607d6c9263efb6a5",
+      "public_bytes": 7959,
+      "public_content_sha256": "f17a7c6524443ade56dda74853ab2a87e4ab0da13f59a87aae9bca6016051d7b",
+      "public_content_bytes": 46802,
+      "encoding": "gzip",
+      "redactions": {
+        "private_ipv4": 25,
+        "root_home_prefix": 8,
+        "workspace_prefix": 3
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/qwen-review-verify-r02/events-rank0.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/qwen-review-verify-r02/events-rank0.jsonl",
+      "source_sha256": "9e712acb77a1274e3d9995562a6e9bfb89abf09a6c0b2cd040efdae782f4fc7e",
+      "source_bytes": 6112,
+      "public_sha256": "7fabcbdc8815f93889b1763ac3eee43e741c67b47309157b3ab855d839898ed8",
+      "public_bytes": 2117,
+      "public_content_sha256": "ee986cec6e3e532d5fb03c140222a751b51d775f5a0f9798634c94e4fe43062b",
+      "public_content_bytes": 6130,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/qwen-review-verify-r02/events-rank1.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/qwen-review-verify-r02/events-rank1.jsonl",
+      "source_sha256": "68f0a505a84bcce4abd05fd05b097eebb7a9b42bd033f3b72f2289e61cb3b8c7",
+      "source_bytes": 6116,
+      "public_sha256": "ca49a39c27da4169c23b2150683a838a985d9842508cf747a45a74a5c74d514c",
+      "public_bytes": 2117,
+      "public_content_sha256": "402896215b6d66b5cb87915959540962bc3c43b74938b79bb664fc19e7293209",
+      "public_content_bytes": 6134,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/qwen-review-verify-r02/events-rank2.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/qwen-review-verify-r02/events-rank2.jsonl",
+      "source_sha256": "46bb09e3f3fafcc7ee4b21af1a4d2f42ac640023ec43c9cc0a30cf5f8f5563d7",
+      "source_bytes": 6123,
+      "public_sha256": "c674a94588d4b18557d0aed7b5dc3b395ca6538ad7049d4cac5e1df6399571cb",
+      "public_bytes": 2118,
+      "public_content_sha256": "9104ccb1db0538a398e30ca1e1b01497d931d9661fe990ea400f69934cbd6b6b",
+      "public_content_bytes": 6141,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/qwen-review-verify-r02/events-rank3.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/qwen-review-verify-r02/events-rank3.jsonl",
+      "source_sha256": "3b17322a417c1b5a86f29bf8c61fd98101d9e30f9bafc398ee9bace0286f0818",
+      "source_bytes": 6111,
+      "public_sha256": "7e9e5933916f71ef56f22ade1285e79d54857d9bf39e6cfa5e425810b08e573c",
+      "public_bytes": 2114,
+      "public_content_sha256": "1fbe5f9841eae091172f8f3d2e11b7e2027749206ff033c3a60815778acace92",
+      "public_content_bytes": 6129,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/qwen-review-verify-r02/events-rank4.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/qwen-review-verify-r02/events-rank4.jsonl",
+      "source_sha256": "0a075cd1f7b38c2d6ed3ff2c07aabfa242f844c69dc1352a6947887a24f785fb",
+      "source_bytes": 6120,
+      "public_sha256": "da43ca841fd955ba717cda6aa08ce2971af22210f3e680fd3d5b545bcd0c6146",
+      "public_bytes": 2113,
+      "public_content_sha256": "0404b442503bc25b08cb30072fe2d9052524c7b553268ce85c7ed54e996e965d",
+      "public_content_bytes": 6138,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/qwen-review-verify-r02/events-rank5.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/qwen-review-verify-r02/events-rank5.jsonl",
+      "source_sha256": "779fd0c1bf6e1d5bee2079049024d76cf2545986fd3d2093fa39f1549385352a",
+      "source_bytes": 6121,
+      "public_sha256": "14619a17aa8bca24b501c037661d78e7e5a5e5138a5652ae719990b51be7b59e",
+      "public_bytes": 2118,
+      "public_content_sha256": "df990c0e01bc3f7c398fd8bf794ac8cb7572806235e1915a697181c16d1d8fa6",
+      "public_content_bytes": 6139,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/qwen-review-verify-r02/events-rank6.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/qwen-review-verify-r02/events-rank6.jsonl",
+      "source_sha256": "7aa04afe42cf77d1e6deb50cf48dbaf21eeeeaf5d34b5ad4b0f31a75a7812ff1",
+      "source_bytes": 6122,
+      "public_sha256": "65cbaf6cbe9037c2dd54109969578a92084ac8248ad87a9c813e2faddf1a2043",
+      "public_bytes": 2110,
+      "public_content_sha256": "e6901036ea32409b7ec383312b4ef7c617ceb03cc8e95f7a78ab98ef5d76d2b9",
+      "public_content_bytes": 6140,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/qwen-review-verify-r02/events-rank7.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/qwen-review-verify-r02/events-rank7.jsonl",
+      "source_sha256": "f3236e7591cbb5f89b76c8f6da165c49f18649f4770098698559e37429d3915e",
+      "source_bytes": 6124,
+      "public_sha256": "2a848b2a6441918c3855aacb115654320b2606c5755893965f8b5d328182f0f7",
+      "public_bytes": 2112,
+      "public_content_sha256": "09c39330f1653872ee26a8ba5f8cba04070872c20a3e3e7627ab84999e1aa18b",
+      "public_content_bytes": 6142,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/qwen-review-verify-r02/job.json",
+      "source_path": "no17-review-fixes/runs-r02/qwen-review-verify-r02/job.json",
+      "source_sha256": "2ea66fb49e05bbcd75aa044b1f58f37b0452242bfa36458489de31aea0a80241",
+      "source_bytes": 3621,
+      "public_sha256": "97b12d6dc5cd892e826c4f1ee4e914b822d40fbba7804adcdc4f123bbaa5ef95",
+      "public_bytes": 3677,
+      "public_content_sha256": "97b12d6dc5cd892e826c4f1ee4e914b822d40fbba7804adcdc4f123bbaa5ef95",
+      "public_content_bytes": 3677,
+      "encoding": "utf-8",
+      "redactions": {
+        "private_ipv4": 3,
+        "root_home_prefix": 7,
+        "workspace_prefix": 4,
+        "ray_node_identity": 1
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/qwen-review-verify-r02/request.json",
+      "source_path": "no17-review-fixes/runs-r02/qwen-review-verify-r02/request.json",
+      "source_sha256": "49a35204f75ee2c7e12ce04a5abffb36a45ddccb1bd28c5fdfb97ad55ff665df",
+      "source_bytes": 6717,
+      "public_sha256": "7ad7e81516b0f19a6425cd5279c3cfbcfd18ba1a306082c7462cd85616629ac3",
+      "public_bytes": 6878,
+      "public_content_sha256": "7ad7e81516b0f19a6425cd5279c3cfbcfd18ba1a306082c7462cd85616629ac3",
+      "public_content_bytes": 6878,
+      "encoding": "utf-8",
+      "redactions": {
+        "private_ipv4": 1,
+        "root_home_prefix": 8,
+        "workspace_prefix": 10
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/qwen-review-verify-r02/resource_after.json",
+      "source_path": "no17-review-fixes/runs-r02/qwen-review-verify-r02/resource_after.json",
+      "source_sha256": "e9396539e55617b1fea8ee05c0179ac75e937e5abc57bb7a117083f52b4d79a6",
+      "source_bytes": 505,
+      "public_sha256": "e9396539e55617b1fea8ee05c0179ac75e937e5abc57bb7a117083f52b4d79a6",
+      "public_bytes": 505,
+      "public_content_sha256": "e9396539e55617b1fea8ee05c0179ac75e937e5abc57bb7a117083f52b4d79a6",
+      "public_content_bytes": 505,
+      "encoding": "utf-8",
+      "redactions": {},
+      "byte_exact_before_compression": true
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/sensenova-review-online-r02/driver.log.gz",
+      "source_path": "no17-review-fixes/runs-r02/sensenova-review-online-r02/driver.log",
+      "source_sha256": "48bd27962d68b0ce91ac79ffd4ee140e5e879496781ae86628c05ab3a860451e",
+      "source_bytes": 127662,
+      "public_sha256": "d901dfc1d745479aacde4e1cb35fe8c9934f723571117c823f714c7d623a1f7d",
+      "public_bytes": 15026,
+      "public_content_sha256": "aff35d6aa8a8a4ba59176d071829e8e2c0db3262878f038e036be6d949ee56bf",
+      "public_content_bytes": 127736,
+      "encoding": "gzip",
+      "redactions": {
+        "private_ipv4": 25,
+        "root_home_prefix": 8,
+        "workspace_prefix": 3
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/sensenova-review-online-r02/events-rank0.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/sensenova-review-online-r02/events-rank0.jsonl",
+      "source_sha256": "c5e2d6d29cdb4fbc87aef235a7b20ee3bcb7546ada674295054bdddae03fdb12",
+      "source_bytes": 90188,
+      "public_sha256": "ff0f678e896a6962d155f1175e6d7a27f4280f90fb91678eab159baa4c89282c",
+      "public_bytes": 8644,
+      "public_content_sha256": "6a1cc512c43fd0f6f47172ec2435a696fa8178fe610fbe486bfdf098336da53c",
+      "public_content_bytes": 90206,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/sensenova-review-online-r02/events-rank1.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/sensenova-review-online-r02/events-rank1.jsonl",
+      "source_sha256": "c4f3aa9ace31ee85569afb772580bd8fe97ef79b3a0486bd6a197495b509b79f",
+      "source_bytes": 90196,
+      "public_sha256": "e612c68c787330d38e791e1c920e3ff26902194a0b95f480f9c2c4804d1042a9",
+      "public_bytes": 8542,
+      "public_content_sha256": "357b86f7181eb758b3ad44d6013bea0a525a637377d81ca963d21d8b224f2d1a",
+      "public_content_bytes": 90214,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/sensenova-review-online-r02/events-rank2.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/sensenova-review-online-r02/events-rank2.jsonl",
+      "source_sha256": "0b088c41d18291fd27b629ae0e933374558bbb1a5aeafce43d902c1df67b545f",
+      "source_bytes": 90176,
+      "public_sha256": "38b40b5a722f3e85a55521ff9febfec4f44461f2730126333f036e3f64b4df14",
+      "public_bytes": 8507,
+      "public_content_sha256": "c73cf559eaa2e9ed474795e5f14bd785a1ad74836eb16d058acebfc8524f3945",
+      "public_content_bytes": 90194,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/sensenova-review-online-r02/events-rank3.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/sensenova-review-online-r02/events-rank3.jsonl",
+      "source_sha256": "bf6035dbdc3963246794a2a48bf3670c8668dd7ebb56e5a55cd3cd99d0120d4e",
+      "source_bytes": 90183,
+      "public_sha256": "57e4ef6a8cf3fd6800e47dcfd23451c8cd2c5ffdeda90974a89b7241d86293c7",
+      "public_bytes": 8684,
+      "public_content_sha256": "4f9dad88fee12748c908b1d9e929dd1a35fde387f83841cc833b504e6abc9514",
+      "public_content_bytes": 90201,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/sensenova-review-online-r02/events-rank4.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/sensenova-review-online-r02/events-rank4.jsonl",
+      "source_sha256": "b03ae6f3174ea6009f660534da4751cb8aaa868ebb298d6041667f8d95c3f588",
+      "source_bytes": 90160,
+      "public_sha256": "f311e918c4cba8c86a31d44ea069458b1ce02928c36685cad985613f2ab2c257",
+      "public_bytes": 8531,
+      "public_content_sha256": "21b415b894f51da51d6988935dc4ae5f57614312e31cede6ae410d00eb02c6bd",
+      "public_content_bytes": 90178,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/sensenova-review-online-r02/events-rank5.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/sensenova-review-online-r02/events-rank5.jsonl",
+      "source_sha256": "17a108b8686dcd3ec36266ddfcd8655d8a57d3fc2b8ffa20fc994994b595509f",
+      "source_bytes": 90178,
+      "public_sha256": "3dcae66073cd519add5ee433268bb132094328d4ba0e9f082ca3858e0c0b141b",
+      "public_bytes": 8636,
+      "public_content_sha256": "3e70e2f31c9453caccf1c5b860ce18d4f99a556ba45d3429bb8fcf6ce42ae8b9",
+      "public_content_bytes": 90196,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/sensenova-review-online-r02/events-rank6.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/sensenova-review-online-r02/events-rank6.jsonl",
+      "source_sha256": "5533e9a72a993a8fa0ad4795f4dcba012304625a47aaedf211504d65d5467378",
+      "source_bytes": 90178,
+      "public_sha256": "585d4e0d319356528b5f5dfbdd6d280aee7f5eb3bd626a3334f96fe3cda87abd",
+      "public_bytes": 8496,
+      "public_content_sha256": "61a4ce8d504c3f11296070835eca5c50796f57313782205c7bd142192fef72db",
+      "public_content_bytes": 90196,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/sensenova-review-online-r02/events-rank7.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/sensenova-review-online-r02/events-rank7.jsonl",
+      "source_sha256": "15d5bd4da30237e46cd9939ca1326f859adbc5c676ff24af433dddbcab6c507a",
+      "source_bytes": 90158,
+      "public_sha256": "52173daec218b45a8968094f268806b832781ea13501ad51acc5921efeecade0",
+      "public_bytes": 8531,
+      "public_content_sha256": "17faab4b745051eed0d229ca956a8acfc876d969a467d7a7327063ab910e6b89",
+      "public_content_bytes": 90176,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/sensenova-review-online-r02/job.json",
+      "source_path": "no17-review-fixes/runs-r02/sensenova-review-online-r02/job.json",
+      "source_sha256": "e893c347a0437c2016dc5ff82f73dba71b58e7c699ee4e41963a0e4910bb274d",
+      "source_bytes": 3463,
+      "public_sha256": "fb9d27ca6215f8d30b2799473e19e28b525f179aef31aa940fdf212f12acebdd",
+      "public_bytes": 3519,
+      "public_content_sha256": "fb9d27ca6215f8d30b2799473e19e28b525f179aef31aa940fdf212f12acebdd",
+      "public_content_bytes": 3519,
+      "encoding": "utf-8",
+      "redactions": {
+        "private_ipv4": 3,
+        "root_home_prefix": 7,
+        "workspace_prefix": 4,
+        "ray_node_identity": 1
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/sensenova-review-online-r02/request.json",
+      "source_path": "no17-review-fixes/runs-r02/sensenova-review-online-r02/request.json",
+      "source_sha256": "8d881206ce4e74f68cb39fe401c61b78fac04174c2df828e9e254d6499ce61ec",
+      "source_bytes": 6550,
+      "public_sha256": "c0ead1986f4527c87b4703ecb6ae5ff9db60f03f38ffaae6dce76bc18c0af0f1",
+      "public_bytes": 6711,
+      "public_content_sha256": "c0ead1986f4527c87b4703ecb6ae5ff9db60f03f38ffaae6dce76bc18c0af0f1",
+      "public_content_bytes": 6711,
+      "encoding": "utf-8",
+      "redactions": {
+        "private_ipv4": 1,
+        "root_home_prefix": 8,
+        "workspace_prefix": 10
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/sensenova-review-online-r02/resource_after.json",
+      "source_path": "no17-review-fixes/runs-r02/sensenova-review-online-r02/resource_after.json",
+      "source_sha256": "5c38ff34ed3fcf1a46090ea28d934707c79e9a31c4e14451851bd59afb8d4b82",
+      "source_bytes": 510,
+      "public_sha256": "5c38ff34ed3fcf1a46090ea28d934707c79e9a31c4e14451851bd59afb8d4b82",
+      "public_bytes": 510,
+      "public_content_sha256": "5c38ff34ed3fcf1a46090ea28d934707c79e9a31c4e14451851bd59afb8d4b82",
+      "public_content_bytes": 510,
+      "encoding": "utf-8",
+      "redactions": {},
+      "byte_exact_before_compression": true
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/sensenova-review-cached-r02/driver.log.gz",
+      "source_path": "no17-review-fixes/runs-r02/sensenova-review-cached-r02/driver.log",
+      "source_sha256": "444b31f797c65cbe9771eca53aca59adcb2a34fbe290980357e4ccd2abee498e",
+      "source_bytes": 127912,
+      "public_sha256": "f803814d62ae02b0257e05d956742c8a83bed828f7dc1e9a76de89cf6c4cb50a",
+      "public_bytes": 15187,
+      "public_content_sha256": "58b4e5cbc36dc27e919a72c5a0ef1e38b29ce7cde6c6e62ff594651b2cf6ff1c",
+      "public_content_bytes": 127986,
+      "encoding": "gzip",
+      "redactions": {
+        "private_ipv4": 25,
+        "root_home_prefix": 8,
+        "workspace_prefix": 3
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/sensenova-review-cached-r02/events-rank0.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/sensenova-review-cached-r02/events-rank0.jsonl",
+      "source_sha256": "1d12f40945c585e1ca45d101d49403706668fb7415b16a09e14cd2115d2612a1",
+      "source_bytes": 182878,
+      "public_sha256": "e74499be544404200f31458fcae89a09a9679734b6240b80d5fe3302a40ab397",
+      "public_bytes": 20045,
+      "public_content_sha256": "25b00ad25b248345732f6e237daa99caa648caf589444a6bae3ad80355d64c97",
+      "public_content_bytes": 182896,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/sensenova-review-cached-r02/events-rank1.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/sensenova-review-cached-r02/events-rank1.jsonl",
+      "source_sha256": "315b9b68a63d8c51313c99510be82eefe6226ac973b66e528301cac6bcc0aa6e",
+      "source_bytes": 182943,
+      "public_sha256": "c0ab603813f4fcd3d047dd4b2851518107c7dfbd6521cbcfa9bf42a18f44bd3f",
+      "public_bytes": 20049,
+      "public_content_sha256": "5a242927324e1222cb38c779206d19672711d1f0fe6ffcd4f325fc628a4a865e",
+      "public_content_bytes": 182961,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/sensenova-review-cached-r02/events-rank2.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/sensenova-review-cached-r02/events-rank2.jsonl",
+      "source_sha256": "1a77664c185be5ca8556a409f0fa72b59e840ba38590ed5d1d552602a5dd727d",
+      "source_bytes": 182985,
+      "public_sha256": "13d9fef8555509073920aea04c9111a0196ea88f007a88e635dbf14ca1801c71",
+      "public_bytes": 19919,
+      "public_content_sha256": "64bc463dbd2707be990ff1f1158f7f19a7aa8bcd0aaa8375df65712bd271957b",
+      "public_content_bytes": 183003,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/sensenova-review-cached-r02/events-rank3.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/sensenova-review-cached-r02/events-rank3.jsonl",
+      "source_sha256": "7ae1189533e811e767a5fb6046cc403b764a19af84fd234ffbd3537480541a27",
+      "source_bytes": 182878,
+      "public_sha256": "3bf07832f1178e3c72b248decc2e4db4f227ef6d74807813117d785d12ff7899",
+      "public_bytes": 20041,
+      "public_content_sha256": "feb66e74fb552d572255c576f7bf08900328821635efccca38a6fe880e4ec323",
+      "public_content_bytes": 182896,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/sensenova-review-cached-r02/events-rank4.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/sensenova-review-cached-r02/events-rank4.jsonl",
+      "source_sha256": "24a0ae47230100669ab7fbf02f563834d3544d582c237f06051c1be85c9cbe90",
+      "source_bytes": 182819,
+      "public_sha256": "b746d9148423b5c91c0c962c276e37827d1fa3b572ddad2bbebae18f120cae08",
+      "public_bytes": 19903,
+      "public_content_sha256": "b755e7a3860c4863a41658e7b356cd93be5110b4182f701b5ff2b542d6bedc15",
+      "public_content_bytes": 182837,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/sensenova-review-cached-r02/events-rank5.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/sensenova-review-cached-r02/events-rank5.jsonl",
+      "source_sha256": "4363dfe93497610f805f9a2ca2c99412ac061f588d8582a4696a04d12ca06007",
+      "source_bytes": 183004,
+      "public_sha256": "705205530d88bb0cc754961bef57cd8b1ec5e11617b101f4b0a45cd2ea0bcda1",
+      "public_bytes": 19975,
+      "public_content_sha256": "175a30364bd40fe0f00e1eb91685ad0b169d6569d13ef8baf1216590cf638e14",
+      "public_content_bytes": 183022,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/sensenova-review-cached-r02/events-rank6.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/sensenova-review-cached-r02/events-rank6.jsonl",
+      "source_sha256": "a81368fc790f6a2b8fe932d7980f1625ff40db8189d214e5b2cfc8e7f00a24c5",
+      "source_bytes": 182927,
+      "public_sha256": "d8ef04c8c061823d8a11923866573212dc5a5cfa8b683d273b82dd999114267c",
+      "public_bytes": 19919,
+      "public_content_sha256": "842f5367a1cadf436b27ee125cc504f6e4d498d65c8832198e785967e58898ef",
+      "public_content_bytes": 182945,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/sensenova-review-cached-r02/events-rank7.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/sensenova-review-cached-r02/events-rank7.jsonl",
+      "source_sha256": "b45af2e1273150bde51c90d7e7ebd2c97219ce0679b8dde46d323b463fd0b776",
+      "source_bytes": 182985,
+      "public_sha256": "02935d709b82b26624aecd10ac8b71c065adab55fbb9bf8ba29db367d9cdaf97",
+      "public_bytes": 20061,
+      "public_content_sha256": "42e2d0fe2a4ba8531379fe350e2b60dd4847d4bda4b3779192778aa5aadeec57",
+      "public_content_bytes": 183003,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/sensenova-review-cached-r02/job.json",
+      "source_path": "no17-review-fixes/runs-r02/sensenova-review-cached-r02/job.json",
+      "source_sha256": "585148a8ed4c57b6324f323d495afc0318e1c9ceec014c3218d40b8288349409",
+      "source_bytes": 3463,
+      "public_sha256": "c3fc9b4632f986401b579faf537eb7d6db4987ac86edaab7dfb0f33740370981",
+      "public_bytes": 3519,
+      "public_content_sha256": "c3fc9b4632f986401b579faf537eb7d6db4987ac86edaab7dfb0f33740370981",
+      "public_content_bytes": 3519,
+      "encoding": "utf-8",
+      "redactions": {
+        "private_ipv4": 3,
+        "root_home_prefix": 7,
+        "workspace_prefix": 4,
+        "ray_node_identity": 1
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/sensenova-review-cached-r02/request.json",
+      "source_path": "no17-review-fixes/runs-r02/sensenova-review-cached-r02/request.json",
+      "source_sha256": "4e543c77641618cc4d1208e535c385c13c546a721f37bbf0b671451030062902",
+      "source_bytes": 6548,
+      "public_sha256": "55f804def260c17957536d354793bae1c51cc4c57a996a1ecb40c1445f017f5d",
+      "public_bytes": 6709,
+      "public_content_sha256": "55f804def260c17957536d354793bae1c51cc4c57a996a1ecb40c1445f017f5d",
+      "public_content_bytes": 6709,
+      "encoding": "utf-8",
+      "redactions": {
+        "private_ipv4": 1,
+        "root_home_prefix": 8,
+        "workspace_prefix": 10
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/sensenova-review-cached-r02/resource_after.json",
+      "source_path": "no17-review-fixes/runs-r02/sensenova-review-cached-r02/resource_after.json",
+      "source_sha256": "d22f685cc1a75cc4e1d791394a0db859346506e449ec19f680e9622a7e6d55ef",
+      "source_bytes": 509,
+      "public_sha256": "d22f685cc1a75cc4e1d791394a0db859346506e449ec19f680e9622a7e6d55ef",
+      "public_bytes": 509,
+      "public_content_sha256": "d22f685cc1a75cc4e1d791394a0db859346506e449ec19f680e9622a7e6d55ef",
+      "public_content_bytes": 509,
+      "encoding": "utf-8",
+      "redactions": {},
+      "byte_exact_before_compression": true
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/qwen-review-online-r02/driver.log.gz",
+      "source_path": "no17-review-fixes/runs-r02/qwen-review-online-r02/driver.log",
+      "source_sha256": "559e1cb38004d0ccb71e1df9799ab3b5e25327894d53c65ac82dd736c22a95fa",
+      "source_bytes": 131578,
+      "public_sha256": "c835d1e2f89be5349a18bf37af167d69e904755fccd37b4e5775496529bd99f2",
+      "public_bytes": 15719,
+      "public_content_sha256": "6a0c2a4649ff5a340aef737d6d6f05c0ae35090db7496c6b814b3dd85b49642b",
+      "public_content_bytes": 131652,
+      "encoding": "gzip",
+      "redactions": {
+        "private_ipv4": 25,
+        "root_home_prefix": 8,
+        "workspace_prefix": 3
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/qwen-review-online-r02/events-rank0.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/qwen-review-online-r02/events-rank0.jsonl",
+      "source_sha256": "a590114db83983f2efe63edbd2bbce3b9814ea778086e09cd5f897ff58a87d92",
+      "source_bytes": 90603,
+      "public_sha256": "0ef221d26960294104c5a8e88dfeb841b1b34af1cc7a6fc31b9de3f6c9e8b0c6",
+      "public_bytes": 8810,
+      "public_content_sha256": "1264db074e77ee1a4d79bf9a055dc6a82c6a0d0255c26269023d906b10b34397",
+      "public_content_bytes": 90621,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/qwen-review-online-r02/events-rank1.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/qwen-review-online-r02/events-rank1.jsonl",
+      "source_sha256": "11a0de39c6c0968c81e69df09dac227a288ca8f0e3c052fcfc82294e9bb764d2",
+      "source_bytes": 90612,
+      "public_sha256": "eabf56531ec9b803b612b0d3bcec4f06729b6df838e8c82d9e84c2555b9a4d01",
+      "public_bytes": 8832,
+      "public_content_sha256": "bb94a683f8834aa7051f9d12b0a38e1733bcc17ad2adc32101db03c8eee088cb",
+      "public_content_bytes": 90630,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/qwen-review-online-r02/events-rank2.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/qwen-review-online-r02/events-rank2.jsonl",
+      "source_sha256": "cdbf2cd4cd3e01cbd9ad33b03e91ed1aa2859d03eed73c7bcff6160b0c8248c8",
+      "source_bytes": 90651,
+      "public_sha256": "37ef4f280e7f0dce9174c3cc5080e1c6a6ce322cda71bb56752b492ffd79400f",
+      "public_bytes": 8963,
+      "public_content_sha256": "1cb6706bed8c8dd2aa8971008b6c4fa5df99be61c99ed56713ab497f81e45b47",
+      "public_content_bytes": 90669,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/qwen-review-online-r02/events-rank3.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/qwen-review-online-r02/events-rank3.jsonl",
+      "source_sha256": "be328649ed37652b47aef373dc8e2130ed283621ed221dd9b6370eecef73339e",
+      "source_bytes": 90592,
+      "public_sha256": "ce2fbe7b49b0d035a26d418a61c5607b9c87d6349d4f29906986adb67945aa31",
+      "public_bytes": 8813,
+      "public_content_sha256": "18330b7873b726a474d7af5b42dc63876870c3b89e90e43bf1fe5cbcfefcd315",
+      "public_content_bytes": 90610,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/qwen-review-online-r02/events-rank4.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/qwen-review-online-r02/events-rank4.jsonl",
+      "source_sha256": "6ac24537c10e1d1a712c7f85c9e52d348e97e16a89dc8f5a13d2ac93615fda32",
+      "source_bytes": 90631,
+      "public_sha256": "9d0ec93fcfa43c1d28c551b27fe5b4f2618f1b7e45d92ba14471b98b3572f3a7",
+      "public_bytes": 8846,
+      "public_content_sha256": "d8fdda3ebb5cb3d049d2d3fe6c8b993fc21eb8501b57c7272b6e7df0d448ee50",
+      "public_content_bytes": 90649,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/qwen-review-online-r02/events-rank5.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/qwen-review-online-r02/events-rank5.jsonl",
+      "source_sha256": "516e849272d3ead78bc5bb716d88ce4295c9da2a72058ef56fbd631f45d39a9e",
+      "source_bytes": 90612,
+      "public_sha256": "fd797149f42ae702dfdceee4ce82375a0b8806756608ab8f7d558ba24f2e4987",
+      "public_bytes": 8815,
+      "public_content_sha256": "78cee8924629a11e8f70d9657a91201b9874f26c9fce4b7daba5293efbd71cf9",
+      "public_content_bytes": 90630,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/qwen-review-online-r02/events-rank6.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/qwen-review-online-r02/events-rank6.jsonl",
+      "source_sha256": "5c39dcc5c2c9cebb1f78e464c551998a4ae9c0d772471b1f23537e4a20332626",
+      "source_bytes": 90639,
+      "public_sha256": "fb1f19ac7d57e22d7bdb53261ca6e2b1eb4a08bd763996c621fbe8639e9f19c6",
+      "public_bytes": 8839,
+      "public_content_sha256": "5c6cd903f46cd1ab4caf07338b05e38a293c40b96780c221d0fab057aa075dec",
+      "public_content_bytes": 90657,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/qwen-review-online-r02/events-rank7.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/qwen-review-online-r02/events-rank7.jsonl",
+      "source_sha256": "21b22bd31f68bfba09ed315b81425e842802dcc0c2271d74faf94775fc9ccd1f",
+      "source_bytes": 90621,
+      "public_sha256": "7beffff97aa6bb5904566b76c0038dea1b7601b36007833d970bc46eaa9f8c31",
+      "public_bytes": 8899,
+      "public_content_sha256": "651ac29a6b0e7b4382d9175c3e56edcd8a433da4c3434c22c93f842148fe2f54",
+      "public_content_bytes": 90639,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/qwen-review-online-r02/job.json",
+      "source_path": "no17-review-fixes/runs-r02/qwen-review-online-r02/job.json",
+      "source_sha256": "4e06917d9fbcb13a10caec0ca06594f3923bffd63f2acef9e9aed5eab3ed0d21",
+      "source_bytes": 3624,
+      "public_sha256": "22ef33f893877140d461b43f48bf8a285dab29e0e21d8e0de1c449af714bcf81",
+      "public_bytes": 3680,
+      "public_content_sha256": "22ef33f893877140d461b43f48bf8a285dab29e0e21d8e0de1c449af714bcf81",
+      "public_content_bytes": 3680,
+      "encoding": "utf-8",
+      "redactions": {
+        "private_ipv4": 3,
+        "root_home_prefix": 7,
+        "workspace_prefix": 4,
+        "ray_node_identity": 1
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/qwen-review-online-r02/request.json",
+      "source_path": "no17-review-fixes/runs-r02/qwen-review-online-r02/request.json",
+      "source_sha256": "cbb5bd6c6266b6c12c70b2104c2564ffe1ecc21087ed2447b85afd28c007fd22",
+      "source_bytes": 6702,
+      "public_sha256": "04fc2f73219770263843b5edc605d63440e631d2068076393cb88cfc47ec5fef",
+      "public_bytes": 6863,
+      "public_content_sha256": "04fc2f73219770263843b5edc605d63440e631d2068076393cb88cfc47ec5fef",
+      "public_content_bytes": 6863,
+      "encoding": "utf-8",
+      "redactions": {
+        "private_ipv4": 1,
+        "root_home_prefix": 8,
+        "workspace_prefix": 10
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/qwen-review-online-r02/resource_after.json",
+      "source_path": "no17-review-fixes/runs-r02/qwen-review-online-r02/resource_after.json",
+      "source_sha256": "e9dd6b851e78d1c15317464d1d4809bf9e0297c807ba8a4d03ce525d4f5b926b",
+      "source_bytes": 505,
+      "public_sha256": "e9dd6b851e78d1c15317464d1d4809bf9e0297c807ba8a4d03ce525d4f5b926b",
+      "public_bytes": 505,
+      "public_content_sha256": "e9dd6b851e78d1c15317464d1d4809bf9e0297c807ba8a4d03ce525d4f5b926b",
+      "public_content_bytes": 505,
+      "encoding": "utf-8",
+      "redactions": {},
+      "byte_exact_before_compression": true
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/qwen-review-cached-r02/driver.log.gz",
+      "source_path": "no17-review-fixes/runs-r02/qwen-review-cached-r02/driver.log",
+      "source_sha256": "036190f8fbd42f47cbea99bad7687dcd8f7184f84d3e24d97576054cb1369a69",
+      "source_bytes": 132204,
+      "public_sha256": "62fe0afe61b7b04be0d91be79ccbda28db195a9aae70c4835af2de3c5bfc3f78",
+      "public_bytes": 15727,
+      "public_content_sha256": "a4b546a762ffbccc4152c3a72ccc04ab2b2e62408276413067c3fd5081a01d7a",
+      "public_content_bytes": 132278,
+      "encoding": "gzip",
+      "redactions": {
+        "private_ipv4": 25,
+        "root_home_prefix": 8,
+        "workspace_prefix": 3
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/qwen-review-cached-r02/events-rank0.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/qwen-review-cached-r02/events-rank0.jsonl",
+      "source_sha256": "07202f7040af3896521997de8334660a66c0079b96f459b557c68ed9ead01f16",
+      "source_bytes": 155671,
+      "public_sha256": "1fcf83188f8f8f890ea987cda0b997753337ec6be538c96169f86c42ca4c1d06",
+      "public_bytes": 16514,
+      "public_content_sha256": "acedab906ff25ccc59126a6cb1d302bd6b74431991b27637de70961466d293ea",
+      "public_content_bytes": 155689,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/qwen-review-cached-r02/events-rank1.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/qwen-review-cached-r02/events-rank1.jsonl",
+      "source_sha256": "2fb701d84d09a8996c1452662250ff4ed2932bd0e6c9d26b70763f24a7e9863a",
+      "source_bytes": 155622,
+      "public_sha256": "64fe60f4d42d30722f799999c26683c51d14b223ce6d08612414cdde94313d75",
+      "public_bytes": 16456,
+      "public_content_sha256": "e3486bfb0c3ced210cccc39b379289678c20cacab198e7c9235baf416e7253dc",
+      "public_content_bytes": 155640,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/qwen-review-cached-r02/events-rank2.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/qwen-review-cached-r02/events-rank2.jsonl",
+      "source_sha256": "0088bded33924755ff9315e44011d01f37646dd4638f266a8e431c719b41bacf",
+      "source_bytes": 155655,
+      "public_sha256": "3dfaa623484ccf3f36d71b82903569ddd0c97b5f7908c3648f44c655978caf22",
+      "public_bytes": 16514,
+      "public_content_sha256": "9d85b91f7c24b8d2aca3a7311119825383a2c915b0d543b40e666654b6ec503d",
+      "public_content_bytes": 155673,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/qwen-review-cached-r02/events-rank3.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/qwen-review-cached-r02/events-rank3.jsonl",
+      "source_sha256": "06c34f47f264b8ee78d117a8003bd853b257bd8cbfe54a54fd631e28658de60b",
+      "source_bytes": 155535,
+      "public_sha256": "f1b3d4712f136a66ed585515633a60c1501a515ad29fb31f2d9ceb5e723f004c",
+      "public_bytes": 16461,
+      "public_content_sha256": "fee66a1570d3d9ce5f7ac201f849a0dffef2784ce4f4e53b8f0a10ce543dcd77",
+      "public_content_bytes": 155553,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/qwen-review-cached-r02/events-rank4.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/qwen-review-cached-r02/events-rank4.jsonl",
+      "source_sha256": "ab8d67a7c0193de6f75e6461cb71d69b91b52179421f36715cfcc81bb63f853b",
+      "source_bytes": 155688,
+      "public_sha256": "8f689d967da72e77a2304c3ce1e11fc694d78738129e35271c315e5c9b147ede",
+      "public_bytes": 16443,
+      "public_content_sha256": "2521c19857e9658c1c11025d795f1d5ed2dc2d7b30463fa06d891bb0e844e941",
+      "public_content_bytes": 155706,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/qwen-review-cached-r02/events-rank5.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/qwen-review-cached-r02/events-rank5.jsonl",
+      "source_sha256": "ce391ae631599c919f2303b9e02b096fc19489bba0177d798654131c2b18937a",
+      "source_bytes": 155489,
+      "public_sha256": "1471405f017837f51b57fdb1227264132687623eceb49046a7a4f70665fc808f",
+      "public_bytes": 16448,
+      "public_content_sha256": "5ff8c6ba20e40652a6e220308ede7d9b81e675982480229e98ec25b8deed7905",
+      "public_content_bytes": 155507,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/qwen-review-cached-r02/events-rank6.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/qwen-review-cached-r02/events-rank6.jsonl",
+      "source_sha256": "a621863c66454a709b48181a9991ad87188ce68152d7b6ddc701cac61049a716",
+      "source_bytes": 155565,
+      "public_sha256": "316de979640aeaec1aa74015997c624e87849fbb1ce1529c1eae261ee75f88d1",
+      "public_bytes": 16492,
+      "public_content_sha256": "9ffd26af6e87c4ffaf32f48fa9b8f2cf9df9e7cc380f2f0ef6188faee05edccf",
+      "public_content_bytes": 155583,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/qwen-review-cached-r02/events-rank7.jsonl.gz",
+      "source_path": "no17-review-fixes/runs-r02/qwen-review-cached-r02/events-rank7.jsonl",
+      "source_sha256": "01757f261c5d8999391d0ab012a222b13012a10c99d030f384420da5eff5ff6d",
+      "source_bytes": 155655,
+      "public_sha256": "304c100c696811fb20b08d901d1e19babe3cb9346e71f6d7f9d3c0ee83fd0c8f",
+      "public_bytes": 16551,
+      "public_content_sha256": "262ef8304d576f877aaf0d5bca6dedd1d23635c90cb5ff0ca67e39ebb00b6504",
+      "public_content_bytes": 155673,
+      "encoding": "gzip",
+      "redactions": {
+        "workspace_prefix": 2
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/qwen-review-cached-r02/job.json",
+      "source_path": "no17-review-fixes/runs-r02/qwen-review-cached-r02/job.json",
+      "source_sha256": "196f7ff53c47c49643159eb0f177885cb84b481ca57824a8908762918a389966",
+      "source_bytes": 3624,
+      "public_sha256": "15cba83e2c39271834f575919041743187b0df5314a96437f1a0980f0e5a44c2",
+      "public_bytes": 3680,
+      "public_content_sha256": "15cba83e2c39271834f575919041743187b0df5314a96437f1a0980f0e5a44c2",
+      "public_content_bytes": 3680,
+      "encoding": "utf-8",
+      "redactions": {
+        "private_ipv4": 3,
+        "root_home_prefix": 7,
+        "workspace_prefix": 4,
+        "ray_node_identity": 1
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/qwen-review-cached-r02/request.json",
+      "source_path": "no17-review-fixes/runs-r02/qwen-review-cached-r02/request.json",
+      "source_sha256": "8a9c7f359b35d2e37dd45ad9d9ac7cf4153ef79cf3f8a4896cbf9d00f341aa2b",
+      "source_bytes": 6700,
+      "public_sha256": "1e318e33641334b135fd57ac9b8f5da9483fdd949e70f35c11cffb9d4fe5fbd0",
+      "public_bytes": 6861,
+      "public_content_sha256": "1e318e33641334b135fd57ac9b8f5da9483fdd949e70f35c11cffb9d4fe5fbd0",
+      "public_content_bytes": 6861,
+      "encoding": "utf-8",
+      "redactions": {
+        "private_ipv4": 1,
+        "root_home_prefix": 8,
+        "workspace_prefix": 10
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/runs/qwen-review-cached-r02/resource_after.json",
+      "source_path": "no17-review-fixes/runs-r02/qwen-review-cached-r02/resource_after.json",
+      "source_sha256": "97786c3b232bf882ca8130659cbfb9f0bd64b475e769920355fa5db29610abcc",
+      "source_bytes": 505,
+      "public_sha256": "97786c3b232bf882ca8130659cbfb9f0bd64b475e769920355fa5db29610abcc",
+      "public_bytes": 505,
+      "public_content_sha256": "97786c3b232bf882ca8130659cbfb9f0bd64b475e769920355fa5db29610abcc",
+      "public_content_bytes": 505,
+      "encoding": "utf-8",
+      "redactions": {},
+      "byte_exact_before_compression": true
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/cpu.log.gz",
+      "source_path": "no17-minimal/cpu-r02.log",
+      "source_sha256": "f5223a68861a0fc9d143f7aaa641edf7db0acf9848db9e1b698229393cdd9128",
+      "source_bytes": 4833,
+      "public_sha256": "b6802a19ee09514ada5f4c30adfe2d0c2dc74f51b966cb51d0cef13d445354ca",
+      "public_bytes": 1382,
+      "public_content_sha256": "4f58e373605475944d3846ddf178d41bb9c893ee104102f02b395dd5768328cb",
+      "public_content_bytes": 4878,
+      "encoding": "gzip",
+      "redactions": {
+        "root_home_prefix": 5
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/sensenova-a983b3c/precommit.log.gz",
+      "source_path": "no17-minimal/precommit-r02.log",
+      "source_sha256": "db1591dacf6d68f356918e60d681adaee85db73caa1443705582fbed9cb26ed8",
+      "source_bytes": 1280,
+      "public_sha256": "214922d74bb2e80c586f540c84131f8babe6ca7f9285552bff11e1003b6cf2ce",
+      "public_bytes": 237,
+      "public_content_sha256": "db1591dacf6d68f356918e60d681adaee85db73caa1443705582fbed9cb26ed8",
+      "public_content_bytes": 1280,
+      "encoding": "gzip",
+      "redactions": {},
+      "byte_exact_before_compression": true
+    },
+    {
+      "path": "evidence/qwen-9179512/cpu.log.gz",
+      "source_path": "no17-qwen-recovery/cpu-r01.log",
+      "source_sha256": "7dc4e847b901482d867b8ae4f1d0e3c0bf796799ecc55926a24cc50d449da82a",
+      "source_bytes": 4988,
+      "public_sha256": "e47b9ac2cc9ebaea2ecf341ef1e09793fb5257b20ff9fb66b9726e2997d5e610",
+      "public_bytes": 1484,
+      "public_content_sha256": "4c585e3b0daf65755fe5b528d35668555a07dd00510863add8d9fa079e7bc01c",
+      "public_content_bytes": 5033,
+      "encoding": "gzip",
+      "redactions": {
+        "root_home_prefix": 5
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/qwen-9179512/precommit.log.gz",
+      "source_path": "no17-qwen-recovery/precommit-r02.log",
+      "source_sha256": "db1591dacf6d68f356918e60d681adaee85db73caa1443705582fbed9cb26ed8",
+      "source_bytes": 1280,
+      "public_sha256": "214922d74bb2e80c586f540c84131f8babe6ca7f9285552bff11e1003b6cf2ce",
+      "public_bytes": 237,
+      "public_content_sha256": "db1591dacf6d68f356918e60d681adaee85db73caa1443705582fbed9cb26ed8",
+      "public_content_bytes": 1280,
+      "encoding": "gzip",
+      "redactions": {},
+      "byte_exact_before_compression": true
+    },
+    {
+      "path": "evidence/review-bd07ff5/cpu.log.gz",
+      "source_path": "no17-review-fixes/no17-review-pr545-cpu.log",
+      "source_sha256": "2588166469d9e6c09f6814e30491edabafe8aa93ffdcbbf49f12924e45f617e1",
+      "source_bytes": 5068,
+      "public_sha256": "61be3d6c06e1dbb577ff514121015fa815b25697364077afc44f7fcd88ce4452",
+      "public_bytes": 1489,
+      "public_content_sha256": "47b98ffe70d2763329d2f0459d19a987377a20dc16e5641e1a2991518ef938fe",
+      "public_content_bytes": 5113,
+      "encoding": "gzip",
+      "redactions": {
+        "root_home_prefix": 5
+      },
+      "byte_exact_before_compression": false
+    },
+    {
+      "path": "evidence/review-bd07ff5/precommit.log.gz",
+      "source_path": "no17-review-fixes/no17-review-pr545-hooks-r02.log",
+      "source_sha256": "db1591dacf6d68f356918e60d681adaee85db73caa1443705582fbed9cb26ed8",
+      "source_bytes": 1280,
+      "public_sha256": "214922d74bb2e80c586f540c84131f8babe6ca7f9285552bff11e1003b6cf2ce",
+      "public_bytes": 237,
+      "public_content_sha256": "db1591dacf6d68f356918e60d681adaee85db73caa1443705582fbed9cb26ed8",
+      "public_content_bytes": 1280,
+      "encoding": "gzip",
+      "redactions": {},
+      "byte_exact_before_compression": true
+    }
+  ]
+}

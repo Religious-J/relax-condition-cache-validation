@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "scope": "Standalone validation tools, tests and original Qwen integration-test source; no production Relax package vendored",
+  "files": [
+    {
+      "source_repository": "https://github.com/Religious-J/Relax",
+      "source_commit": "bd07ff5e8146207b9319c6b42be426c058be0a82",
+      "source_path": "scripts/tools/benchmark_condition_cache.py",
+      "source_sha256": "e6615e7ce760f3b0cec4c6ba3ed1570ae103ee46dd4dfb4c8fbf41151aebd4ad",
+      "source_bytes": 22746,
+      "path": "benchmark_condition_cache.py",
+      "sha256": "e6615e7ce760f3b0cec4c6ba3ed1570ae103ee46dd4dfb4c8fbf41151aebd4ad",
+      "bytes": 22746,
+      "change": "byte-exact"
+    },
+    {
+      "source_repository": "https://github.com/Religious-J/Relax",
+      "source_commit": "bd07ff5e8146207b9319c6b42be426c058be0a82",
+      "source_path": "relax/engine/sft/conditioning_verification.py",
+      "source_sha256": "2e2f27d7723002de04056b90dd6c0abb76b30f7df2a37473a9fda185026ddb29",
+      "source_bytes": 17515,
+      "path": "conditioning_verification.py",
+      "sha256": "2e2f27d7723002de04056b90dd6c0abb76b30f7df2a37473a9fda185026ddb29",
+      "bytes": 17515,
+      "change": "byte-exact"
+    },
+    {
+      "source_repository": "https://github.com/Religious-J/Relax",
+      "source_commit": "bd07ff5e8146207b9319c6b42be426c058be0a82",
+      "source_path": "tests/cpu/tools/test_benchmark_condition_cache.py",
+      "source_sha256": "6f709c979877c7c3984fe6aa8c830f9586af7d1e10e0c6616df5774d87a6cf81",
+      "source_bytes": 13180,
+      "path": "tests/test_benchmark_condition_cache.py",
+      "sha256": "c03c9c2803b751c8ed9ddd123082676b0eab454663bc5949997ae624ef3c99b6",
+      "bytes": 13166,
+      "change": "Import relocated standalone module; test behavior unchanged"
+    },
+    {
+      "source_repository": "https://github.com/Religious-J/Relax",
+      "source_commit": "bd07ff5e8146207b9319c6b42be426c058be0a82",
+      "source_path": "tests/cpu/engine/sft/test_conditioning_verification.py",
+      "source_sha256": "e6ac321c8b1c08368299c30eecfc5e51758ec3ca15e6395c8274c6ddf60e4da6",
+      "source_bytes": 10745,
+      "path": "tests/test_conditioning_verification.py",
+      "sha256": "0b1e19364b5862615dc3d54e1d4c737a63b325cb5960f5768be7d73f96a1e1eb",
+      "bytes": 10728,
+      "change": "Import relocated standalone module; test behavior unchanged"
+    },
+    {
+      "source_repository": "https://github.com/Religious-J/Relax",
+      "source_commit": "bd07ff5e8146207b9319c6b42be426c058be0a82",
+      "source_path": "scripts/benchmarks/conditioning_cache/README.md",
+      "source_sha256": "e05f3ccadb195d2517dab136181f1d011b5068def9ad1a4c8f2ae2325ccb14f7",
+      "source_bytes": 3830,
+      "path": "archive/validation-at-bd07ff5.md",
+      "sha256": "e05f3ccadb195d2517dab136181f1d011b5068def9ad1a4c8f2ae2325ccb14f7",
+      "bytes": 3830,
+      "change": "byte-exact"
+    },
+    {
+      "source_repository": "https://github.com/Religious-J/Relax",
+      "source_commit": "bd07ff5e8146207b9319c6b42be426c058be0a82",
+      "source_path": "tests/cpu/models/qwen_image/test_sft_adapter.py",
+      "source_sha256": "042652d6e76aaa27a2b7cb98e5d1ca7518f8c0a4d645ec1acdf6859b2e6e053f",
+      "source_bytes": 40173,
+      "path": null,
+      "change": "Source hash/link retained; full original test is available at the pinned GitHub commit and not duplicated here",
+      "source_url": "https://github.com/Religious-J/Relax/blob/bd07ff5e8146207b9319c6b42be426c058be0a82/tests/cpu/models/qwen_image/test_sft_adapter.py"
+    },
+    {
+      "source_repository": "https://github.com/Religious-J/Relax",
+      "source_commit": "bd07ff5e8146207b9319c6b42be426c058be0a82",
+      "source_path": "LICENSE",
+      "source_sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "source_bytes": 11357,
+      "path": "LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "bytes": 11357,
+      "change": "byte-exact"
+    }
+  ]
+}
