@@ -52,10 +52,9 @@
       "source_path": "scripts/benchmarks/conditioning_cache/README.md",
       "source_sha256": "e05f3ccadb195d2517dab136181f1d011b5068def9ad1a4c8f2ae2325ccb14f7",
       "source_bytes": 3830,
-      "path": "archive/validation-at-bd07ff5.md",
-      "sha256": "e05f3ccadb195d2517dab136181f1d011b5068def9ad1a4c8f2ae2325ccb14f7",
-      "bytes": 3830,
-      "change": "byte-exact"
+      "path": null,
+      "change": "Pinned source path and hash retained; duplicate historical guide omitted",
+      "source_url": "https://github.com/Religious-J/Relax/blob/bd07ff5e8146207b9319c6b42be426c058be0a82/scripts/benchmarks/conditioning_cache/README.md"
     },
     {
       "source_repository": "https://github.com/Religious-J/Relax",
